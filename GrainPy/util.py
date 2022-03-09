@@ -50,6 +50,15 @@ def selectdata():
 
 
 
+
+# new function to check input data consistency
+    # bins all same (or rounded)
+    # same number of rows in data? maybe doesn't matter?
+
+
+
+# update to work with current class
+# re-format for current gems grain size fields
 def gems(gsclass):
     """
     Export grain size data into GeMS table format; saves .xlsx file in directory
