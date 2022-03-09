@@ -7,18 +7,25 @@ Created on Fri May 14 18:56:21 2021
 """
 
 
+
+__all__ = [
+    "selectdata",
+    "gems",
+    "gsdplot",
+    "gsdmultiplot",
+]
+
+
+
 import tkinter as tk
 from tkinter import filedialog
 import os
 from datetime import date
-
 import pandas as pd
 import numpy as np
-from scipy.signal import find_peaks, peak_prominences
-
+#from scipy.signal import find_peaks, peak_prominences
 from matplotlib import pyplot as plt
 from matplotlib.patches import Rectangle
-
 
 
 
@@ -40,205 +47,6 @@ def selectdata():
     root.destroy()
 
     return path
-
-
-
-def wentclass(phi):
-    """
-    Conversion of grain size in phi units to qualitative name using Wentworth scale
-
-    Parameters
-    ----------
-    phi : integer or float
-        grain size in phi units
-
-    Returns
-    -------
-    gs : string
-        qualitative name of grain size
-
-    """
-
-
-    if -1 <= phi < 0:
-        gs = 'very coarse sand'
-    elif 0 <= phi < 1:
-        gs = 'coarse sand'
-    elif 1 <= phi < 2:
-        gs = 'medium sand'
-    elif 2 <= phi < 3:
-        gs = 'fine sand'
-    elif 3 <= phi < 4:
-        gs = 'very fine sand'
-    elif 4 <= phi < 5:
-        gs = 'coarse silt'
-    elif 5 <= phi < 6:
-        gs = 'medium silt'
-    elif 6 <= phi < 7:
-        gs = 'fine silt'
-    elif 7 <= phi < 8:
-        gs = 'very fine silt'
-    elif 8 <= phi:
-        gs = 'clay'
-    else:
-        gs = np.nan
-
-    return gs
-
-
-
-def folkclass(sand, silt, clay):
-    """
-    Conversion of bulk sand, silt, and clay percentages into qualitative name 
-    using Folk classification (Folk, 1954, 1972)
-
-    Parameters
-    ----------
-    sand : integer or float
-        percentage of total sand in sample
-    silt : integer or float
-        percentage of total silt in sample
-    clay : integer or float
-        percentage of total clay in sample
-
-    Returns
-    -------
-    sed : string
-        qualitative name of sediment
-
-    """
-    if sand >= 90:
-        sed = 'sand'
-    elif 50 <= sand < 90:
-        if silt/clay >= 2:
-            sed = 'silty sand'
-        elif clay/silt >=2:
-            sed = 'clayey sand'
-        else:
-            sed = 'muddy sand'
-    elif 10 <= sand < 50:
-        if silt/clay >= 2:
-            sed = 'sandy silt'
-        elif clay/silt >= 2:
-            sed = 'sandy clay'
-        else:
-            sed = 'sandy mud'
-    elif sand < 10:
-        if silt/clay >= 2:
-            sed = 'silt'
-        elif clay/silt >= 2:
-            sed = 'clay'
-        else:
-            sed = 'mud'
-    else:
-        sed = np.nan
-
-    return sed
-
-
-
-def sortclass(sorting):
-    """
-    Conversion of inclusive graphic standard deviation value to qualitative 
-    descriptive value of Folk and Ward (1957)
-
-    Parameters
-    ----------
-    sorting : integer or float
-        value in phi units of inclusive graphic standard deviation 
-
-    Returns
-    -------
-    sort : string
-        qualitative description of sorting
-
-    """
-    if sorting <= 0.35:
-        sort = 'very well sorted'
-    elif 0.35 < sorting <= 0.5:
-        sort = 'well sorted'
-    elif 0.5 < sorting <= 0.71:
-        sort = 'moderately well sorted'
-    elif 0.71 < sorting <= 1.0:
-        sort  = 'moderately sorted'
-    elif 1.0 < sorting <= 2.0:
-        sort = 'poorly sorted'
-    elif 2.0 < sorting <= 4.0:
-        sort = 'very poorly sorted'
-    elif 4.0 < sorting:
-        sort = 'extremely poorly sorted'
-    else:
-        sort = np.nan
-
-    return sort
-
-
-
-def skewclass(skewness):
-    """
-    Conversion of inclusive graphic skewness value to qualitative 
-    descriptive value of Folk and Ward (1957)
-
-    Parameters
-    ----------
-    skewness : integer or float
-        value of inclusive graphic skewness
-
-    Returns
-    -------
-    skew : string
-        qualitative description of skewness
-
-    """
-    if 0.3 < skewness <=1:
-        skew = 'strongly coarse skewed'
-    elif 0.1 < skewness <= 0.3:
-        skew = 'coarse skewed'
-    elif -0.1 <= skewness <= 0.1:
-        skew = 'near symmetrical'
-    elif -0.3 <= skewness < -0.1:
-        skew = 'fine skewed'
-    elif -1.0 <= skewness < -0.1:
-        skew = 'strongly fine skewed'
-    else:
-        skew = np.nan
-
-    return skew
-
-
-
-def kurtclass(kurtosis):
-    """
-    Conversion of inclusive graphic kurtosis value to qualitative 
-    descriptive value of Folk and Ward (1957)
-
-    Parameters
-    ----------
-    kurtosis : integer or float
-        value of inclusive graphic kurtosis
-
-    Returns
-    -------
-    kurt : string
-        qualitative description of kurtosis
-
-    """
-    if 0.41 <= kurtosis <= 0.67:
-        kurt = 'very platykurtic'
-    elif 0.67 < kurtosis <= 0.9:
-        kurt = 'platykurtic'
-    elif 0.9 < kurtosis <= 1.10:
-        kurt = 'mesokurtic'
-    elif 1.10 < kurtosis <= 1.5:
-        kurt = 'leptokurtic'
-    elif 1.5 < kurtosis <= 3.0:
-        kurt = 'very leptokurtic'
-    elif 3.0 < kurtosis:
-        kurt = 'extremely leptokurtic'
-    else:
-        kurt = np.nan
-
-    return kurt
 
 
 
