@@ -11,11 +11,13 @@ import os
 import pandas as pd
 import numpy as np
 from scipy.signal import find_peaks
-import scipy.stats as st
 from matplotlib import pyplot as plt
-from datetime import date
+#from math import isclose
+#from datetime import date
+#import scipy.stats as st
 
 from util import *
+from grainclass import *
 
 
 
@@ -27,15 +29,16 @@ class Grainsize():
         self.lith = lith
     
 
-    
+    # works
+    # change to basenames or filenames 
     def samplenames(self):
         '''
-        Collects basenames of class path(s) and infers sample name(s)
+        Collects basenames of class path(s).
 
         Returns
         -------
         samplenames : list
-            sample names inferred from class path(s)
+            sample names inferred from file basename(s)
 
         '''
         samplenames = []
@@ -47,22 +50,23 @@ class Grainsize():
         return samplenames
     
 
-    
+    # works
+    # add rounding for smallbin based on datacheck function in util
+    # collect all bins...solves rounding...or different gs analysis methods
     def bins(self, smallbin=0.375198, binrows=93, bincol=0):
         '''
-        Collects bins used for grain size analysis using first class path file
+        Diameter bins used for grain size analysis.
 
         Parameters
         ----------
         smallbin : integer or float, optional
-            value of smallest grain size bin in microns used in analysis. The 
-            default is 0.375198 for Kentucky Geological Survey.
+            value of smallest grain size bin in microns used in analysis; default
+            is 0.375198 for Kentucky Geological Survey.
         binrows : integer, optional
-            number of rows in path file(s) containing bin sizes. The default 
-            is 93 for Kentucky Geological Survey.
+            number of rows containing bin sizes; default is 93.
         bincol : integer, optional
-            vertical column number in data path file(s) containing bin sizes.
-            The default is 0 (first column) for Kentucky Geological Survey.
+            vertical column number in data path file(s) containing bin sizes; 
+            default is 0 (first column).
 
         Returns
         -------
@@ -89,12 +93,10 @@ class Grainsize():
         bins = bins.iloc[::-1].reset_index(drop=True)
         
         return bins                    
-        
-    '''
-    ADD VALIDATION OR ROUNDING FOR smallbin!!!! Not all smallbins are same sometimes
-    '''    
+    
 
-        
+    # works
+    # remove mean and sd...add to stats?        
     def data(self, smallbin=0.375198, datarows=93, datacol=1):   
         '''
         Collects data from grain size analysis in class path file(s)
@@ -140,7 +142,8 @@ class Grainsize():
     
 
     
-
+    # works
+    # different name to something else...cp?
     def cump(self):
         '''
         Calculates cumulative percentage of grain size data collected from 
@@ -166,8 +169,10 @@ class Grainsize():
     '''
     Add new column for 95% CI
     '''
-        
+    
 
+    # update function names from grainclass module...import grainclass    
+    # add mean and std deviation from data()?
     def stats(self, prom=0.1):
         '''
         Calculates statistics for grain size data from class path file(s)
@@ -287,6 +292,12 @@ class Grainsize():
             x += 1
         
         return st
+  
+    
+  
+    
+  
+    
   
     
     

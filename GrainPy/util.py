@@ -6,26 +6,16 @@ Created on Fri May 14 18:56:21 2021
 @author: Matthew Massey
 """
 
-
-
-__all__ = [
-    "selectdata",
-    "gems",
-    "gsdplot",
-    "gsdmultiplot",
-]
-
-
-
 import tkinter as tk
 from tkinter import filedialog
 import os
 from datetime import date
 import pandas as pd
 import numpy as np
-#from scipy.signal import find_peaks, peak_prominences
 from matplotlib import pyplot as plt
 from matplotlib.patches import Rectangle
+from openpyxl import load_workbook
+#from scipy.signal import find_peaks, peak_prominences
 
 
 
@@ -46,28 +36,87 @@ def selectdata():
         [('Excel files', '*.xlsx *.xls')]))
     root.destroy()
 
-    return path
+    return list(path)
+
+
+# change from class to paths...call selectdata inside
+def datacheck(gsclass, bmin=0.375198, brows=93, bcol=0):
+    path = gsclass.path
+    names = gsclass.samplenames()
+    x = 0
+    bmincheck = []
+    browcheck = []
+    
+    for p in path:
+        file = pd.read_excel(p, header=None)
+        bins = pd.to_numeric(file.iloc[:, bcol], errors='coerce')
+        
+        binmin = bins.min()
+        i = np.where(bins == binmin)
+        if binmin != bmin:
+            bmincheck.append([names[x], binmin, x, i[0]])
+        
+        binrows = sum(bins >= binmin)
+        if binrows != brows:
+            browcheck.append([names[x], binrows, x])
+        
+        x+=1
+    
+    if len(bmincheck) > 0:
+        print("The following files have minimum bin values different than input of {}:".format(bmin))
+        for i in bmincheck:
+            print("{}, {}".format(i[0], i[1]))
+    
+    else:
+        print("All files have consistent minimum bin values of {}".format(bmin))
+
+    if len(browcheck) > 0:
+        print("\nThe following files have total number of bin rows different than input of {}".format(brows))
+        for i in browcheck:
+            print("{}, {}".format(i[0], i[1]))
+    else:
+        print("\nAll files have consistent number of bin rows of {}".format(brows))
+    
+    value = input("Enter '1' to change the value(s) in original file(s). CAREFUL!\nEnter '2' to proceed grain size analysis without noted file(s).\nEnter any other key to continue.\nEnter value: ")
+    
+    #openpyxl to change excel file values
+    if value == "1":
+        for i in bmincheck:
+            idx = i[2]
+            wb = load_workbook(path[idx])
+            sheet = wb.active
+            
+            excol = chr(ord('@')+(bcol+1))
+            
+            erow = int(i[3]) + 1
+            
+            cellcoord = excol + str(erow)
+            
+            sheet[cellcoord] = bmin
+            wb.save(path[idx])
+
+    elif value == "2":
+        for i in bmincheck:
+            idx = i[2]
+            del path[idx]
 
 
 
-
-# new function to check input data consistency
-    # bins all same (or rounded)
-    # same number of rows in data? maybe doesn't matter?
 
 
 
 # update to work with current class
 # re-format for current gems grain size fields
+# delete mean & sd from data in class...add to stats?
 def gems(gsclass):
     """
-    Export grain size data into GeMS table format; saves .xlsx file in directory
-    where Grainsize class object is located
+    Export grain size data into table format used by Kentucky Geological Survey; 
+    saves .xlsx file in directory where Grainsize instance data is located
 
     Parameters
     ----------
     gsclass : class
-        Object of Grainsize class
+        Instance of Grainsize class
 
     """
     path = gsclass.path
