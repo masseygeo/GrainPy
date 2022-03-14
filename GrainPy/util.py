@@ -40,65 +40,64 @@ def selectdata():
 
 
 # change from class to paths...call selectdata inside
-def datacheck(gsclass, bmin=0.375198, brows=93, bcol=0):
-    path = gsclass.path
-    names = gsclass.samplenames()
-    x = 0
-    bmincheck = []
-    browcheck = []
+def datacheck(bmin=0.375198, brows=93, bcol=0):
+    
+    path = selectdata()
+    
+    bmin_check = []
+    brow_check = []
     
     for p in path:
         file = pd.read_excel(p, header=None)
-        bins = pd.to_numeric(file.iloc[:, bcol], errors='coerce')
+        bins_df = pd.to_numeric(file.iloc[:, bcol], errors='coerce')
         
-        binmin = bins.min()
-        i = np.where(bins == binmin)
-        if binmin != bmin:
-            bmincheck.append([names[x], binmin, x, i[0]])
+        bmin_val = bins_df.min()
+        i = np.where(bins_df == bmin_val)
+        if bmin_val != bmin:
+            bmin_check.append([p, bmin_val, i[0]])
         
-        binrows = sum(bins >= binmin)
+        binrows = sum(bins_df >= bmin_val)
         if binrows != brows:
-            browcheck.append([names[x], binrows, x])
-        
-        x+=1
-    
-    if len(bmincheck) > 0:
+            brow_check.append([p, binrows])
+            
+    if len(bmin_check) > 0:
         print("The following files have minimum bin values different than input of {}:".format(bmin))
-        for i in bmincheck:
+        for i in bmin_check:
             print("{}, {}".format(i[0], i[1]))
     
     else:
         print("All files have consistent minimum bin values of {}".format(bmin))
 
-    if len(browcheck) > 0:
+    if len(brow_check) > 0:
         print("\nThe following files have total number of bin rows different than input of {}".format(brows))
-        for i in browcheck:
+        for i in brow_check:
             print("{}, {}".format(i[0], i[1]))
     else:
         print("\nAll files have consistent number of bin rows of {}".format(brows))
     
-    value = input("Enter '1' to change the value(s) in original file(s). CAREFUL!\nEnter '2' to proceed grain size analysis without noted file(s).\nEnter any other key to continue.\nEnter value: ")
+    value = input("Enter '1' to change value(s) in marked file(s). WARNING! PERMANENT CHANGE IN FILE(S)!\nEnter any other key to continue.\nEnter value: ")
     
-    #openpyxl to change excel file values
+    #option 1, permanently change and save excel file(s)
     if value == "1":
-        for i in bmincheck:
-            idx = i[2]
-            wb = load_workbook(path[idx])
+        for i in bmin_check:
+            idx = i[0]
+            wb = load_workbook(idx)
             sheet = wb.active
             
+            # convert column number to letter
             excol = chr(ord('@')+(bcol+1))
             
-            erow = int(i[3]) + 1
+            # convert python row number to excel row number
+            erow = int(i[2]) + 1
             
+            # excel coordinate string
             cellcoord = excol + str(erow)
             
+            # change to input minimum bin value
             sheet[cellcoord] = bmin
-            wb.save(path[idx])
-
-    elif value == "2":
-        for i in bmincheck:
-            idx = i[2]
-            del path[idx]
+            
+            # save file
+            wb.save(idx)
 
 
 
