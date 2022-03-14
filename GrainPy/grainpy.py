@@ -29,7 +29,6 @@ class Grainsize():
         self.lith = lith
     
 
-    # works
     # change to basenames or filenames 
     def samplenames(self):
         '''
@@ -50,8 +49,7 @@ class Grainsize():
         return samplenames
     
 
-    # works
-    # add rounding for smallbin based on datacheck function in util
+
     # collect all bins...solves rounding...or different gs analysis methods
     def bins(self, smallbin=0.375198, binrows=93, bincol=0):
         '''
@@ -95,8 +93,8 @@ class Grainsize():
         return bins                    
     
 
-    # works
-    # remove mean and sd...add to stats?        
+
+    # add column for standard error and 95% Margin of error     
     def data(self, smallbin=0.375198, datarows=93, datacol=1):   
         '''
         Collects data from grain size analysis in class path file(s)
@@ -141,8 +139,8 @@ class Grainsize():
         return data
     
 
-    
-    # works
+
+    # add column for 95% margin of error
     # different name to something else...cp?
     def cump(self):
         '''
@@ -166,13 +164,10 @@ class Grainsize():
         cp['std'] = cp.std(axis=1)
     
         return cp
-    '''
-    Add new column for 95% CI
-    '''
+
     
 
     # update function names from grainclass module...import grainclass    
-    # add mean and std deviation from data()?
     def stats(self, prom=0.1):
         '''
         Calculates statistics for grain size data from class path file(s)

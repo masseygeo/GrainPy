@@ -39,11 +39,25 @@ def selectdata():
     return list(path)
 
 
-# change from class to paths...call selectdata inside
+
 def datacheck(bmin=0.375198, brows=93, bcol=0):
-    
+    """
+    Check multiple files for consistency and successful grain size analysis.
+    Parameters
+    ----------
+    bmin : integer or float, optional
+        Minimum bin size expected. The default is 0.375198.
+    brows : integer, optional
+        Number of rows of bins expected. The default is 93.
+    bcol : integer, optional
+        Bin column number expected (convert from Excel to Python, e.g., "A"=0). The default is 0.
+
+    Returns
+    -------
+    None.
+
+    """
     path = selectdata()
-    
     bmin_check = []
     brow_check = []
     
@@ -101,13 +115,12 @@ def datacheck(bmin=0.375198, brows=93, bcol=0):
 
 
 
+# new function for exporting grain size class dataframe as csv or excel (not gems)
 
 
 
-# update to work with current class
 # re-format for current gems grain size fields
-# delete mean & sd from data in class...add to stats?
-def gems(gsclass):
+def gems_exp(gsclass):
     """
     Export grain size data into table format used by Kentucky Geological Survey; 
     saves .xlsx file in directory where Grainsize instance data is located
@@ -151,7 +164,10 @@ def gems(gsclass):
     comp.to_excel(filesave)  
 
 
-        
+
+
+
+     
 # Grain Size Distribution Plot - individual sample
 def gsp_single(gs_class, i=0, j=0):
     '''
