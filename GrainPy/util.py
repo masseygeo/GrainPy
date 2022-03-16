@@ -115,12 +115,23 @@ def datacheck(bmin=0.375198, brows=93, bcol=0):
 
 
 
-# new function for exporting grain size class dataframe as csv or excel (not gems)
+def df_ex(df):
+    root = tk.Tk()
+    root.withdraw()
+    fs = filedialog.asksaveasfilename(title='Save data frame...', filetypes=(
+        [('Comma Separated Values file', '*.csv'), ('Excel file', '*.xlsx')]), defaultextension='*.csv')
+    root.destroy()
+    
+    if fs.endswith('.csv'):
+        df.to_csv(fs)
+    elif fs.endswith('.xlsx'):
+        df.to_excel(fs)
+    else:
+        print('No file saved')
 
 
 
-# re-format for current gems grain size fields
-def gems_exp(gsclass):
+def gems_ex(gsclass):
     """
     Export grain size data into table format used by Kentucky Geological Survey; 
     saves .xlsx file in directory where Grainsize instance data is located
@@ -131,37 +142,32 @@ def gems_exp(gsclass):
         Instance of Grainsize class
 
     """
-    path = gsclass.path
-    bins = gsclass.bins()
-    data = gsclass.data().iloc[:,:-2]
+    bins = gsclass.bins().drop(index=0)
+    data = gsclass.data().iloc[:,:-2].drop(index=0)
     st = gsclass.stats().iloc[:,:-1]
-    area = gsclass.area
-    lith = gsclass.lith
-    pre = str(date.today()).replace('-','') + '_'
-    cols = ['Microns_' + str(i) for i in bins['microns']]
     
-    comp = pd.DataFrame(data, copy=True).T
-    comp.index.name = 'FieldLocationID'
-    comp.columns = cols
-    comp = comp.drop(['Microns_2000.0'], axis=1)
-    comp.insert(0, 'Sand', st.loc['sand'])
-    comp.insert(1, 'Silt', st.loc['silt'])
-    comp.insert(2, 'Clay', st.loc['clay'])
-    comp.insert(3, 'Silt_Clay', st.loc['silt_clay'])
+    # format bins titles
+    cols = ['Lower' + str(i) for i in bins['microns']]
     
-    if area is None:
-        if lith is None:
-            name = pre + 'GS_gems.xlsx'
-        else:
-            name = pre + lith + '_gems.xlsx'
-    else:
-        if lith is None:
-            name = pre + area + '_gems.xlsx'
-        else:
-            name = pre + area + '_' + lith + '_gems.xlsx'
     
-    filesave = path[0].replace(os.path.basename(path[0]), name)
-    comp.to_excel(filesave)  
+    # replacing decimal not working!!!!!!!!!!!!!
+    for i in cols:
+        i.replace('.', 'p')
+    
+    
+    cols[0] = 'Upper2000' + cols[0]
+
+    # create properly formatted df for export
+    df = pd.DataFrame(data, copy=True).T
+    df.columns = cols
+    df.index.name = 'FieldLocationID'
+    df.insert(0, 'SampleID', '')
+    df.insert(1, 'BCSand', st.loc['sand'])
+    df.insert(2, 'BCSilt', st.loc['silt'])
+    df.insert(3, 'BCClay', st.loc['clay'])
+    
+    df_ex(df)
+
 
 
 
