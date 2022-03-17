@@ -9,24 +9,25 @@ Created on Fri May 14 18:56:21 2021
 import tkinter as tk
 from tkinter import filedialog
 import os
-from datetime import date
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.patches import Rectangle
 from openpyxl import load_workbook
 #from scipy.signal import find_peaks, peak_prominences
+#from datetime import date
+
 
 
 
 def selectdata():
     """
-    Select file(s) using file dialog window
+    Function to select .xlsx or .xls file(s) using file dialog window.
 
     Returns
     -------
-    path : tuple
-        file paths selected by user
+    path : list
+        File paths selected by user.
 
     """
 
@@ -39,18 +40,22 @@ def selectdata():
     return list(path)
 
 
-
 def datacheck(bmin=0.375198, brows=93, bcol=0):
     """
-    Check multiple files for consistency and successful grain size analysis.
+    Quality control check function for multiple files used in the Grainsize class. 
+    Function checks consistency of minimum bin values and total number of bin rows
+    with expected values defined by parameters. User is given option to change 
+    minimum bin values if different than input by overwriting original files with 
+    errors.
+    
     Parameters
     ----------
     bmin : integer or float, optional
-        Minimum bin size expected. The default is 0.375198.
+        Minimum bin size expected in all files. The default is 0.375198 microns.
     brows : integer, optional
-        Number of rows of bins expected. The default is 93.
+        Total number of rows expected for bin values. The default is 93.
     bcol : integer, optional
-        Bin column number expected (convert from Excel to Python, e.g., "A"=0). The default is 0.
+        Column number for bins; must be same for all files. The default is 0 (Excel Column "A").
 
     Returns
     -------
@@ -58,64 +63,86 @@ def datacheck(bmin=0.375198, brows=93, bcol=0):
 
     """
     path = selectdata()
+
+    #empty lists for data checks
     bmin_check = []
-    brow_check = []
-    
+    brows_check = []
+
+    #loop through all files selected by user and examine bins
     for p in path:
         file = pd.read_excel(p, header=None)
         bins_df = pd.to_numeric(file.iloc[:, bcol], errors='coerce')
-        
+
+        #find minimum bin value in file and compare to expected
         bmin_val = bins_df.min()
-        i = np.where(bins_df == bmin_val)
+        bmin_idx = np.where(bins_df == bmin_val)
+        #if different, append path, value, and index to list
         if bmin_val != bmin:
-            bmin_check.append([p, bmin_val, i[0]])
-        
+            bmin_check.append([p, bmin_val, bmin_idx[0]])
+
+        #find number of bin rows and compare to expected
         binrows = sum(bins_df >= bmin_val)
         if binrows != brows:
-            brow_check.append([p, binrows])
-            
+            brows_check.append([p, binrows])
+
+    # results of checks
     if len(bmin_check) > 0:
         print("The following files have minimum bin values different than input of {}:".format(bmin))
         for i in bmin_check:
             print("{}, {}".format(i[0], i[1]))
-    
     else:
         print("All files have consistent minimum bin values of {}".format(bmin))
 
-    if len(brow_check) > 0:
+    if len(brows_check) > 0:
         print("\nThe following files have total number of bin rows different than input of {}".format(brows))
-        for i in brow_check:
+        for i in brows_check:
             print("{}, {}".format(i[0], i[1]))
     else:
         print("\nAll files have consistent number of bin rows of {}".format(brows))
-    
-    value = input("Enter '1' to change value(s) in marked file(s). WARNING! PERMANENT CHANGE IN FILE(S)!\nEnter any other key to continue.\nEnter value: ")
-    
-    #option 1, permanently change and save excel file(s)
-    if value == "1":
-        for i in bmin_check:
-            idx = i[0]
-            wb = load_workbook(idx)
-            sheet = wb.active
-            
-            # convert column number to letter
-            excol = chr(ord('@')+(bcol+1))
-            
-            # convert python row number to excel row number
-            erow = int(i[2]) + 1
-            
-            # excel coordinate string
-            cellcoord = excol + str(erow)
-            
-            # change to input minimum bin value
-            sheet[cellcoord] = bmin
-            
-            # save file
-            wb.save(idx)
+
+    # if error in minimum bin values, option to fix
+    if len(bmin_check) > 0:
+
+        value = input("Enter '1' to change value(s) in marked file(s) to expected value. WARNING! PERMANENT CHANGE IN FILE(S)!\nEnter any other key to ignore.\nEnter choice: ")
+
+        #option 1, permanently change and save excel file(s)
+        if value == "1":
+            for i in bmin_check:
+                error_path = i[0]
+                wb = load_workbook(error_path)
+                sheet = wb.active
+
+                # convert column number to letter
+                excol = chr(ord('@')+(bcol+1))
+
+                # convert python row number to excel row number
+                exrow = int(i[2]) + 1
+
+                # excel coordinate string
+                cellcoord = excol + str(exrow)
+
+                # change to input minimum bin value
+                sheet[cellcoord] = bmin
+
+                # save file
+                wb.save(error_path)
 
 
 
 def df_ex(df):
+    """
+    Function to save dataframe as .csv or .xlsx file using file dialog window.
+
+    Parameters
+    ----------
+    df : Pandas DataFrame object
+        Dataframe to be saved.
+
+    Returns
+    -------
+    None.
+
+    """
     root = tk.Tk()
     root.withdraw()
     fs = filedialog.asksaveasfilename(title='Save data frame...', filetypes=(
@@ -124,22 +151,25 @@ def df_ex(df):
     
     if fs.endswith('.csv'):
         df.to_csv(fs)
-    elif fs.endswith('.xlsx'):
-        df.to_excel(fs)
     else:
-        print('No file saved')
+        df.to_excel(fs)
+
 
 
 
 def gems_ex(gsclass):
     """
-    Export grain size data into table format used by Kentucky Geological Survey; 
-    saves .xlsx file in directory where Grainsize instance data is located
+    Function to save an object of the Grainsize class in a specific table format
+    used by the Kentucky for GIS geodatabases. File saved as .csv or .xlsx.
 
     Parameters
     ----------
     gsclass : class
-        Instance of Grainsize class
+        Object of Grainsize class.
+    
+    Returns
+    -------
+    None.
 
     """
     bins = gsclass.bins().drop(index=0)
