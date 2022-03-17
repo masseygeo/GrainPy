@@ -17,6 +17,7 @@ from openpyxl import load_workbook
 #from scipy.signal import find_peaks, peak_prominences
 #from datetime import date
 
+from grainclass import *
 
 
 
@@ -38,6 +39,8 @@ def selectdata():
     root.destroy()
 
     return list(path)
+
+
 
 
 def datacheck(bmin=0.375198, brows=93, bcol=0):

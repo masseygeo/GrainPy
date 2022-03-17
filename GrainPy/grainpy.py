@@ -16,6 +16,10 @@ from matplotlib import pyplot as plt
 #from datetime import date
 #import scipy.stats as st
 
+
+
+
+#better way to import...need init file?
 from util import *
 from grainclass import *
 
@@ -94,7 +98,7 @@ class Grainsize():
     
 
 
-    # add column for standard error and 95% Margin of error     
+    # delete mean and std deviation...update gems_ex...plotting...etc     
     def data(self, smallbin=0.375198, datarows=93, datacol=1):   
         '''
         Collects data from grain size analysis in class path file(s)
@@ -140,7 +144,7 @@ class Grainsize():
     
 
 
-    # add column for 95% margin of error
+    # delete mean and std deviation...update gems_ex...plotting...etc     
     # different name to something else...cp?
     def cump(self):
         '''
@@ -290,7 +294,9 @@ class Grainsize():
   
     
   
-    
+# generic plot method for individual analyses
+
+# generic plot method for multiple analyses
   
     
   
@@ -452,46 +458,12 @@ class Grainsize():
         cp_mn['SEM'] = cp_mn['std'] / np.sqrt(cp_mn['count'])
         cp_mn['ME'] = np.nan
  
-        
- 
-    
- 
-        # # calculate Margin of Error from normal or t distribution
-        # cp_mn[cp_mn['count'] >= 30]:
-        #     st.zscore
-        # elif cp_mn[0 < cp_mn['count'] < 30]:
-            
-            
-        # cp_mn['ME'] = st.t.interval(alpha=0.95, df=cp_mn['df'], loc=cp_mn['mean'], scale=cp_mn['SEM'])
-        
-        # ci95_high
-        # ci95_low
-            
-            
-            
-            
+                 
         cphigh = cp_mn['mean'] + cp_mn['std']
         #cphigh = cp_mn['mean'] + st.t.interval(alpha=0.95, df=len(cp_mn_arr)-1, loc=cp_mn['mean'])
         cplow = cp_mn['mean'] - cp_mn['std']
         ax2.fill_between(bins, cphigh, cplow, color='#00008B', alpha=0.5, zorder=2)
         ax2.plot(bins, cp.replace(0,np.nan), color='k', linewidth=0.5, zorder=2.1)
-
-
-
-
-        # plot stats
-        # med_ln = ax.axvline(st.loc['median'], color='blue', lw=2)
-        
-        # mean_ln = ax.axvline(st.loc['mean'], color='#FF3333', lw=2)
-        
-        # modes = st.iloc[19::2]
-        # mode_label = []
-        # x = 1
-        # for mode in modes:
-        #     modes_ln = ax.axvline(mode, color='#00CC00', lw=2, zorder=4)
-        #     if mode != np.nan:
-        #         label = 'mode%d: '%x + str(round(modes[x-1],1)) + '\u03C6' + ', {}'.format(wentclass(modes[x-1]))
-        #         mode_label.append(label)
 
         # legend
         sed = st.loc['sediment_class']
