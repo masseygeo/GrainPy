@@ -143,6 +143,6 @@ Contributions are what make the open source community such an amazing place to l
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. For more information, see [LICENSE.txt](https://github.com/masseygeo/GrainPy/blob/main/LICENSE).
+Distributed under the version 3 of the GNU General Public License ([GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)). For more information, see [LICENSE.txt](https://github.com/masseygeo/GrainPy/blob/main/LICENSE).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
