@@ -12,11 +12,6 @@ import pandas as pd
 import numpy as np
 from scipy.signal import find_peaks
 from matplotlib import pyplot as plt
-#from math import isclose
-#from datetime import date
-#import scipy.stats as st
-
-
 
 
 #better way to import...need init file?
@@ -27,13 +22,14 @@ from grainclass import *
 
 class Grainsize():
     
+    
+    # insert samplenames() function for instead of calling separately?
     def __init__(self, path, area=None, lith=None):
         self.path = path
         self.area = area
         self.lith = lith
     
 
-    # change to basenames or filenames 
     def samplenames(self):
         '''
         Collects basenames of class path(s).
@@ -55,18 +51,18 @@ class Grainsize():
 
 
     # collect all bins...solves rounding...or different gs analysis methods
-    def bins(self, smallbin=0.375198, binrows=93, bincol=0):
+    def bins(self, bin_min=0.375198, bin_rows=93, bin_col=0):
         '''
         Diameter bins used for grain size analysis.
 
         Parameters
         ----------
-        smallbin : integer or float, optional
+        bin_min : integer or float, optional
             value of smallest grain size bin in microns used in analysis; default
             is 0.375198 for Kentucky Geological Survey.
-        binrows : integer, optional
+        bin_rows : integer, optional
             number of rows containing bin sizes; default is 93.
-        bincol : integer, optional
+        bin_col : integer, optional
             vertical column number in data path file(s) containing bin sizes; 
             default is 0 (first column).
 
@@ -84,9 +80,9 @@ class Grainsize():
         for path in self.path:
             while x == 0:
                 file = pd.read_excel(path, header=None)
-                i, c = np.where(file == smallbin)            
+                i, c = np.where(file == bin_min)            
             
-                bins['microns'] = file.iloc[i[0]:i[0]+binrows, bincol].astype(float)      
+                bins['microns'] = file.iloc[i[0]:i[0]+bin_rows, bin_col].astype(float)      
                 bins['mm'] = bins['microns'] / 1000                            
                 bins['phi'] = -1 * np.log2(bins['mm'])  
                 
@@ -99,19 +95,19 @@ class Grainsize():
 
 
     # delete mean and std deviation...update gems_ex...plotting...etc     
-    def data(self, smallbin=0.375198, datarows=93, datacol=1):   
+    def data(self, bin_min=0.375198, data_rows=93, data_col=1):   
         '''
         Collects data from grain size analysis in class path file(s)
 
         Parameters
         ----------
-        smallbin : integer or float, optional
+        bin_min : integer or float, optional
             value of smallest grain size bin in microns used in analysis. The 
             default is 0.375198 for Kentucky Geological Survey.
-        datarows : integer, optional
+        data_rows : integer, optional
             number of rows in data path(s) containing data and bin sizes. The 
             default is 93 for Kentucky Geological Survey.
-        datacol : integer, optional
+        data_col : integer, optional
             vertical column number in data path file(s) containing data.
             The default is 1 (second column) for Kentucky Geological Survey.
 
@@ -128,8 +124,8 @@ class Grainsize():
         x = 0
         for path in self.path:           
             file = pd.read_excel(path, header=None)  
-            i, c = np.where(file == smallbin)                                    
-            data[names[x]] = file.iloc[i[0]:i[0]+datarows, datacol].astype(float)
+            i, c = np.where(file == bin_min)                                    
+            data[names[x]] = file.iloc[i[0]:i[0]+data_rows, data_col].astype(float)
             x += 1
             
         # reorganize for standard grain size distribution plots
@@ -145,8 +141,7 @@ class Grainsize():
 
 
     # delete mean and std deviation...update gems_ex...plotting...etc     
-    # different name to something else...cp?
-    def cump(self):
+    def data_cp(self):
         '''
         Calculates cumulative percentage of grain size data collected from 
         Grainsize.data class method
@@ -169,10 +164,10 @@ class Grainsize():
     
         return cp
 
-    
 
-    # update function names from grainclass module...import grainclass    
-    def stats(self, prom=0.1):
+    
+    # add row for lithology on first row
+    def data_st(self, prom=0.1):
         '''
         Calculates statistics for grain size data from class path file(s)
 
@@ -189,7 +184,7 @@ class Grainsize():
 
         '''
         data = self.data().iloc[:,:-1]
-        cp = self.cump().iloc[:,:-1]
+        cp = self.data_cp().iloc[:,:-1]
         phi = self.bins()['phi']
         st = pd.DataFrame(columns=data.columns)
         
@@ -297,208 +292,8 @@ class Grainsize():
 # generic plot method for individual analyses
 
 # generic plot method for multiple analyses
-  
-    
-  
-    
-    
-    def singleplot(self, samp=None, i=0, j=0):
-        '''
-        Grain size plots with selected statistics for single file(s) from class 
-        path(s). All samples from the class path(s) will be plotted by default, 
-        however, user-selected plots may be defined using the parameters. Plots
-        saved in class path(s) directory.
-
-        Parameters
-        ----------
-        samp : string, optional
-            name of one sepcific sample to be plotted. The default is None.
-        i : integer, optional
-            starting index value of specific sample(s) to be plotted. The 
-            default is 0.
-        j : integer, optional
-            ending index value of specific sample(s) to be plotted. The 
-            default is 0.
-
-        Returns
-        -------
-        None.
-
-        '''
-        path = self.path
-        data = self.data()
-        cp = self.cump()
-        st = self.stats()
-        bins = self.bins()
-        idx = 0
-        
-        # samp, i, and j arguments allows one, slice, or all samples to be plotted
-        if type(samp) != str:   
-            if i==0 and j==0:
-                samples = self.samplenames()
-            else:
-                samples = self.samplenames()[i:j]
-        else:
-            samples=[samp]
-        
-        
-        # plot all samples (default) or user-specified sample(s)
-        for sample in samples:
-            
-            # create figure and axes in Kentucky Geological Survey format
-            fig, ax, ax2, ax3 = gsplot()
-            
-            ax.set_ylim(0, max(data[sample]) + 0.25)
-            ax.set_title(sample, size=18, weight='bold', style='italic')
-            
-            # plot bin volumes % bars
-            ax.bar(bins['phi'], data[sample], width=0.1, color='0.7', align='edge', edgecolor='k', lw=0.2)
-        
-            # plot cumulative relative frequency line
-            ax2.plot(bins['phi'], cp[sample].replace(0, np.nan), color='#00008B', linewidth=1.5)
-            
-            # plot stats
-            med_ln = ax.axvline(st[sample].loc['median'], color='blue', lw=2) 
-            mean_ln = ax.axvline(st[sample].loc['mean'], color='#FF3333', lw=2)
-            modes = st[sample].iloc[19::2]
-            mode_label = []
-            x = 1
-            for mode in modes:
-                modes_ln = ax.axvline(mode, color='#00CC00', lw=2, zorder=4)
-                if mode != np.nan:
-                    label = 'mode%d: '%x + str(round(modes[x-1],1)) + '\u03C6' + ', {}'.format(wentclass(modes[x-1]))
-                    mode_label.append(label)
-                x+=1
-                                
-            # legend and annotation text
-            sed = st[sample].loc['sediment_class']
-            sort = st[sample].loc['sorting_class']
-            sand = str(round(st[sample].loc['sand'], 1))
-            silt = str(round(st[sample].loc['silt'], 1))
-            clay = str(round(st[sample].loc['clay'], 1))
-            ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(
-                sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
-                horizontalalignment='center')
-            
-            mean_lab = 'mean: {0:.1f}\u03C6, {1}'.format(st[sample].loc['mean'], 
-                                                         st[sample].loc['mean_gs'])
-            med_lab = 'median: {0:.1f}\u03C6, {1}'.format(st[sample].loc['median'], 
-                                                          st[sample].loc['median_gs'])
-            ax.legend(handles=[mean_ln, med_ln], labels=[mean_lab, med_lab], 
-                      bbox_to_anchor=(0.5, -0.133), ncol=2, fancybox=False, 
-                      frameon=False, loc='center')
-            
-            modelab = '  /  '.join(mode_label)
-            ax2.legend(handles=[modes_ln], labels=[modelab], bbox_to_anchor=(0.5, -0.166), 
-                       fancybox=False, frameon=False, loc='center')
-            
-            skew = str(round(st[sample].loc['skewness'], 2)) + ', {}'.format(
-                st[sample].loc['skewness_class'])
-            kurt = str(round(st[sample].loc['kurtosis'], 2)) + ', {}'.format(
-                st[sample].loc['kurtosis_class'])
-            ax.annotate('skewness: {0}     kurtosis: {1}'.format(skew, kurt), xy=(0.5, -0.204), 
-                        xycoords='axes fraction', horizontalalignment='center')
-            
-            # save figure in directory with sample files
-            save_pdf = os.path.splitext(path[idx])[0] + '.pdf'
-            plt.savefig(fname=save_pdf, dpi=300, bbox_inches='tight')
-            save_jpg = os.path.splitext(path[idx])[0] + '.jpg'
-            plt.savefig(fname=save_jpg, dpi=300, bbox_inches='tight')
-            idx += 1
-        
-            plt.show()
-            plt.close()
-            
-    '''
-    Add option to NOT use KGS formatting?
-    Can remove sampl parameter and just use index range?
-    '''
-
-
-    
-    def meanplot(self):
-        path = self.path[0]
-        data_mn = self.data().iloc[:,-2:]
-        cp_mn = self.cump().iloc[:,-2:]
-        cp = self.cump().iloc[:,:-2]
-        st = self.stats()['mean']
-        bins = self.bins()['phi']
-        loc = self.area
-        mat = self.lith
-        
-        # create figure and axes in Kentucky Geological Survey format
-        fig, ax, ax2, ax3 = gsplot()
-        ax.set_ylim(0, max(data_mn['mean']) + 0.25)
-        
-        # set title and savefile name
-        if type(loc) != str and type(mat) != str:
-            title = 'Mean Grain Size Distribution'
-            file = 'MeanGSD'
-        elif type(loc) != str and type(mat) == str:
-            title = 'Mean Grain Size Distribution' + ' - ' + mat
-            file = 'MeanGSD_' + mat
-        elif type(loc) == str and type(mat) != str:
-            title = 'Mean Grain Size Distribution' + ' - ' + loc
-        else:
-            nm = '{0} ({1})'.format(mat, loc)
-            title = 'Mean Grain Size Distribution' + ' - ' + nm
-            file = 'MeanGSD_' + mat + '_' + loc
-        ax.set_title(title, size=18, weight='bold', style='italic')
-        
-        # plot bin volumes bars of average
-        ax.bar(bins, data_mn['mean'], width=0.1, color='0.7', align='edge', edgecolor='k', lw=0.2)
-    
-        # plot cumulative average line and error
-        ax2.plot(bins, cp_mn['mean'].replace(0,np.nan), color='white', linewidth=2, zorder=2.2)
-        
-        # plot error of cumulative frequency line
-        cp_mn['count'] = cp.replace(0, np.nan).count(axis=1)
-        cp_mn['df'] = cp_mn['count'] - 1
-        cp_mn[cp_mn['df'] < 0] = 0
-        cp_mn['SEM'] = cp_mn['std'] / np.sqrt(cp_mn['count'])
-        cp_mn['ME'] = np.nan
- 
-                 
-        cphigh = cp_mn['mean'] + cp_mn['std']
-        #cphigh = cp_mn['mean'] + st.t.interval(alpha=0.95, df=len(cp_mn_arr)-1, loc=cp_mn['mean'])
-        cplow = cp_mn['mean'] - cp_mn['std']
-        ax2.fill_between(bins, cphigh, cplow, color='#00008B', alpha=0.5, zorder=2)
-        ax2.plot(bins, cp.replace(0,np.nan), color='k', linewidth=0.5, zorder=2.1)
-
-        # legend
-        sed = st.loc['sediment_class']
-        sort = st.loc['sorting_class']
-        sand = str(round(st.loc['sand'], 1))
-        silt = str(round(st.loc['silt'], 1))
-        clay = str(round(st.loc['clay'], 1))
-        ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(
-            sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
-            horizontalalignment='center')
-
-        # save figure in directory with sample files
-        filesave = path.replace(os.path.basename(path), file)
-
-        save_pdf =  filesave + '.pdf'
-        plt.savefig(fname=save_pdf, dpi=300, bbox_inches='tight')
-        save_jpg = filesave + '.jpg'
-        plt.savefig(fname=save_jpg, dpi=300, bbox_inches='tight')
-            
-        plt.show()
-        plt.close()
-
-        return cp_mn
-
-    '''
-    plot fill area of 95% CI instead of standard deviation
-    '''
-    
-    
-    
     
 
-# Testing
-
-
+# TESTING
 path = selectdata()
-
 test = Grainsize(path)
