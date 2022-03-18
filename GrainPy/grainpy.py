@@ -1,9 +1,18 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Wed Apr 28 21:12:57 2021
+Copyright 2021-2022 Matthew A. Massey
 
-@author: Matthew Massey
+This file is part of GrainPy.
+
+GrainPy is free software: you can redistribute it and/or modify it under the terms 
+of the GNU General Public License as published by the Free Software Foundation, 
+either version 3 of the License, or (at your option) any later version. GrainPy is 
+distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GrainPy. 
+If not, see <https://www.gnu.org/licenses/>. 
 """
 
 
@@ -11,8 +20,6 @@ import os
 import pandas as pd
 import numpy as np
 from scipy.signal import find_peaks
-
-#better way to import...need init file?
 from util import *
 from grainclass import *
 
@@ -206,7 +213,7 @@ class Grainsize():
             mode_sort = mode_sort[::-1]
             mode_list.append(mode_sort)
             
-        # stats derived from cumulative percentage of grain size data
+        # stats derived from cumulative percentage data
         mean_list = []
         median_list = []
         sort_list = []
@@ -287,9 +294,9 @@ class Grainsize():
   
     
   
-# generic plot method for individual analyses
+# plot method for individual analyses
 
-# generic plot method for multiple analyses
+# plot method for multiple analyses
     
 
 # TESTING

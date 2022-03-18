@@ -1,10 +1,22 @@
-#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Fri May 14 18:56:21 2021
+Copyright 2021-2022 Matthew A. Massey
 
-@author: Matthew Massey
+This file is part of GrainPy.
+
+GrainPy is free software: you can redistribute it and/or modify it under the terms 
+of the GNU General Public License as published by the Free Software Foundation, 
+either version 3 of the License, or (at your option) any later version. GrainPy is 
+distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
+even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with GrainPy. 
+If not, see <https://www.gnu.org/licenses/>. 
 """
+
+
+
 
 import tkinter as tk
 from tkinter import filedialog
@@ -14,8 +26,8 @@ import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.patches import Rectangle
 from openpyxl import load_workbook
-
 from grainclass import *
+
 
 
 
@@ -191,6 +203,12 @@ def gems_ex(gso):
     df.insert(2, 'BCClay', st.loc['clay'])
     
     df_ex(df)
+
+
+
+def gsd__format():
+    
+    return fig, ax, ax2, ax3
 
 
      
