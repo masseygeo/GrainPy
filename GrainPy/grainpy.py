@@ -16,12 +16,15 @@ If not, see <https://www.gnu.org/licenses/>.
 """
 
 
+
+
 import os
 import pandas as pd
 import numpy as np
 from scipy.signal import find_peaks
 from util import *
 from grainclass import *
+
 
 
 
@@ -53,6 +56,7 @@ class Grainsize():
         
         return samplenames
     
+
 
 
     # collect all bins...solves rounding...or different gs analysis methods
@@ -97,6 +101,7 @@ class Grainsize():
         
         return bins                    
     
+
 
 
     # delete mean and std deviation...update gems_ex...plotting...etc     
@@ -145,6 +150,7 @@ class Grainsize():
     
 
 
+
     # delete mean and std deviation...update gems_ex...plotting...etc     
     def data_cp(self):
         '''
@@ -168,6 +174,7 @@ class Grainsize():
         cp['std'] = cp.std(axis=1)
     
         return cp
+
 
 
     

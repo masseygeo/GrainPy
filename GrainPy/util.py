@@ -206,12 +206,78 @@ def gems_ex(gso):
 
 
 
+
 def gsd__format():
     
+    # create figure and axes
+    fig, ax = plt.subplots(1, 1, figsize=(8,8), dpi=300)
+    ax2 = ax.twinx()
+    ax3 = ax.twiny()
+
+    # format axes
+    ax.tick_params(axis='x', width=0.5, labelsize=10)
+    ax.tick_params(axis='y', color='0.5', width=0.5, labelsize=10, labelcolor='0.5')
+    ax.set_xlim(-1, 12)
+    
+    ax.set_ylim(0, max(data[sample]) + 0.25)
+    
+    ax.set_xlabel('Grain size (\u03C6)', size=12, style='italic')
+    ax.set_ylabel('Bin volume (%)', size=12, style='italic', color='0.5')
+    
+    ax.set_title(sample, size=18, weight='bold', style='italic')
+    
+    ax2.set_ylim(0,100)
+    ax2.tick_params(axis='y', color='#00008B', width=0.5, labelsize=10, labelcolor='#00008B')
+    ax2.set_ylabel('Cumulative volume (%)', size=12, style='italic', color='#00008B')
+    ax2.spines['left'].set_visible(False)
+    ax2.spines['right'].set(color='#00008B')
+    ax2_xtick_loc = [i for i in range(-1,13,1)]
+    ax2_ytick_loc = [i for i in range(0,101,10)]
+    ax2.set(xticks=ax2_xtick_loc)
+    ax2.set(yticks=ax2_ytick_loc)
+    
+    ax3.set_xlim(2, 0.00024)
+    ax3.tick_params(axis='x', color='k', width=0.5, labelsize=10, labelcolor='k', pad=-1)
+    ax3.set_xlabel('Grain size (mm)', size=12, style='italic', color='k')
+    ax3.set_xscale('log', base=2)
+    ax3.spines['right'].set_visible(False)
+    ax3.spines['left'].set_visible(False)
+    ax3_xtick_loc = [2, 0.0625, 0.0039]
+    ax3_xtick_lab = ['2', '0.0625', '0.0039']
+    ax3.set(xticks=ax3_xtick_loc)
+    ax3.set(xticklabels=ax3_xtick_lab)
+    ax3.annotate('-sand-', xy=(0.18, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
+    ax3.annotate('-silt-', xy=(0.54, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
+    ax3.annotate('-clay-', xy=(0.85, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
+
+    # background lines and patches for Wentworth grain size divisions
+    #lines
+    for i in range(0,9,1):
+        ax.plot([i,i], [0,100], color='0.8', linewidth=0.25, zorder=0)
+
+    # sand patches      
+    ax.add_patch(Rectangle((-1,0), 1, 100, color='#FFBA01', alpha=0.5, zorder=0))
+    ax.add_patch(Rectangle((0,0), 1, 100, color='#FFC918', alpha=0.5, zorder=0))
+    ax.add_patch(Rectangle((1,0), 1, 100, color='#FFD82F', alpha=0.5, zorder=0))
+    ax.add_patch(Rectangle((2,0), 1, 100, color='#FEE745', alpha=0.6, zorder=0))
+    ax.add_patch(Rectangle((3,0), 1, 100, color='#FEF65C', alpha=0.3, zorder=0))
+    
+    # silt patches
+    ax.add_patch(Rectangle((4,0), 1, 100, color='#0080FF', alpha=0.3, zorder=0))
+    ax.add_patch(Rectangle((5,0), 1, 100, color='#3399FF', alpha=0.3, zorder=0))
+    ax.add_patch(Rectangle((6,0), 1, 100, color='#66B2FF', alpha=0.3, zorder=0))
+    ax.add_patch(Rectangle((7,0), 1, 100, color='#99CCFF', alpha=0.3, zorder=0))
+    
+    # clay patch
+    ax.add_patch(Rectangle((8,0), 4, 100, color='#6B8E23', alpha=0.1, zorder=0))
+        
     return fig, ax, ax2, ax3
 
 
      
+
+
+
 # change i and j to single list...default will be None
 # change to no space between bars...change from bar to histogram?
 def gsd_single(gso, i=0, j=0):
@@ -264,10 +330,17 @@ def gsd_single(gso, i=0, j=0):
         ax.tick_params(axis='x', width=0.5, labelsize=10)
         ax.tick_params(axis='y', color='0.5', width=0.5, labelsize=10, labelcolor='0.5')
         ax.set_xlim(-1, 12)
+        
+        
         ax.set_ylim(0, max(data[sample]) + 0.25)
+        
+        
         ax.set_xlabel('Grain size (\u03C6)', size=12, style='italic')
         ax.set_ylabel('Bin volume (%)', size=12, style='italic', color='0.5')
+        
+        
         ax.set_title(sample, size=18, weight='bold', style='italic')
+        
         
         ax2.set_ylim(0,100)
         ax2.tick_params(axis='y', color='#00008B', width=0.5, labelsize=10, labelcolor='#00008B')
