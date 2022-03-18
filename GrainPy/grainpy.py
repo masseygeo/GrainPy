@@ -11,8 +11,6 @@ import os
 import pandas as pd
 import numpy as np
 from scipy.signal import find_peaks
-from matplotlib import pyplot as plt
-
 
 #better way to import...need init file?
 from util import *

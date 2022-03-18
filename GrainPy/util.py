@@ -14,8 +14,6 @@ import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.patches import Rectangle
 from openpyxl import load_workbook
-#from scipy.signal import find_peaks, peak_prominences
-#from datetime import date
 
 from grainclass import *
 
@@ -132,6 +130,7 @@ def datacheck(bin_min=0.375198, bin_rows=93, bin_col=0):
 
 
 
+
 def df_ex(df):
     """
     Function to save dataframe as .csv or .xlsx file using file dialog window.
@@ -163,7 +162,7 @@ def df_ex(df):
 def gems_ex(gso):
     """
     Function to save an object of the Grainsize class in a specific table format
-    used by the Kentucky for GIS geodatabases. File saved as .csv or .xlsx.
+    for GIS geodatabases. Saved as .csv or .xlsx file using file dialog window.
 
     Parameters
     ----------
@@ -179,58 +178,69 @@ def gems_ex(gso):
     data = gso.data().iloc[:,:-2].drop(index=0)
     st = gso.data_st().iloc[:,:-1]
     
-    # format bins titles
-    cols = ['Lower' + str(i) for i in bins['microns']]
-    
-    
-    # replacing decimal not working!!!!!!!!!!!!!
-    for i in cols:
-        i.replace('.', 'p')
-    
-    
+    # format bin titles
+    cols = ['Lower' + str(i).replace('.','p') for i in bins['microns']]
     cols[0] = 'Upper2000' + cols[0]
 
-    # create properly formatted df for export
+    # create df, modify for geodatabase format
     df = pd.DataFrame(data, copy=True).T
     df.columns = cols
-    df.index.name = 'FieldLocationID'
-    df.insert(0, 'SampleID', '')
-    df.insert(1, 'BCSand', st.loc['sand'])
-    df.insert(2, 'BCSilt', st.loc['silt'])
-    df.insert(3, 'BCClay', st.loc['clay'])
+    df.index.name = 'SampleID'
+    df.insert(0, 'BCSand', st.loc['sand'])
+    df.insert(1, 'BCSilt', st.loc['silt'])
+    df.insert(2, 'BCClay', st.loc['clay'])
     
     df_ex(df)
 
 
      
-# remove slice i,j option...just use list of samplename(s)? or both?
-def gsp(gso, i=0, j=0):
+# change i and j to single list...default will be None
+# change to no space between bars...change from bar to histogram?
+def gsd_single(gso, i=0, j=0):
+    """
+    Function to plot grain size distribution data as a histogram of binned sizes, 
+    cumulative percentage line, and statistics. Formatted to show Wentworth grain
+    size divisions, x scales in phi units and millimeters, and legend with statistics.
+    User has the option of plotting all files in the Grainsize object (default) or
+    slicing specific file(s) using optional indexing. Plots are saved in jpeg and 
+    PDF formats in the same location as the data files.
 
+    Parameters
+    ----------
+    gso : class
+        Object of Grainsize class.
+    i : integer, optional
+        First index location for slicing specific files. The default is 0.
+    j : integer, optional
+        Second index location for slicing specific files. The default is 0.
+
+    Returns
+    -------
+    None.
+
+    """
     path = gso.path
     bins = gso.bins()
     data = gso.data()
     cp = gso.data_cp()
     st = gso.data_st()
     
-    idx = 0
+    # counter for saving files
+    c = 0
     
-    # Collect sample names to be plotted.
+    # Collect sample names to be plotted
     if i!=0 or j!=0:
             samples = gso.samplenames()[i:j]
     else:
             samples = gso.samplenames()
 
-
-    
-    # plot all samples (default) or user-specified sample(s)
+    # plot all samples
     for sample in samples:
-
         
         # create figure and axes
         fig, ax = plt.subplots(1, 1, figsize=(8,8), dpi=300)
         ax2 = ax.twinx()
         ax3 = ax.twiny()
-
 
         # format axes
         ax.tick_params(axis='x', width=0.5, labelsize=10)
@@ -244,8 +254,7 @@ def gsp(gso, i=0, j=0):
         ax2.set_ylim(0,100)
         ax2.tick_params(axis='y', color='#00008B', width=0.5, labelsize=10, labelcolor='#00008B')
         ax2.set_ylabel('Cumulative volume (%)', size=12, style='italic', color='#00008B')
-        ax2.spines['left'].set(color='0.5')
-        #ax2.spines['left'].set_visible(False)
+        ax2.spines['left'].set_visible(False)
         ax2.spines['right'].set(color='#00008B')
         ax2_xtick_loc = [i for i in range(-1,13,1)]
         ax2_ytick_loc = [i for i in range(0,101,10)]
@@ -266,46 +275,47 @@ def gsp(gso, i=0, j=0):
         ax3.annotate('-silt-', xy=(0.54, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
         ax3.annotate('-clay-', xy=(0.85, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
 
-        # background lines and color patches for Wentworth grain size divisions
+        # background lines and patches for Wentworth grain size divisions
+        #lines
         for i in range(0,9,1):
             ax.plot([i,i], [0,100], color='0.8', linewidth=0.25, zorder=0)
 
-        # sand        
+        # sand patches      
         ax.add_patch(Rectangle((-1,0), 1, 100, color='#FFBA01', alpha=0.5, zorder=0))
         ax.add_patch(Rectangle((0,0), 1, 100, color='#FFC918', alpha=0.5, zorder=0))
         ax.add_patch(Rectangle((1,0), 1, 100, color='#FFD82F', alpha=0.5, zorder=0))
         ax.add_patch(Rectangle((2,0), 1, 100, color='#FEE745', alpha=0.6, zorder=0))
         ax.add_patch(Rectangle((3,0), 1, 100, color='#FEF65C', alpha=0.3, zorder=0))
         
-        # silt
+        # silt patches
         ax.add_patch(Rectangle((4,0), 1, 100, color='#0080FF', alpha=0.3, zorder=0))
         ax.add_patch(Rectangle((5,0), 1, 100, color='#3399FF', alpha=0.3, zorder=0))
         ax.add_patch(Rectangle((6,0), 1, 100, color='#66B2FF', alpha=0.3, zorder=0))
         ax.add_patch(Rectangle((7,0), 1, 100, color='#99CCFF', alpha=0.3, zorder=0))
         
-        # clay
+        # clay patch
         ax.add_patch(Rectangle((8,0), 4, 100, color='#6B8E23', alpha=0.1, zorder=0))
         
-        # plot bin volumes % bars
+        # plot bars of volume percentages within each bin
         ax.bar(bins['phi'], data[sample], width=0.1, color='0.7', align='edge', edgecolor='k', lw=0.2)
     
         # plot cumulative percentage line
-        ax2.plot(bins['phi'], cp[sample].replace(0, np.nan), color='#00008B', linewidth=2)
+        ax2.plot(bins['phi'], cp[sample].replace(0, np.nan), color='#00008B', linewidth=2.5)
         
-        # plot stats
-        med_ln = ax.axvline(st[sample].loc['median'], color='blue', lw=2) 
-        mean_ln = ax.axvline(st[sample].loc['mean'], color='#FF3333', lw=2)
+        # plot statistic lines
+        med_ln = ax.axvline(st[sample].loc['median'], color='blue', ls=(0, (1, 1)), lw=1.5) 
+        mean_ln = ax.axvline(st[sample].loc['mean'], color='blue', lw=1.5)
         modes = st[sample].iloc[19::2]
         mode_label = []
         x = 1
         for mode in modes:
-            modes_ln = ax.axvline(mode, color='#00CC00', lw=2, zorder=4)
+            modes_ln = ax.axvline(mode, color='black', ls=(0, (5, 1)), lw=1.5, zorder=4)
             if mode != np.nan:
                 label = 'mode%d: '%x + str(round(modes[x-1],1)) + '\u03C6' + ', {}'.format(wentclass(modes[x-1]))
                 mode_label.append(label)
             x+=1
                             
-        # format legend and annotation text
+        # key and annotation text
         sed = st[sample].loc['sediment_class']
         sort = st[sample].loc['sorting_class']
         sand = str(round(st[sample].loc['sand'], 1))
@@ -334,35 +344,46 @@ def gsp(gso, i=0, j=0):
         ax.annotate('skewness: {0}     kurtosis: {1}'.format(skew, kurt), xy=(0.5, -0.204), 
                     xycoords='axes fraction', horizontalalignment='center')
         
-        
-        
         # save figure in directory with sample files
-        save_pdf = os.path.splitext(path[idx])[0] + '.pdf'
+        save_pdf = os.path.splitext(path[c])[0] + '.pdf'
         plt.savefig(fname=save_pdf, dpi=300, bbox_inches='tight')
-        save_jpg = os.path.splitext(path[idx])[0] + '.jpg'
+        
+        save_jpg = os.path.splitext(path[c])[0] + '.jpg'
         plt.savefig(fname=save_jpg, dpi=300, bbox_inches='tight')
-        idx += 1
         
-        # show plot in IDE window
-        plt.show()
-        #plt.close()
+        c += 1
         
 
 
 
-# Grain Size Distribution Plot - mean plot of multiple samples
-def meanplot(self):
-    path = self.path[0]
-    data_mn = self.data().iloc[:,-2:]
-    cp_mn = self.data_cp().iloc[:,-2:]
-    cp = self.data_cp().iloc[:,:-2]
-    st = self.data_st()['mean']
-    bins = self.bins()['phi']
-    loc = self.area
-    mat = self.lith
+def gsd_multi(gso):
+    path = gso.path[0]
+    data_mn = gso.data().iloc[:,-2:]
+    cp_mn = gso.data_cp().iloc[:,-2:]
+    cp = gso.data_cp().iloc[:,:-2]
+    st = gso.data_st()['mean']
+    bins = gso.bins()['phi']
+    loc = gso.area
+    mat = gso.lith
     
     # create figure and axes
     fig, ax, ax2, ax3 = gsplot()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     # format axes
     ax.set_ylim(0, max(data_mn['mean']) + 0.25)  
@@ -423,9 +444,6 @@ def meanplot(self):
     plt.close()
 
     return cp_mn
-
-
-        
 
 
 
