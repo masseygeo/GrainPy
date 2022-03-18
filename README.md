@@ -15,9 +15,9 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#examples">Usage</a></li>
+    <li><a href="#examples">Examples</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributions&feedback">Contributing</a></li>
+    <li><a href="#contributions&feedback">Contributions & Feedback</a></li>
     <li><a href="#license">License</a></li>
   </ol>
 </details>
