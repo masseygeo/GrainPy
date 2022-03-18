@@ -118,21 +118,19 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a full li
 
 Any contributions or feedback you make are greatly appreciated!
 
-- If you have a suggestion that would make this better, please fork the repo and create a pull request. 
+- If you have a suggestion that would make this better, you can simply [create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the label **enhancement** OR fork the repo and create a pull request... 
 
-     1. Fork the Project
-     2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-     3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-     4. Push to the Branch (`git push origin feature/AmazingFeature`)
-     5. Open a Pull Request
+     - Fork the Project
+     - Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+     - Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+     - Push to the Branch (`git push origin feature/AmazingFeature`)
+     - Open a Pull Request
 
-- You can also simply [create an issue](https://github.com/masseygeo/GrainPy/issues/new) with the label **enhancement**.
+- If something isn't working, [create an issue](https://github.com/masseygeo/GrainPy/issues/new)
 
-- If something is not working, [create an issue](https://github.com/masseygeo/GrainPy/issues/new)
+- If you think GrainPy is pretty cool, consider giving it a star.
 
-- If you think GrainPy is useful, consider giving it a star.
-
-- If you need to get in touch for other reasons, [send us an email](mamass1@g.uky.edu)
+- If you need to get in touch for other reasons, [send me an email](mamass1@g.uky.edu)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
