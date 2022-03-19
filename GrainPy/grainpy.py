@@ -412,7 +412,7 @@ class Grainsize():
 
 
     # plot method for multiple analyses
-    def gsd_multi(self):
+    def gsd_multi(self, bins_plt=False):
         path = self.path[0]
         bins = self.bins()['phi']
 
@@ -445,12 +445,16 @@ class Grainsize():
         ax.set_title(title, size=18, weight='bold', style='italic')
         
         
-        # plot bin volumes bars of average
-        ax.bar(bins, data_mn['mean'], width=0.1, color='0.7', align='edge', edgecolor='k', lw=0.2)
-        
+        # optional plot of mean volume percentages within each bin
+        if bins_plt == False:
+            # plot bin volumes bars of average
+            ax.bar(bins, data_mn['mean'], width=0.1, color='0.7', align='edge', 
+                   edgecolor='k', lw=0.2)
+            
         
         # plot cumulative average line and error
-        ax2.plot(bins, cp_mn['mean'].replace(0,np.nan), color='white', linewidth=2, zorder=2.2)
+        ax2.plot(bins, cp_mn['mean'].replace(0,np.nan), color='white', linewidth=2, 
+                 zorder=2.2)
         
         
         # plot error of cumulative frequency line
