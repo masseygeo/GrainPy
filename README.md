@@ -94,12 +94,14 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] XXX
-     - [ ]  xxx
-- [ ] YYY
-     - [ ] yyy
-- [ ] ZZZ
-     - [ ] zzz
+- [ ] Initial build
+- [ ] Public release 0.1.0
+- [ ] Added functionalities
+     - [ ] Object compatibility with multiple types/sources of grain size distribution data
+     - [ ] Compare multiple objects
+     - [ ] Sediment mixing models
+     - [ ] Examine multiple distributions (MLR? PCA?)
+- [ ] Integrate with GIS
 
 See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a full list of proposed features (and known issues).
 
@@ -133,6 +135,6 @@ Any contributions or feedback you make are greatly appreciated!
 <!-- LICENSE -->
 ## License
 
-Distributed under the version 3 of the GNU General Public License ([GPLv3](https://www.gnu.org/licenses/gpl-3.0.html)). For more information, see [LICENSE.txt](https://github.com/masseygeo/GrainPy/blob/main/LICENSE).
+Distributed under the version 3 of the GNU General Public License. For more information, see [LICENSE.txt](https://github.com/masseygeo/GrainPy/blob/main/LICENSE).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
