@@ -93,6 +93,6 @@ Any contributions or feedback you make is greatly appreciated!
 
 
 ## License
-Distributed under the [version 3 of the GNU General Public License](https://github.com/masseygeo/GrainPy/blob/main/LICENSE).
+Distributed under the version 3 of the GNU General Public [License](https://github.com/masseygeo/GrainPy/blob/main/LICENSE).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
