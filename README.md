@@ -5,7 +5,7 @@
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-grainpy">About GrainPy</a>
+      <a href="#about-grainpy">About</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -22,7 +22,7 @@
 
 
 
-## About GrainPy
+## About
 GrainPy is a Python package for compiling, analyzing, visualizing, and interpreting grain size distribution data. The idea for GrainPy started with an abundance of grain size distribution data that wasn't being fully utilized. Initially, GrainPy was developed to quickly compare multiple grain size distribution analyses with geologic statistics and publication-quality plots. It is now evident that the potential for modern grain size analyses extends well beyond these basic, yet necessary, features, and GrainPy will continue to add user-friendly functionality.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -30,7 +30,6 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
 
 
 ## Getting Started
-This is an example of how you may give instructions on setting up your project locally.
 
 ### Installation
 We reccomend installation using Conda as below...\
@@ -43,13 +42,13 @@ The basic functionality of GrainPy is explained below, however, please refer to 
 
 _**Input data structure**_
 > Grain size distribution data can be collected from a variety of methods, including sieve analysis, hydrometer method, and laser diffraction particle size analyzer. GrainPy uses the raw data from any type of analysis to be organized in an Excel table (.xlsx or .xls) consisting of the bins used for the analysis and the data collected for each bin (relative percentage).
-
-_image of tables in correct format...sieve data, hydrometer data, beckman-coulter_
+> 
+> _image of tables in correct format...sieve data, hydrometer data, beckman-coulter_
 
 _**Grain size distribution curves**_
 > Grain size data can then be compiled into a usable format with GrainPy, used to calculate a variety of statistics, and produce publication-quality grain size distribution plots of individual or multiple samples.
-
-_image of single plot...and multi plot_
+> 
+> _image of single plot...and multi plot_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -57,7 +56,7 @@ _image of single plot...and multi plot_
 
 ## Roadmap
 - [ ] Initial build
-- [ ] Public release 0.1.0
+- [ ] Package 0.1.0 release
 - [ ] Added functionalities
      - [ ] Object compatibility with multiple types/sources of grain size distribution data
      - [ ] More geotechnical statistics
@@ -94,6 +93,6 @@ Any contributions or feedback you make is greatly appreciated!
 
 
 ## License
-Distributed under the version 3 of the GNU General Public License. For more information, see the [LICENSE.txt](https://github.com/masseygeo/GrainPy/blob/main/LICENSE) file.
+Distributed under the version 3 of the GNU General Public [License](https://github.com/masseygeo/GrainPy/blob/main/LICENSE).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
