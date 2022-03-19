@@ -131,6 +131,7 @@ Any contributions or feedback you make is greatly appreciated!
 
 
 ## License
+[![License: GPLv3](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](https://tldrlegal.com/license/creative-commons-cc0-1.0-universal)
 Distributed under the version 3 of the GNU General Public [License](https://github.com/masseygeo/GrainPy/blob/main/LICENSE).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
