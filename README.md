@@ -33,16 +33,20 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
 This is an example of how you may give instructions on setting up your project locally.
 
 ### Installation
+We reccomend installation using Conda as below...\
+```
+conda install python=3 grainpy
+```
 
 ### Example
 The basic functionality of GrainPy is explained below, however, please refer to the [documentation](https://example.com) for more detailed information and tutorials.
 
-_**Input data structure**_
+_**Input data structure**_\
 Grain size distribution data can be collected from a variety of methods, including sieve analysis, hydrometer method, and laser diffraction particle size analyzer. GrainPy uses the raw data from any type of analysis to be organized in an Excel table (.xlsx or .xls) consisting of the bins used for the analysis and the data collected for each bin (relative percentage).
 
 _image of tables in correct format...sieve data, hydrometer data, beckman-coulter_
 
-_**Grain size distribution curves**_
+_**Grain size distribution curves**_\
 Grain size data can then be compiled into a usable format with GrainPy, used to calculate a variety of statistics, and produce publication-quality grain size distribution plots of individual or multiple samples.
 
 _image of single plot...and multi plot_
