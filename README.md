@@ -1,12 +1,13 @@
 # GrainPy
- Python package for compiling, analyzing, visualizing, and interpreting grain size distribution data. 
- 
+
+
+
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ol>
     <li>
-      <a href="#about-the-project">About the Project</a>
+      <a href="#about-grainpy">About GrainPy</a>
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
@@ -24,15 +25,8 @@
 
 
 
-## About The Project
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-* Your time should be focused on creating something amazing. A project that solves a problem and helps others
-* You shouldn't be doing the same tasks over and over like creating a README from scratch
-* You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
+## About GrainPy
+GrainPy is a Python package for compiling, analyzing, visualizing, and interpreting grain size distribution data. The idea for GrainPy started with an abundance of grain size distribution data that wasn't being fully utilized. Initially, GrainPy was developed to quickly compare multiple grain size distribution analyses with geologic statistics and publication-quality plots. It is now evident that the potential for modern grain size analyses extends well beyond these basic, yet necessary, features, and GrainPy will continue to add user-friendly functionality.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -69,13 +63,13 @@ _Below is an example of how you can instruct your audience on installing and set
 
 
 
-## Example
-The idea for GrainPy started with an abundance of grain size distribution data that wasn't being fully utilized. The basic functionality of GrainPy is explained below, however, please refer to the [documentation](https://example.com) for more detailed information and tutorials.
+### Example
+The basic functionality of GrainPy is explained below, however, please refer to the [documentation](https://example.com) for more detailed information and tutorials.
 
-### Data Structure
+#### Data Structure
 Grain size distribution data can be collected from a variety of methods, including sieve analysis, hydrometer method, and laser diffraction particle size analyzer. GrainPy uses the raw data from any type of analysis to be organized in an Excel table (.xlsx or .xls) consisting of the bins used for the analysis and the data collected for each bin (relative percentage).
 
-### Grain Size Distributions
+#### Grain Size Distributions
 Grain size data can then be compiled into a usable format with GrainPy, used to calculate a variety of statistics, and produce publication-quality grain size distribution plots of individual or multiple samples.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
