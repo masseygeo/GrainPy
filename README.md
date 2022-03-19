@@ -56,7 +56,7 @@ _**Grain size distribution curves**_
 
 ## Roadmap
 - [ ] Initial build
-- [ ] Public release 0.1.0
+- [ ] Package 0.1.0 release
 - [ ] Added functionalities
      - [ ] Object compatibility with multiple types/sources of grain size distribution data
      - [ ] More geotechnical statistics
