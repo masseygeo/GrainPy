@@ -80,18 +80,21 @@ _Below is an example of how you can instruct your audience on installing and set
 
 
 
-<!-- USAGE EXAMPLES -->
 ## Examples
+The idea for GrainPy started with an abundance of grain size distribution data that wasn't being fully utilized.
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+### Data Structure
+Grain size distribution data can be collected from a variety of methods, including sieving, hydrometers, and laser particle analyzers. The raw data of collected must be organized in an Excel table (.xlsx or .xls) consisting of the bins used for the analysis (first column) and the data collected for each bin (relative percentage).
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+### Grain Size Distribution Data
+Grain size data can then be compiled into a usable format with GrainPy and produce publication-quality grain size distribution plots of individual and multiple analyses.
+
+For more examples, please refer to the [documentation](https://example.com)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
-<!-- ROADMAP -->
 ## Roadmap
 
 - [ ] Initial build
@@ -112,9 +115,9 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a full li
 
 ## Contributions & Feedback
 
-Any contributions or feedback you make are greatly appreciated!
+Any contributions or feedback you make is greatly appreciated!
 
-- If you have a suggestion that would make this better, you can simply [create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the label **enhancement** OR fork the repo and create a pull request... 
+- If you have a suggestion that you think would make this better, you can simply [create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the  **enhancement** label...OR...fork the repo and create a pull request: 
 
      - Fork the Project
      - Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -124,7 +127,7 @@ Any contributions or feedback you make are greatly appreciated!
 
 - If something isn't working, [create an issue](https://github.com/masseygeo/GrainPy/issues/new)
 
-- If you think GrainPy is pretty cool, consider giving it a star.
+- If you think GrainPy is pretty cool, please give it a star!
 
 - If you need to get in touch for other reasons, [send me an email](mamass1@g.uky.edu)
 
@@ -132,7 +135,6 @@ Any contributions or feedback you make are greatly appreciated!
 
 
 
-<!-- LICENSE -->
 ## License
 
 Distributed under the version 3 of the GNU General Public License. For more information, see the [LICENSE.txt](https://github.com/masseygeo/GrainPy/blob/main/LICENSE) file.
