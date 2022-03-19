@@ -131,7 +131,6 @@ Any contributions or feedback you make is greatly appreciated!
 
 
 ## License
-[![License: GPLv3](https://img.shields.io/badge/License%3A-GNUv3-lightgrey)](https://www.gnu.org/licenses/gpl-3.0.html)\
-Distributed under the version 3 of the GNU General Public License.
+[![License: GPLv3](https://img.shields.io/badge/License%3A-GNUv3-lightgrey)](https://www.gnu.org/licenses/gpl-3.0.html)     _Distributed under the version 3 of the GNU General Public License._
 
 <p align="right">(<a href="#top">back to top</a>)</p>
