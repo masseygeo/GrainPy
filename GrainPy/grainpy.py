@@ -414,7 +414,7 @@ class Grainsize():
         bins = self.bins()['phi']
         data = self.data()
         cp = self.data_cp()
-        st = self.data_st()
+        #st = self.data_st()
         
         # create figure and axes
         fig, ax, ax2, ax3 = gsd_format()
@@ -473,6 +473,7 @@ class Grainsize():
         # cplow = cp_mn['mean'] - cp_mn['std']
         # ax2.fill_between(bins, cphigh, cplow, color='#00008B', alpha=0.5, zorder=2)
         #ax2.plot(bins, cp, color='k', linewidth=1, zorder=2.1)
+        #cp.plot(ax=ax2)
     
         
         # # key and annotation text
