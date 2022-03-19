@@ -1,3 +1,39 @@
+<h1 align="center">
+  <br>
+  <a href="https://github.com/ArmynC/ArminC-AutoExec/archive/master.zip"><img src="https://raw.githubusercontent.com/ArmynC/ArminC-AutoExec/master/arminc_autoexec.png" alt="ArminC AutoExec"></a>
+</h1>
+
+<h4 align="center">A high-quality CS:GO config built for gamers.</h4>
+
+<p align="center">
+    <a href="https://github.com/ArmynC/ArminC-AutoExec/commits/master">
+    <img src="https://img.shields.io/github/last-commit/ArmynC/ArminC-AutoExec.svg?style=flat-square&logo=github&logoColor=white"
+         alt="GitHub last commit">
+    <a href="https://github.com/ArmynC/ArminC-AutoExec/issues">
+    <img src="https://img.shields.io/github/issues-raw/ArmynC/ArminC-AutoExec.svg?style=flat-square&logo=github&logoColor=white"
+         alt="GitHub issues">
+    <a href="https://github.com/ArmynC/ArminC-AutoExec/pulls">
+    <img src="https://img.shields.io/github/issues-pr-raw/ArmynC/ArminC-AutoExec.svg?style=flat-square&logo=github&logoColor=white"
+         alt="GitHub pull requests">
+    <a href="https://twitter.com/intent/tweet?text=Try this CS:GO AutoExec:&url=https%3A%2F%2Fgithub.com%2FArmynC%2FArminC-AutoExec">
+    <img src="https://img.shields.io/twitter/url/https/github.com/ArmynC/ArminC-AutoExec.svg?style=flat-square&logo=twitter"
+         alt="GitHub tweet">
+</p>
+      
+<p align="center">
+  <a href="#about">About</a> •
+  <a href="#features">Features</a> •
+  <a href="#getting-started">Getting Started</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#example">Example</a> •
+  <a href="#roadmap">Roadmap</a> •
+  <a href="#contributions&feedback">Contributions & Feedback</a> •
+  <a href="#license">License</a>
+</p>
+
+---
+
+
 # GrainPy
 
 <!-- TABLE OF CONTENTS -->
@@ -25,6 +61,8 @@
 ## About
 GrainPy is a Python package for compiling, analyzing, visualizing, and interpreting grain size distribution data. The idea for GrainPy started with an abundance of grain size distribution data that wasn't being fully utilized. Initially, GrainPy was developed to quickly compare multiple grain size distribution analyses with geologic statistics and publication-quality plots. It is now evident that the potential for modern grain size analyses extends well beyond these basic, yet necessary, features, and GrainPy will continue to add user-friendly functionality.
 
+### Features
+      
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
