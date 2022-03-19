@@ -86,6 +86,6 @@ Any contributions or feedback you make is greatly appreciated!
 
 
 ## License
-[![License: GPLv3](https://img.shields.io/badge/License%3A-GNUv3-lightgrey)](https://github.com/masseygeo/GrainPy/blob/main/LICENSE)
+[![License: GPLv3](https://img.shields.io/badge/GrainPy%20license-GNUv3-lightgrey)](https://github.com/masseygeo/GrainPy/blob/main/LICENSE)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
