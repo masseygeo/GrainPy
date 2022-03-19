@@ -108,7 +108,6 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a full li
 
 
 
-<!-- CONTRIBUTING -->
 ## Contributions & Feedback
 
 Any contributions or feedback you make are greatly appreciated!
