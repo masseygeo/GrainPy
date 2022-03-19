@@ -84,10 +84,10 @@ _Below is an example of how you can instruct your audience on installing and set
 The idea for GrainPy started with an abundance of grain size distribution data that wasn't being fully utilized. The basic functionality of GrainPy is explained below, however, please refer to the [documentation](https://example.com) for more detailed information and tutorials.
 
 ### Data Structure
-Grain size distribution data can be collected from a variety of methods, including sieving, hydrometers, and laser particle analyzers. The raw data of collected must be organized in an Excel table (.xlsx or .xls) consisting of the bins used for the analysis (first column) and the data collected for each bin (relative percentage).
+Grain size distribution data can be collected from a variety of methods, including sieve analysis, hydrometer method, and laser diffraction particle size analyzer. GrainPy uses the raw data from any type of analysis to be organized in an Excel table (.xlsx or .xls) consisting of the bins used for the analysis and the data collected for each bin (relative percentage).
 
 ### Grain Size Distributions
-Grain size data can then be compiled into a usable format with GrainPy and produce publication-quality grain size distribution plots of individual and multiple analyses.
+Grain size data can then be compiled into a usable format with GrainPy, used to calculate a variety of statistics, and produce publication-quality grain size distribution plots of individual or multiple samples.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
