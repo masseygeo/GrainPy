@@ -1,7 +1,5 @@
 # GrainPy
 
-
-
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
@@ -12,11 +10,10 @@
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
+        <li><a href="example">Example</a></li>
       </ul>
     </li>
-    <li><a href="#examples">Example</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributions&feedback">Contributions & Feedback</a></li>
     <li><a href="#license">License</a></li>
@@ -34,43 +31,21 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
 
 ## Getting Started
 This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/your_username_/Project-Name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
 
 ### Example
 The basic functionality of GrainPy is explained below, however, please refer to the [documentation](https://example.com) for more detailed information and tutorials.
 
-#### Data Structure
+_**Input data structure**_
 Grain size distribution data can be collected from a variety of methods, including sieve analysis, hydrometer method, and laser diffraction particle size analyzer. GrainPy uses the raw data from any type of analysis to be organized in an Excel table (.xlsx or .xls) consisting of the bins used for the analysis and the data collected for each bin (relative percentage).
 
-#### Grain Size Distributions
+_image of tables in correct format...sieve data, hydrometer data, beckman-coulter_
+
+_**Grain size distribution curves**_
 Grain size data can then be compiled into a usable format with GrainPy, used to calculate a variety of statistics, and produce publication-quality grain size distribution plots of individual or multiple samples.
+
+_image of single plot...and multi plot_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
