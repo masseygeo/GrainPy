@@ -1,24 +1,4 @@
-<h1 align="center">
-  <br>
-  <a href="https://github.com/ArmynC/ArminC-AutoExec/archive/master.zip"><img src="https://raw.githubusercontent.com/ArmynC/ArminC-AutoExec/master/arminc_autoexec.png" alt="ArminC AutoExec"></a>
-</h1>
-
-<h4 align="center">A high-quality CS:GO config built for gamers.</h4>
-
-<p align="center">
-    <a href="https://github.com/ArmynC/ArminC-AutoExec/commits/master">
-    <img src="https://img.shields.io/github/last-commit/ArmynC/ArminC-AutoExec.svg?style=flat-square&logo=github&logoColor=white"
-         alt="GitHub last commit">
-    <a href="https://github.com/ArmynC/ArminC-AutoExec/issues">
-    <img src="https://img.shields.io/github/issues-raw/ArmynC/ArminC-AutoExec.svg?style=flat-square&logo=github&logoColor=white"
-         alt="GitHub issues">
-    <a href="https://github.com/ArmynC/ArminC-AutoExec/pulls">
-    <img src="https://img.shields.io/github/issues-pr-raw/ArmynC/ArminC-AutoExec.svg?style=flat-square&logo=github&logoColor=white"
-         alt="GitHub pull requests">
-    <a href="https://twitter.com/intent/tweet?text=Try this CS:GO AutoExec:&url=https%3A%2F%2Fgithub.com%2FArmynC%2FArminC-AutoExec">
-    <img src="https://img.shields.io/twitter/url/https/github.com/ArmynC/ArminC-AutoExec.svg?style=flat-square&logo=twitter"
-         alt="GitHub tweet">
-</p>
+#GrainPy
       
 <p align="center">
   <a href="#about">About</a> •
@@ -32,31 +12,6 @@
 </p>
 
 ---
-
-
-# GrainPy
-
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-grainpy">About</a>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#example">Example</a></li>
-      </ul>
-    </li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributions&feedback">Contributions & Feedback</a></li>
-    <li><a href="#license">License</a></li>
-  </ol>
-</details>
-
-
 
 ## About
 GrainPy is a Python package for compiling, analyzing, visualizing, and interpreting grain size distribution data. The idea for GrainPy started with an abundance of grain size distribution data that wasn't being fully utilized. Initially, GrainPy was developed to quickly compare multiple grain size distribution analyses with geologic statistics and publication-quality plots. It is now evident that the potential for modern grain size analyses extends well beyond these basic, yet necessary, features, and GrainPy will continue to add user-friendly functionality.
@@ -131,6 +86,7 @@ Any contributions or feedback you make is greatly appreciated!
 
 
 ## License
-[![License: GPLv3](https://img.shields.io/badge/License%3A-GNUv3-lightgrey)](https://www.gnu.org/licenses/gpl-3.0.html)&nbsp;&nbsp;&nbsp;_Distributed under the version 3 of the GNU General Public License._
+_Distributed under the version 3 of the GNU General Public License._\
+[![License: GPLv3](https://img.shields.io/badge/License%3A-GNUv3-lightgrey)](https://www.gnu.org/licenses/gpl-3.0.html)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
