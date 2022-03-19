@@ -414,41 +414,44 @@ class Grainsize():
     # plot method for multiple analyses
     def gsd_multi(self):
         path = self.path[0]
+        bins = self.bins()['phi']
+
+        
         data_mn = self.data().iloc[:,-2:]
         cp_mn = self.data_cp().iloc[:,-2:]
         cp = self.data_cp().iloc[:,:-2]
         st = self.data_st()['mean']
-        bins = self.bins()['phi']
-        loc = self.area
-        mat = self.lith
+        
         
         # create figure and axes
         fig, ax, ax2, ax3 = gsd_format()
         ax.set_ylim(0, max(data_mn['mean']) + 0.25)  
         
-        # set title and savefile name
-        if type(loc) != str and type(mat) != str:
+        
+        # set savefile name and plot title
+        if type(self.area) != str and type(self.lith) != str:
             title = 'Mean Grain Size Distribution'
             file = 'MeanGSD'
-        elif type(loc) != str and type(mat) == str:
-            title = 'Mean Grain Size Distribution' + ' - ' + mat
-            file = 'MeanGSD_' + mat
-        elif type(loc) == str and type(mat) != str:
-            title = 'Mean Grain Size Distribution' + ' - ' + loc
+        elif type(self.area) != str and type(self.lith) == str:
+            title = 'Mean Grain Size Distribution' + ' - ' + self.lith
+            file = 'MeanGSD_' + self.lith
+        elif type(self.area) == str and type(self.lith) != str:
+            title = 'Mean Grain Size Distribution' + ' - ' + self.area
         else:
-            nm = '{0} ({1})'.format(mat, loc)
-            title = 'Mean Grain Size Distribution' + ' - ' + nm
-            file = 'MeanGSD_' + mat + '_' + loc
+            both = '{0}_({1})'.format(self.lith, self.area)
+            title = 'Mean Grain Size Distribution' + ' - ' + both
+            file = 'MeanGSD_' + self.lith + '_' + self.area
+        
         ax.set_title(title, size=18, weight='bold', style='italic')
-        
-        
         
         
         # plot bin volumes bars of average
         ax.bar(bins, data_mn['mean'], width=0.1, color='0.7', align='edge', edgecolor='k', lw=0.2)
-    
+        
+        
         # plot cumulative average line and error
         ax2.plot(bins, cp_mn['mean'].replace(0,np.nan), color='white', linewidth=2, zorder=2.2)
+        
         
         # plot error of cumulative frequency line
         cp_mn['count'] = cp.replace(0, np.nan).count(axis=1)
@@ -463,7 +466,8 @@ class Grainsize():
         ax2.fill_between(bins, cphigh, cplow, color='#00008B', alpha=0.5, zorder=2)
         ax2.plot(bins, cp.replace(0,np.nan), color='k', linewidth=0.5, zorder=2.1)
     
-        # legend
+        
+        # key and annotation text
         sed = st.loc['sediment_class']
         sort = st.loc['sorting_class']
         sand = str(round(st.loc['sand'], 1))
@@ -475,7 +479,9 @@ class Grainsize():
     
         # save figure in directory with sample files
         filesave = path.replace(os.path.basename(path), file)
-    
+        
+        save_pdf = os.path.splitext(path[c])[0] + '.pdf'
+
         save_pdf =  filesave + '.pdf'
         plt.savefig(fname=save_pdf, dpi=300, bbox_inches='tight')
         save_jpg = filesave + '.jpg'

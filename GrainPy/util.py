@@ -20,7 +20,6 @@ If not, see <https://www.gnu.org/licenses/>.
 
 import tkinter as tk
 from tkinter import filedialog
-import os
 import pandas as pd
 import numpy as np
 from matplotlib import pyplot as plt
@@ -268,84 +267,6 @@ def gsd_format():
         
     return fig, ax, ax2, ax3
 
-
-
-
-def gsd_multi(gso):
-    path = gso.path[0]
-    data_mn = gso.data().iloc[:,-2:]
-    cp_mn = gso.data_cp().iloc[:,-2:]
-    cp = gso.data_cp().iloc[:,:-2]
-    st = gso.data_st()['mean']
-    bins = gso.bins()['phi']
-    loc = gso.area
-    mat = gso.lith
-    
-    # create figure and axes
-    fig, ax, ax2, ax3 = gsd_format()
-    
-    
-    
-    
-    # format axes
-    ax.set_ylim(0, max(data_mn['mean']) + 0.25)  
-    
-    # set title and savefile name
-    if type(loc) != str and type(mat) != str:
-        title = 'Mean Grain Size Distribution'
-        file = 'MeanGSD'
-    elif type(loc) != str and type(mat) == str:
-        title = 'Mean Grain Size Distribution' + ' - ' + mat
-        file = 'MeanGSD_' + mat
-    elif type(loc) == str and type(mat) != str:
-        title = 'Mean Grain Size Distribution' + ' - ' + loc
-    else:
-        nm = '{0} ({1})'.format(mat, loc)
-        title = 'Mean Grain Size Distribution' + ' - ' + nm
-        file = 'MeanGSD_' + mat + '_' + loc
-    ax.set_title(title, size=18, weight='bold', style='italic')
-    
-    # plot bin volumes bars of average
-    ax.bar(bins, data_mn['mean'], width=0.1, color='0.7', align='edge', edgecolor='k', lw=0.2)
-
-    # plot cumulative average line and error
-    ax2.plot(bins, cp_mn['mean'].replace(0,np.nan), color='white', linewidth=2, zorder=2.2)
-    
-    # plot error of cumulative frequency line
-    cp_mn['count'] = cp.replace(0, np.nan).count(axis=1)
-    cp_mn['df'] = cp_mn['count'] - 1
-    cp_mn[cp_mn['df'] < 0] = 0
-    cp_mn['SEM'] = cp_mn['std'] / np.sqrt(cp_mn['count'])
-    cp_mn['ME'] = np.nan
-        
-    cphigh = cp_mn['mean'] + cp_mn['std']
-    #cphigh = cp_mn['mean'] + st.t.interval(alpha=0.95, df=len(cp_mn_arr)-1, loc=cp_mn['mean'])
-    cplow = cp_mn['mean'] - cp_mn['std']
-    ax2.fill_between(bins, cphigh, cplow, color='#00008B', alpha=0.5, zorder=2)
-    ax2.plot(bins, cp.replace(0,np.nan), color='k', linewidth=0.5, zorder=2.1)
-
-    # legend
-    sed = st.loc['sediment_class']
-    sort = st.loc['sorting_class']
-    sand = str(round(st.loc['sand'], 1))
-    silt = str(round(st.loc['silt'], 1))
-    clay = str(round(st.loc['clay'], 1))
-    ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(
-        sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
-        horizontalalignment='center')
-
-    # save figure in directory with sample files
-    filesave = path.replace(os.path.basename(path), file)
-
-    save_pdf =  filesave + '.pdf'
-    plt.savefig(fname=save_pdf, dpi=300, bbox_inches='tight')
-    save_jpg = filesave + '.jpg'
-    plt.savefig(fname=save_jpg, dpi=300, bbox_inches='tight')
-        
-    plt.show()
-    plt.close()
-
-    return cp_mn
 
 
 
