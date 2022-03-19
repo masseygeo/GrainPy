@@ -180,7 +180,6 @@ def df_ex(df):
 
 
 
-
 def gems_ex(gso):
     """
     Function to save an object of the Grainsize class in a specific table format
@@ -197,8 +196,8 @@ def gems_ex(gso):
 
     """
     bins = gso.bins().drop(index=0)
-    data = gso.data().iloc[:,:-2].drop(index=0)
-    st = gso.data_st().iloc[:,:-1]
+    data = gso.data().drop(index=0)
+    st = gso.data_st()
     
     # format bin titles
     cols = ['Lower' + str(i).replace('.','p') for i in bins['microns']]
@@ -256,7 +255,7 @@ def gsd_format():
     ax3.annotate('-clay-', xy=(0.85, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
 
     # background lines and patches for Wentworth grain size divisions
-    #lines
+    # lines
     for i in range(0,9,1):
         ax.plot([i,i], [0,100], color='0.8', linewidth=0.25, zorder=0)
 

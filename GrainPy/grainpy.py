@@ -22,6 +22,7 @@ import os
 import pandas as pd
 import numpy as np
 from scipy.signal import find_peaks
+import scipy.stats
 from matplotlib import pyplot as plt
 from util import *
 from grainclass import *
@@ -105,7 +106,6 @@ class Grainsize():
 
 
 
-    # delete mean and std deviation...update gems_ex...plotting...etc     
     def data(self, bin_min=0.375198, data_rows=93, data_col=1):   
         '''
         Collects data from grain size analysis in class path file(s)
@@ -141,18 +141,12 @@ class Grainsize():
             
         # reorganize for standard grain size distribution plots
         data = data.iloc[::-1].reset_index(drop=True).replace(np.nan, 0)
-        
-        # average and standard deviation if multiple samples
-        if len(names) >= 1:
-            data['mean'] = data.mean(axis=1)
-            data['std'] = data.std(axis=1)
                 
         return data
     
 
 
 
-    # delete mean and std deviation...update gems_ex...plotting...etc     
     def data_cp(self):
         '''
         Calculates cumulative percentage of grain size data collected from 
@@ -170,9 +164,6 @@ class Grainsize():
 
         for sample in names:
             cp[sample] = (data[sample].cumsum() / data[sample].sum()) * 100
-        
-        cp['mean'] = cp.mean(axis=1)
-        cp['std'] = cp.std(axis=1)
     
         return cp
 
@@ -180,6 +171,9 @@ class Grainsize():
 
     
     # add row for lithology on first row
+    # add geotechnical stats
+    # add new functions for basic stats / geotechnical stats / method of moments
+     #stats, and folk stats
     def data_st(self, prom=0.1):
         '''
         Calculates statistics for grain size data from class path file(s)
@@ -196,8 +190,8 @@ class Grainsize():
             Dataframe of statistics of grain size data.
 
         '''
-        data = self.data().iloc[:,:-1]
-        cp = self.data_cp().iloc[:,:-1]
+        data=self.data()
+        cp = self.data_cp()
         phi = self.bins()['phi']
         st = pd.DataFrame(columns=data.columns)
         
@@ -304,6 +298,7 @@ class Grainsize():
 
     # change i and j to single list...default will be None
     # change to no space between bars...change from bar to histogram?
+    # option for basic plot...no background or stat lines...modify gsd_format?
     def gsd_single(self, i=0, j=0):
         
         """
@@ -411,22 +406,19 @@ class Grainsize():
 
 
 
-    # plot method for multiple analyses
+    # change bar plot to histogram?
+    # change up axes if/if not bins_plt?
+    # option to include background in gsd_format
     def gsd_multi(self, bins_plt=False):
         path = self.path[0]
         bins = self.bins()['phi']
-
-        
-        data_mn = self.data().iloc[:,-2:]
-        cp_mn = self.data_cp().iloc[:,-2:]
-        cp = self.data_cp().iloc[:,:-2]
-        st = self.data_st()['mean']
-        
+        data = self.data()
+        cp = self.data_cp()
+        st = self.data_st()
         
         # create figure and axes
         fig, ax, ax2, ax3 = gsd_format()
-        ax.set_ylim(0, max(data_mn['mean']) + 0.25)  
-        
+        ax.set_ylim(0, max(data.mean(axis=1)) + 0.25)  
         
         # set savefile name and plot title
         if type(self.area) != str and type(self.lith) != str:
@@ -437,62 +429,73 @@ class Grainsize():
             file = 'MeanGSD_' + self.lith
         elif type(self.area) == str and type(self.lith) != str:
             title = 'Mean Grain Size Distribution' + ' - ' + self.area
+            file = 'MeanGSD_' + self.area
         else:
-            both = '{0}_({1})'.format(self.lith, self.area)
+            both = '{0} ({1})'.format(self.lith, self.area)
             title = 'Mean Grain Size Distribution' + ' - ' + both
             file = 'MeanGSD_' + self.lith + '_' + self.area
         
         ax.set_title(title, size=18, weight='bold', style='italic')
         
-        
         # optional plot of mean volume percentages within each bin
-        if bins_plt == False:
+        if bins_plt == True:
             # plot bin volumes bars of average
-            ax.bar(bins, data_mn['mean'], width=0.1, color='0.7', align='edge', 
+            ax.bar(bins, data.mean(axis=1), width=0.1, color='0.7', align='edge', 
                    edgecolor='k', lw=0.2)
-            
         
         # plot cumulative average line and error
-        ax2.plot(bins, cp_mn['mean'].replace(0,np.nan), color='white', linewidth=2, 
+        ax2.plot(bins, cp.mean(axis=1).replace(0,np.nan), color='white', linewidth=2, 
                  zorder=2.2)
         
+        # find 95% confidence intervals
+        n = len(cp.columns)
+        sem = cp.sem(axis=1)
         
-        # plot error of cumulative frequency line
-        cp_mn['count'] = cp.replace(0, np.nan).count(axis=1)
-        cp_mn['df'] = cp_mn['count'] - 1
-        cp_mn[cp_mn['df'] < 0] = 0
-        cp_mn['SEM'] = cp_mn['std'] / np.sqrt(cp_mn['count'])
-        cp_mn['ME'] = np.nan
+        # use z (>=30) or t (<30) distribution
+        if n >= 30:
+            ci = scipy.stats.norm.interval(alpha=0.95, loc=cp.mean(axis=1), scale=sem)
+        else:
+            ci = scipy.stats.t.interval(alpha=0.95, df=n-1, loc=cp.mean(axis=1), scale=sem) 
+        
+        ax2.fill_between(bins, ci[1], ci[0], color='#00008B', alpha=0.4, zorder=2)
+
+        
+        
+        # # plot error of cumulative frequency line
+        # cp_mn['count'] = cp.replace(0, np.nan).count(axis=1)
+        # cp_mn['df'] = cp_mn['count'] - 1
+        # cp_mn[cp_mn['df'] < 0] = 0
+        # cp_mn['SEM'] = cp_mn['std'] / np.sqrt(cp_mn['count'])
+        # cp_mn['ME'] = np.nan
             
-        cphigh = cp_mn['mean'] + cp_mn['std']
-        #cphigh = cp_mn['mean'] + st.t.interval(alpha=0.95, df=len(cp_mn_arr)-1, loc=cp_mn['mean'])
-        cplow = cp_mn['mean'] - cp_mn['std']
-        ax2.fill_between(bins, cphigh, cplow, color='#00008B', alpha=0.5, zorder=2)
-        ax2.plot(bins, cp.replace(0,np.nan), color='k', linewidth=0.5, zorder=2.1)
+        # cphigh = cp_mn['mean'] + cp_mn['std']
+        # #cphigh = cp_mn['mean'] + st.t.interval(alpha=0.95, df=len(cp_mn_arr)-1, loc=cp_mn['mean'])
+        # cplow = cp_mn['mean'] - cp_mn['std']
+        # ax2.fill_between(bins, cphigh, cplow, color='#00008B', alpha=0.5, zorder=2)
+        #ax2.plot(bins, cp, color='k', linewidth=1, zorder=2.1)
     
         
-        # key and annotation text
-        sed = st.loc['sediment_class']
-        sort = st.loc['sorting_class']
-        sand = str(round(st.loc['sand'], 1))
-        silt = str(round(st.loc['silt'], 1))
-        clay = str(round(st.loc['clay'], 1))
-        ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(
-            sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
-            horizontalalignment='center')
+        # # key and annotation text
+        # sed = st.loc['sediment_class']
+        # sort = st.loc['sorting_class']
+        # sand = str(round(st.loc['sand'], 1))
+        # silt = str(round(st.loc['silt'], 1))
+        # clay = str(round(st.loc['clay'], 1))
+        # ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(
+        #     sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
+        #     horizontalalignment='center')
     
+        
+        
         # save figure in directory with sample files
         filesave = path.replace(os.path.basename(path), file)
         
-        save_pdf = os.path.splitext(path[c])[0] + '.pdf'
-
         save_pdf =  filesave + '.pdf'
         plt.savefig(fname=save_pdf, dpi=300, bbox_inches='tight')
+        
         save_jpg = filesave + '.jpg'
         plt.savefig(fname=save_jpg, dpi=300, bbox_inches='tight')
-            
-        plt.show()
-        plt.close()
+
 
 
     
