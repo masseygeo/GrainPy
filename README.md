@@ -89,7 +89,10 @@ Grain size distribution data can be collected from a variety of methods, includi
 ### Grain Size Distribution Data
 Grain size data can then be compiled into a usable format with GrainPy and produce publication-quality grain size distribution plots of individual and multiple analyses.
 
-For more examples, please refer to the [documentation](https://example.com)
+
+
+
+**For more inofrmation and examples, please refer to the [documentation](https://example.com).**
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
