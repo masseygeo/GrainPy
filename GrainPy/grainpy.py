@@ -22,6 +22,7 @@ import os
 import pandas as pd
 import numpy as np
 from scipy.signal import find_peaks
+from matplotlib import pyplot as plt
 from util import *
 from grainclass import *
 
@@ -300,10 +301,190 @@ class Grainsize():
         return st
   
     
-  
-# plot method for individual analyses
 
-# plot method for multiple analyses
+    # change i and j to single list...default will be None
+    # change to no space between bars...change from bar to histogram?
+    def gsd_single(self, i=0, j=0):
+        
+        """
+        Method to plot grain size distribution data as a histogram of binned sizes, 
+        cumulative percentage line, and statistics. Formatted to show Wentworth scale 
+        grain size divisions, x scales in phi units and millimeters, and legend with 
+        statistics. User has the option of plotting all files in the Grainsize object 
+        (default) or slicing specific file(s) using optional indexing. Plots are saved 
+        in jpeg and PDF formats in the same location as the data files.
+    
+        Parameters
+        ----------
+        i : integer, optional
+            First index location for slicing specific files. The default is 0.
+        j : integer, optional
+            Second index location for slicing specific files. The default is 0.
+    
+        Returns
+        -------
+        None.
+    
+        """
+        path = self.path
+        bins = self.bins()
+        data = self.data()
+        cp = self.data_cp()
+        st = self.data_st()
+        
+        # counter for saving files
+        c = 0
+        
+        # Collect sample names to be plotted
+        if i!=0 or j!=0:
+                samples = self.samplenames()[i:j]
+        else:
+                samples = self.samplenames()
+    
+        # plot all samples
+        for sample in samples:
+            
+            # create figure and axes
+            fig, ax, ax2, ax3 = gsd_format()
+            
+            ax.set_ylim(0, max(data[sample]) + 0.25)
+            ax.set_title(sample, size=18, weight='bold', style='italic')
+            
+            # plot bars of volume percentages within each bin
+            ax.bar(bins['phi'], data[sample], width=0.1, color='0.7', align='edge', edgecolor='k', lw=0.2)
+        
+            # plot cumulative percentage line
+            ax2.plot(bins['phi'], cp[sample].replace(0, np.nan), color='#00008B', linewidth=2.5)
+            
+            # plot statistic lines
+            med_ln = ax.axvline(st[sample].loc['median'], color='blue', ls=(0, (1, 1)), lw=1.5) 
+            mean_ln = ax.axvline(st[sample].loc['mean'], color='blue', lw=1.5)
+            modes = st[sample].iloc[19::2]
+            mode_label = []
+            x = 1
+            for mode in modes:
+                modes_ln = ax.axvline(mode, color='black', ls=(0, (5, 1)), lw=1.5, zorder=4)
+                if mode != np.nan:
+                    label = 'mode%d: '%x + str(round(modes[x-1],1)) + '\u03C6' + ', {}'.format(wentclass(modes[x-1]))
+                    mode_label.append(label)
+                x+=1
+                                
+            # key and annotation text
+            sed = st[sample].loc['sediment_class']
+            sort = st[sample].loc['sorting_class']
+            sand = str(round(st[sample].loc['sand'], 1))
+            silt = str(round(st[sample].loc['silt'], 1))
+            clay = str(round(st[sample].loc['clay'], 1))
+            ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(
+                sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
+                horizontalalignment='center')
+            
+            mean_lab = 'mean: {0:.1f}\u03C6, {1}'.format(st[sample].loc['mean'], 
+                                                         st[sample].loc['mean_gs'])
+            med_lab = 'median: {0:.1f}\u03C6, {1}'.format(st[sample].loc['median'], 
+                                                          st[sample].loc['median_gs'])
+            ax.legend(handles=[mean_ln, med_ln], labels=[mean_lab, med_lab], 
+                      bbox_to_anchor=(0.5, -0.133), ncol=2, fancybox=False, 
+                      frameon=False, loc='center')
+            
+            modelab = '  /  '.join(mode_label)
+            ax2.legend(handles=[modes_ln], labels=[modelab], bbox_to_anchor=(0.5, -0.166), 
+                       fancybox=False, frameon=False, loc='center')
+            
+            skew = str(round(st[sample].loc['skewness'], 2)) + ', {}'.format(
+                st[sample].loc['skewness_class'])
+            kurt = str(round(st[sample].loc['kurtosis'], 2)) + ', {}'.format(
+                st[sample].loc['kurtosis_class'])
+            ax.annotate('skewness: {0}     kurtosis: {1}'.format(skew, kurt), xy=(0.5, -0.204), 
+                        xycoords='axes fraction', horizontalalignment='center')
+            
+            # save figure in directory with sample files
+            save_pdf = os.path.splitext(path[c])[0] + '.pdf'
+            plt.savefig(fname=save_pdf, dpi=300, bbox_inches='tight')
+            
+            save_jpg = os.path.splitext(path[c])[0] + '.jpg'
+            plt.savefig(fname=save_jpg, dpi=300, bbox_inches='tight')      
+            
+            # increase counter
+            c += 1
+
+
+
+
+    # plot method for multiple analyses
+    def gsd_multi(self):
+        path = self.path[0]
+        data_mn = self.data().iloc[:,-2:]
+        cp_mn = self.data_cp().iloc[:,-2:]
+        cp = self.data_cp().iloc[:,:-2]
+        st = self.data_st()['mean']
+        bins = self.bins()['phi']
+        loc = self.area
+        mat = self.lith
+        
+        # create figure and axes
+        fig, ax, ax2, ax3 = gsd_format()
+        ax.set_ylim(0, max(data_mn['mean']) + 0.25)  
+        
+        # set title and savefile name
+        if type(loc) != str and type(mat) != str:
+            title = 'Mean Grain Size Distribution'
+            file = 'MeanGSD'
+        elif type(loc) != str and type(mat) == str:
+            title = 'Mean Grain Size Distribution' + ' - ' + mat
+            file = 'MeanGSD_' + mat
+        elif type(loc) == str and type(mat) != str:
+            title = 'Mean Grain Size Distribution' + ' - ' + loc
+        else:
+            nm = '{0} ({1})'.format(mat, loc)
+            title = 'Mean Grain Size Distribution' + ' - ' + nm
+            file = 'MeanGSD_' + mat + '_' + loc
+        ax.set_title(title, size=18, weight='bold', style='italic')
+        
+        
+        
+        
+        # plot bin volumes bars of average
+        ax.bar(bins, data_mn['mean'], width=0.1, color='0.7', align='edge', edgecolor='k', lw=0.2)
+    
+        # plot cumulative average line and error
+        ax2.plot(bins, cp_mn['mean'].replace(0,np.nan), color='white', linewidth=2, zorder=2.2)
+        
+        # plot error of cumulative frequency line
+        cp_mn['count'] = cp.replace(0, np.nan).count(axis=1)
+        cp_mn['df'] = cp_mn['count'] - 1
+        cp_mn[cp_mn['df'] < 0] = 0
+        cp_mn['SEM'] = cp_mn['std'] / np.sqrt(cp_mn['count'])
+        cp_mn['ME'] = np.nan
+            
+        cphigh = cp_mn['mean'] + cp_mn['std']
+        #cphigh = cp_mn['mean'] + st.t.interval(alpha=0.95, df=len(cp_mn_arr)-1, loc=cp_mn['mean'])
+        cplow = cp_mn['mean'] - cp_mn['std']
+        ax2.fill_between(bins, cphigh, cplow, color='#00008B', alpha=0.5, zorder=2)
+        ax2.plot(bins, cp.replace(0,np.nan), color='k', linewidth=0.5, zorder=2.1)
+    
+        # legend
+        sed = st.loc['sediment_class']
+        sort = st.loc['sorting_class']
+        sand = str(round(st.loc['sand'], 1))
+        silt = str(round(st.loc['silt'], 1))
+        clay = str(round(st.loc['clay'], 1))
+        ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(
+            sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
+            horizontalalignment='center')
+    
+        # save figure in directory with sample files
+        filesave = path.replace(os.path.basename(path), file)
+    
+        save_pdf =  filesave + '.pdf'
+        plt.savefig(fname=save_pdf, dpi=300, bbox_inches='tight')
+        save_jpg = filesave + '.jpg'
+        plt.savefig(fname=save_jpg, dpi=300, bbox_inches='tight')
+            
+        plt.show()
+        plt.close()
+
+
     
 
 # TESTING

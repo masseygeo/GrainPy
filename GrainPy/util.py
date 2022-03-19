@@ -207,7 +207,7 @@ def gems_ex(gso):
 
 
 
-def gsd__format():
+def gsd_format():
     
     # create figure and axes
     fig, ax = plt.subplots(1, 1, figsize=(8,8), dpi=300)
@@ -217,15 +217,10 @@ def gsd__format():
     # format axes
     ax.tick_params(axis='x', width=0.5, labelsize=10)
     ax.tick_params(axis='y', color='0.5', width=0.5, labelsize=10, labelcolor='0.5')
-    ax.set_xlim(-1, 12)
-    
-    ax.set_ylim(0, max(data[sample]) + 0.25)
-    
+    ax.set_xlim(-1, 12)    
     ax.set_xlabel('Grain size (\u03C6)', size=12, style='italic')
     ax.set_ylabel('Bin volume (%)', size=12, style='italic', color='0.5')
-    
-    ax.set_title(sample, size=18, weight='bold', style='italic')
-    
+        
     ax2.set_ylim(0,100)
     ax2.tick_params(axis='y', color='#00008B', width=0.5, labelsize=10, labelcolor='#00008B')
     ax2.set_ylabel('Cumulative volume (%)', size=12, style='italic', color='#00008B')
@@ -274,13 +269,11 @@ def gsd__format():
     return fig, ax, ax2, ax3
 
 
-     
-
 
 
 # change i and j to single list...default will be None
 # change to no space between bars...change from bar to histogram?
-def gsd_single(gso, i=0, j=0):
+def gsd_singleplot(gso, i=0, j=0):
     """
     Function to plot grain size distribution data as a histogram of binned sizes, 
     cumulative percentage line, and statistics. Formatted to show Wentworth grain
