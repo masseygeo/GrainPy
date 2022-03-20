@@ -67,8 +67,8 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a list of
 Any contributions or feedback you make is greatly appreciated!
 
 🔥 If you have a suggestion that you think would make this better, you can either:
-- [Create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the ***enhancement*** label 🏷️
-***...OR...***
+- [Create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the ***enhancement*** label 🏷️\
+***...OR...***\
 - Fork the Project.
 - Create your Feature Branch. `git checkout -b feature/amazingfeature`
 - Commit your Changes. `git commit -m 'Add some AmazingFeature'`
