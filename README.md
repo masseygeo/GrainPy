@@ -1,4 +1,4 @@
-<p align="center": center>GrainPy</p>
+<h1 align="center": center>GrainPy</h1>
       
 <p align="center">
   <a href="#about">About</a> •
