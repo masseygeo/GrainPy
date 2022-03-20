@@ -40,7 +40,10 @@ The basic functionality of GrainPy is explained below, however, please refer to 
 
 ***Grain size distribution curves***
 > Grain size data can then be compiled into a usable format with GrainPy, used to calculate a variety of statistics, and produce publication-quality grain size distribution plots of individual or multiple samples.
-> 
+
+<p align="center">
+  <img alt="plots" src="https://imgur.com/oUCbnrL" height="200" /></p>
+</p>
 > _image of single plot...and multi plot_
 
 <p align="right">(<a href="#top">back to top</a>)</p>
