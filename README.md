@@ -66,20 +66,20 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a list of
 ## Contributions & Feedback
 Any contributions or feedback you make is greatly appreciated!
 
->🔥 If you have a suggestion that you think would make this better, you can either:
->>- [Create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the enhancement label 🏷️\
->>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***...OR...***
+🔥 If you have a suggestion that you think would make this better, you can either:
+>- [Create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the enhancement label 🏷️\
+>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***...OR...***
 >>- Fork the Project.
->>- Create your Feature Branch. `git checkout -b feature/amazingfeature`
->>- Commit your Changes. `git commit -m 'Add some AmazingFeature'`
->>- Push to the Branch. `git push origin feature/AmazingFeature`
->>- Open a [Pull request](https://github.com/masseygeo/GrainPy/pulls).
->
->🐛 If something isn't working, [create an issue](https://github.com/masseygeo/GrainPy/issues/new)
->
->🌟 If you think GrainPy is pretty cool, please give it a star!
->
->🗣️ If you need to get in touch for other reasons, [send me an email](mamass1@g.uky.edu)
+>- Create your Feature Branch. `git checkout -b feature/amazingfeature`
+>- Commit your Changes. `git commit -m 'Add some AmazingFeature'`
+>- Push to the Branch. `git push origin feature/AmazingFeature`
+>- Open a [Pull request](https://github.com/masseygeo/GrainPy/pulls).
+
+🐛 If something isn't working, [create an issue](https://github.com/masseygeo/GrainPy/issues/new)
+
+🌟 If you think GrainPy is pretty cool, please give it a star!
+
+🗣️ If you need to get in touch for other reasons, [send me an email](mamass1@g.uky.edu)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -91,7 +91,8 @@ _GrainPy is free software: you can redistribute it and/or modify it under the te
 of the GNU General Public License as published by the Free Software Foundation, 
 either version 3 of the License, or (at your option) any later version. GrainPy is 
 distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
-even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\See the GNU General Public License for more details._
+even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE._\
+See the GNU General Public License for more details._
 
 [![License: GPLv3](https://img.shields.io/badge/GrainPy%20license-GNUv3-lightgrey)](https://github.com/masseygeo/GrainPy/blob/main/LICENSE)
 
