@@ -1,4 +1,6 @@
-<h1 align="center": center; font-size: 100>GrainPy</h1>
+<p align="center">
+<img alt="plots" src="https://i.imgur.com/4DYY47L.png" height="500" /></p>
+</p>
       
 <p align="center">
   <a href="#about">About</a> •
@@ -15,8 +17,6 @@
 
 ## About
 GrainPy is a Python package for compiling, analyzing, visualizing, and interpreting grain size distribution data. The idea for GrainPy started with an abundance of grain size distribution data that wasn't being fully utilized. Initially, GrainPy was developed to quickly compare multiple grain size distribution analyses with geologic statistics and publication-quality plots. GrainPy will continue to add modern, user-friendly tools for the interpretation and presentation of sediment analyses.
-
-### Features
       
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -40,8 +40,11 @@ The basic functionality of GrainPy is explained below, however, please refer to 
 
 ***Grain size distribution curves***
 > Grain size data can then be compiled into a usable format with GrainPy, used to calculate a variety of statistics, and produce publication-quality grain size distribution plots of individual or multiple samples.
-> 
-> _image of single plot...and multi plot_
+>
+> <p align="center">
+>  <img alt="plots" src="https://i.imgur.com/oUCbnrL.png" ></p>
+> </p>
+> Grain size distribution plots. Single sample plot (left) shows histogram of binned data, cumulative percentage curve, vertical lines for mean, median, and modes. Multiple sample plot (right) shows individual sample and mean with 95% confidence interval cumulative percentage curve. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -86,7 +89,7 @@ Any contributions or feedback you make is greatly appreciated!
 
 
 ## License
-Copyright 2021-2022 Matthew A. Massey\
+Copyright 2021-2022, Matthew A. Massey\
 _GrainPy is free software: you can redistribute it and/or modify it under the terms 
 of the GNU General Public License as published by the Free Software Foundation, 
 either version 3 of the License, or (at your option) any later version. GrainPy is 
