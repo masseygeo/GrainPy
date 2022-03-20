@@ -44,7 +44,7 @@ The basic functionality of GrainPy is explained below, however, please refer to 
 > <p align="center">
 >  <img alt="plots" src="https://i.imgur.com/oUCbnrL.png" ></p>
 > </p>
-> _Grain size distribution plots. Single sample plot (left) shows histogram of binned data, cumulative percentage curve, vertical lines for mean, median, and modes. Multiple sample plot (right) shows individual sample and mean with 95% confidence interval cumulative percentage curve._ 
+> _Grain size distribution plots. Single sample plot (left) shows histogram of binned data, cumulative percentage curve, vertical lines for mean, median, and modes. Multiple sample plot (right) shows individual sample and mean with 95% confidence interval cumulative percentage curve_ 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -89,7 +89,7 @@ Any contributions or feedback you make is greatly appreciated!
 
 
 ## License
-Copyright 2021-2022 Matthew A. Massey\
+Copyright 2021-2022, Matthew A. Massey\
 _GrainPy is free software: you can redistribute it and/or modify it under the terms 
 of the GNU General Public License as published by the Free Software Foundation, 
 either version 3 of the License, or (at your option) any later version. GrainPy is 
