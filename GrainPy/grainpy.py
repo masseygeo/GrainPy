@@ -299,6 +299,7 @@ class Grainsize():
     # change i and j to single list...default will be None
     # change to no space between bars...change from bar to histogram?
     # option for basic plot...no background or stat lines...modify gsd_format?
+    # option for histogram, cumulative, or both
     def gsd_single(self, i=0, j=0):
         
         """
@@ -407,14 +408,14 @@ class Grainsize():
 
 
     # change bar plot to histogram?
-    # change up axes if/if not bins_plt?
-    # option to include background in gsd_format
+    # option for histogram, cumulative, or both
     def gsd_multi(self, bins_plt=False):
         path = self.path[0]
         bins = self.bins()['phi']
         data = self.data()
         cp = self.data_cp()
         #st = self.data_st()
+        
         
         # create figure and axes
         fig, ax, ax2, ax3 = gsd_format()
@@ -437,17 +438,25 @@ class Grainsize():
         
         ax.set_title(title, size=18, weight='bold', style='italic')
         
+        
         # optional plot of mean volume percentages within each bin
         if bins_plt == True:
             # plot bin volumes bars of average
             ax.bar(bins, data.mean(axis=1), width=0.1, color='0.7', align='edge', 
-                   edgecolor='k', lw=0.2)
+                   edgecolor='k', lw=0.2, zorder=1)
         
-        # plot cumulative average line and error
-        ax2.plot(bins, cp.mean(axis=1).replace(0,np.nan), color='white', linewidth=2, 
+        
+        # plot cumulative line of all samples
+        for column, contents in cp.replace(0, np.nan).iteritems():
+            ax2.plot(bins, contents, color='k', linewidth=0.4, zorder=2)
+                
+        
+        # plot mean cumulative line
+        ax2.plot(bins, cp.mean(axis=1).replace(0,np.nan), color='r', linewidth=3, 
                  zorder=2.2)
         
-        # find 95% confidence intervals
+        
+        # plot 95% confidence intervals
         n = len(cp.columns)
         sem = cp.sem(axis=1)
         
@@ -457,23 +466,7 @@ class Grainsize():
         else:
             ci = scipy.stats.t.interval(alpha=0.95, df=n-1, loc=cp.mean(axis=1), scale=sem) 
         
-        ax2.fill_between(bins, ci[1], ci[0], color='#00008B', alpha=0.4, zorder=2)
-
-        
-        
-        # # plot error of cumulative frequency line
-        # cp_mn['count'] = cp.replace(0, np.nan).count(axis=1)
-        # cp_mn['df'] = cp_mn['count'] - 1
-        # cp_mn[cp_mn['df'] < 0] = 0
-        # cp_mn['SEM'] = cp_mn['std'] / np.sqrt(cp_mn['count'])
-        # cp_mn['ME'] = np.nan
-            
-        # cphigh = cp_mn['mean'] + cp_mn['std']
-        # #cphigh = cp_mn['mean'] + st.t.interval(alpha=0.95, df=len(cp_mn_arr)-1, loc=cp_mn['mean'])
-        # cplow = cp_mn['mean'] - cp_mn['std']
-        # ax2.fill_between(bins, cphigh, cplow, color='#00008B', alpha=0.5, zorder=2)
-        #ax2.plot(bins, cp, color='k', linewidth=1, zorder=2.1)
-        #cp.plot(ax=ax2)
+        ax2.fill_between(bins, ci[1], ci[0], color='r', alpha=0.3, zorder=2.1)
     
         
         # # key and annotation text
@@ -486,7 +479,6 @@ class Grainsize():
         #     sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
         #     horizontalalignment='center')
     
-        
         
         # save figure in directory with sample files
         filesave = path.replace(os.path.basename(path), file)

@@ -215,7 +215,7 @@ def gems_ex(gso):
 
 
 
-
+# option for histogram format, cumulative format, or both
 def gsd_format():
     
     # create figure and axes
