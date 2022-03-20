@@ -67,7 +67,7 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a full li
 ## Contributions & Feedback
 Any contributions or feedback you make is greatly appreciated!
 
-- If you have a suggestion that you think would make this better, you can simply [create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the  **enhancement** label...OR...fork the repo and create a pull request: 
+🔥 If you have a suggestion that you think would make this better, you can simply [create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the  **enhancement** label...OR...fork the repo and create a pull request: 
 
      - Fork the Project
      - Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -75,11 +75,11 @@ Any contributions or feedback you make is greatly appreciated!
      - Push to the Branch (`git push origin feature/AmazingFeature`)
      - Open a Pull Request
 
-- If something isn't working, [create an issue](https://github.com/masseygeo/GrainPy/issues/new)
+💀 If something isn't working, [create an issue](https://github.com/masseygeo/GrainPy/issues/new)
 
-- If you think GrainPy is pretty cool, please give it a star!
+🌟 If you think GrainPy is pretty cool, please give it a star!
 
-- If you need to get in touch for other reasons, [send me an email](mamass1@g.uky.edu)
+🗣️ If you need to get in touch for other reasons, [send me an email](mamass1@g.uky.edu)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
