@@ -30,13 +30,13 @@ We reccomend installation using Conda as below...
 conda install python=3 grainpy
 ```
 
-### Example
+### Examples
 The basic functionality of GrainPy is explained below, however, please refer to the [documentation](https://example.com) for more detailed information and tutorials.
 
-_**Input data structure**_
-> Grain size distribution data can be collected from a variety of methods, including sieve analysis, hydrometer method, and laser diffraction particle size analyzer. GrainPy uses the raw data from any type of analysis to be organized in an Excel table (.xlsx or .xls) consisting of the bins used for the analysis and the data collected for each bin (relative percentage).
+_**Grain size distribution data compilation**_
+> Grain size distribution data comes from a variety of methods, including sieve, hydrometer, and laser diffraction particle size analyses. GrainPy collects and organizes this data (table of bins used and percentages) for single or multiple samples, calculates cumulative percentages, and a variety of sample statistics.
 > 
-> _image of tables in correct format...sieve data, hydrometer data, beckman-coulter_
+> _images of input table...and output tables (data, cumulative, stats)_
 
 _**Grain size distribution curves**_
 > Grain size data can then be compiled into a usable format with GrainPy, used to calculate a variety of statistics, and produce publication-quality grain size distribution plots of individual or multiple samples.
@@ -50,11 +50,10 @@ _**Grain size distribution curves**_
 ## Roadmap
 - [ ] Initial build
 - [ ] Package 0.1.0 release
-- [ ] Added functionalities
-     - [ ] Object compatibility with multiple types/sources of grain size distribution data
-     - [ ] More geotechnical statistics
-     - [ ] Multiple object comparitive plots and distributions (MLR? PCA?)
-     - [ ] Sediment mixing models
+- [ ] Compatibility with multiple types/sources of grain size distribution data
+- [ ] Additional statistics
+- [ ] Comparison of multiple objects (More plots? MLR? PCA?)
+- [ ] Sediment mixing models
 - [ ] Integrate with GIS
 
 See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a list of features currently in development.
