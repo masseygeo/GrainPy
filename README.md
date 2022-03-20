@@ -1,4 +1,6 @@
-<h1 align="center": center; font-size: 100>GrainPy</h1>
+<p align="center">
+<img alt="plots" src="https://i.imgur.com/4DYY47L.png" ></p>
+</p>
       
 <p align="center">
   <a href="#about">About</a> •
