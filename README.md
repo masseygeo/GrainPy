@@ -67,13 +67,13 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a list of
 Any contributions or feedback you make is greatly appreciated!
 
 🔥 If you have a suggestion that you think would make this better, you can either:
-1. [Create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the ***enhancement*** label.
-2. Fork the Project.
-3. Create your
-     - Create your Feature Branch. `git checkout -b feature/amazingfeature`\
-     - Commit your Changes. `git commit -m 'Add some AmazingFeature'`\
-     - Push to the Branch. `git push origin feature/AmazingFeature`\
-     - Open a Pull Request.
+- [Create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the ***enhancement*** label 🏷️
+***...OR...***
+- Fork the Project.
+- Create your Feature Branch. `git checkout -b feature/amazingfeature`
+- Commit your Changes. `git commit -m 'Add some AmazingFeature'`
+- Push to the Branch. `git push origin feature/AmazingFeature`
+- Open a [Pull request](https://github.com/masseygeo/GrainPy/pulls).
 
 🐛 If something isn't working, [create an issue](https://github.com/masseygeo/GrainPy/issues/new)
 
