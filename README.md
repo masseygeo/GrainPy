@@ -25,7 +25,7 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
 ## Getting Started
 
 ### Installation
-We reccomend installation using Conda as below...\
+We reccomend installation using Conda as below...
 ```
 conda install python=3 grainpy
 ```
