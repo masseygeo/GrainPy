@@ -180,6 +180,7 @@ def df_ex(df):
 
 
 
+
 def gems_ex(gso):
     """
     Function to save an object of the Grainsize class in a specific table format
@@ -215,7 +216,7 @@ def gems_ex(gso):
 
 
 
-# option for histogram format, cumulative format, or both
+
 def gsd_format():
     
     # create figure and axes

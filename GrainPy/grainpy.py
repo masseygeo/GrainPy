@@ -31,9 +31,6 @@ from grainclass import *
 
 
 class Grainsize():
-    
-    
-    # insert samplenames() function for instead of calling separately?
     def __init__(self, path, area=None, lith=None):
         self.path = path
         self.area = area
@@ -61,7 +58,6 @@ class Grainsize():
 
 
 
-    # collect all bins...solves rounding...or different gs analysis methods
     def bins(self, bin_min=0.375198, bin_rows=93, bin_col=0):
         '''
         Diameter bins used for grain size analysis.
@@ -168,12 +164,8 @@ class Grainsize():
         return cp
 
 
-
     
-    # add row for lithology on first row
-    # add geotechnical stats
-    # add new functions for basic stats / geotechnical stats / method of moments
-     #stats, and folk stats
+
     def data_st(self, prom=0.1):
         '''
         Calculates statistics for grain size data from class path file(s)
@@ -294,12 +286,9 @@ class Grainsize():
         
         return st
   
+
     
 
-    # change i and j to single list...default will be None
-    # change to no space between bars...change from bar to histogram?
-    # option for basic plot...no background or stat lines...modify gsd_format?
-    # option for histogram, cumulative, or both
     def gsd_single(self, i=0, j=0):
         
         """
@@ -407,15 +396,13 @@ class Grainsize():
 
 
 
-    # change bar plot to histogram?
-    # option for histogram, cumulative, or both
     def gsd_multi(self, bins_plt=False):
         path = self.path[0]
         bins = self.bins()['phi']
         data = self.data()
         cp = self.data_cp()
         #st = self.data_st()
-        
+             
         
         # create figure and axes
         fig, ax, ax2, ax3 = gsd_format()
@@ -490,8 +477,6 @@ class Grainsize():
         plt.savefig(fname=save_jpg, dpi=300, bbox_inches='tight')
 
 
-
-    
 
 # TESTING
 path = selectdata()
