@@ -44,7 +44,8 @@ The basic functionality of GrainPy is explained below, however, please refer to 
 > <p align="center">
 >  <img alt="plots" src="https://i.imgur.com/oUCbnrL.png" ></p>
 > </p>
-> _Grain size distribution plots. Single sample plot (left) shows histogram of binned data, cumulative percentage curve, vertical lines for mean, median, and modes. Multiple sample plot (right) shows individual sample and mean with 95% confidence interval cumulative percentage curve. _
+> 
+> _Grain size distribution plots. Single sample plot (left) shows histogram of binned data, cumulative percentage curve, vertical lines for mean, median, and modes. Multiple sample plot (right) shows individual sample and mean with 95% confidence interval cumulative percentage curve._
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -67,8 +68,6 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a list of
 
 
 ## Contributions & Feedback
-Any contributions or feedback you make is greatly appreciated!
-
 🔥 If you have a suggestion that you think would make this better, you can either:
 >- [Create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the _enhancement_ label 🏷️\
 >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***...OR...***
