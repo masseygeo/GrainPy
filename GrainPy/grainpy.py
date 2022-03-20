@@ -435,11 +435,11 @@ class Grainsize():
         
         # plot cumulative line of all samples
         for column, contents in cp.replace(0, np.nan).iteritems():
-            ax2.plot(bins, contents, color='k', linewidth=0.4, zorder=2)
+            ax2.plot(bins, contents, color='k', linewidth=0.5, zorder=2)
                 
         
         # plot mean cumulative line
-        ax2.plot(bins, cp.mean(axis=1).replace(0,np.nan), color='r', linewidth=3, 
+        ax2.plot(bins, cp.mean(axis=1).replace(0,np.nan), color='white', linewidth=2.5, 
                  zorder=2.2)
         
         
