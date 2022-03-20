@@ -57,7 +57,7 @@ _**Grain size distribution curves**_
      - [ ] Sediment mixing models
 - [ ] Integrate with GIS
 
-See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a list of features currently in development.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -75,7 +75,7 @@ Any contributions or feedback you make is greatly appreciated!
      - Push to the Branch (`git push origin feature/AmazingFeature`)
      - Open a Pull Request
 
-💀 If something isn't working, [create an issue](https://github.com/masseygeo/GrainPy/issues/new)
+🐛 If something isn't working, [create an issue](https://github.com/masseygeo/GrainPy/issues/new)
 
 🌟 If you think GrainPy is pretty cool, please give it a star!
 
