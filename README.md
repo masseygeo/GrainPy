@@ -1,5 +1,5 @@
 <h1 align="center": center>GrainPy</h1>
-<p style="font-size:30px">This is a paragraph.</p>
+<p style="font-size:90px">This is a paragraph.</p>
       
 <p align="center">
   <a href="#about">About</a> •
