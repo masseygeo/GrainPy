@@ -40,16 +40,16 @@ Grain size distribution data comes from a variety of methods, including sieve, h
 >  <img alt="plots" src="https://i.imgur.com/WuEMx6R.png" ></p>
 > </p>
 > 
-> _Multiple raw data tables collected from a Beckman Coulter laser particle analyzer (left). Input data (single or multiple tables) are collected and compiled by GrainPy into usable compilation tables of the data, cumulative frequencies, and statistics (right)._
+> _Multiple raw data tables collected from a Beckman Coulter laser particle analyzer (left) are collected and compiled by GrainPy into usable compilation tables of the data, cumulative frequencies, and statistics (right)._
 
 ***Grain size distribution curves***
-Grain size data can then be compiled into a usable format with GrainPy, used to calculate a variety of statistics, and produce publication-quality grain size distribution plots of individual or multiple samples.
+Data can then be visualized and interpreted with publication-quality grain size distribution plots.
 >
 > <p align="center">
 >  <img alt="plots" src="https://i.imgur.com/2zp0KCt.png" ></p>
 > </p>
 > 
-> _Grain size distribution plots. Single sample plot (left) shows histogram of binned data, cumulative percentage curve, vertical lines for mean, median, and modes. Multiple sample plot (right) shows individual sample and mean with 95% confidence interval cumulative percentage curve._
+> _Single samples can be plotted (left) to show histogram of binned data, cumulative percentage curve, vertical lines for mean, median, and modes. Multiple sample plots (right) show cumulative frequencies (percent finer) of all samples, the mean, and a 95% confidence interval._
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
