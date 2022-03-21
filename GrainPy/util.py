@@ -250,7 +250,7 @@ def gsd_format():
         
     ax2.set_ylim(0,100)
     ax2.tick_params(axis='y', color='#AB2328', width=0.5, labelsize=10, labelcolor='#AB2328')
-    ax2.set_ylabel('Percent finer (%)', size=12, style='italic', color='#AB2328')
+    ax2.set_ylabel('Cumulative frequency (%)', size=12, style='italic', color='#AB2328')
     ax2.spines['left'].set_visible(False)
     ax2.spines['right'].set(color='#AB2328')
     ax2_xtick_loc = [i for i in range(-1,13,1)]

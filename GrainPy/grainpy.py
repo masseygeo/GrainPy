@@ -260,10 +260,10 @@ class Grainsize():
         st.loc['max_gs'] = [wentclass(i) for i in max_list]
         st.loc['min'] = min_list
         st.loc['min_gs'] = [wentclass(i) for i in min_list]
-        st.loc['mean'] = mean_list
-        st.loc['mean_gs'] = [wentclass(i) for i in mean_list]
         st.loc['median'] = median_list
         st.loc['median_gs'] = [wentclass(i) for i in median_list]
+        st.loc['mean'] = mean_list
+        st.loc['mean_gs'] = [wentclass(i) for i in mean_list]
         st.loc['sorting'] = sort_list
         st.loc['sorting_class'] = [sortclass(i) for i in sort_list]
         st.loc['skewness'] = skew_list
@@ -289,19 +289,20 @@ class Grainsize():
 
     
 
-    def gsd_single(self, samplenames=None, i=0, j=0):
+    def gsd_single(self, files=None, i=0, j=0):
         """
         Method to plot grain size distribution data as a histogram of binned sizes, 
         cumulative percentage line, and statistics. Formatted to show Wentworth scale 
         grain size divisions, x scales in phi units and millimeters, and legend with 
         statistics. User has the option of plotting all files in the Grainsize object 
-        (default) or slicing specific file(s) using optional indexing. Plots are saved 
-        in jpeg and PDF formats in the same location as the data files.
+        (default) or slicing specific file(s) using list of specific sample name(s) or 
+        indexing (i, j). Plots are saved in jpeg and PDF formats in the same location 
+        as the data files.
 
         Parameters
         ----------
-        samplenames : list, optional
-            List of strings of specific samplenames to be plotted. The default 
+        files : list, optional
+            List of strings of specific samples to be plotted. The default 
             is None.
         i : integer, optional
             First index location for slicing specific files to be plotted. The 
@@ -325,9 +326,9 @@ class Grainsize():
         c = 0
         
         # Collect sample names to be plotted
-        if len(samplenames) > 0:
-            samples = samplenames
-        if i!=0 or j!=0:
+        if files != None:
+            samples = files
+        elif i!=0 or j!=0:
             samples = self.samplenames()[i:j]
         else:
             samples = self.samplenames()
@@ -342,7 +343,7 @@ class Grainsize():
             ax.set_title(sample, size=18, weight='bold', style='italic')
             
             # plot bars of volume percentages within each bin
-            ax.bar(bins['phi'], data[sample], width=0.1, color='0.7', align='edge', edgecolor='k', lw=0.2)
+            ax.bar(bins['phi'], data[sample], width=0.105, color='0.7', align='edge', edgecolor='k', lw=0.2)
         
             # plot cumulative percentage line
             ax2.plot(bins['phi'], cp[sample].replace(0, np.nan), color='#AB2328', linewidth=2.5)
@@ -403,6 +404,7 @@ class Grainsize():
 
 
     def gsd_multi(self, bins_plt=False, st_plt=False):
+        
         path = self.path[0]
         bins = self.bins()['phi']
         data = self.data()
@@ -456,6 +458,8 @@ class Grainsize():
         
         ax2.fill_between(bins, ci[1], ci[0], color='#AB2328', alpha=0.3, zorder=2.1)
     
+        
+        
         # key and annotation text
         # means of selected statistics
         sand = str(round(st.loc['sand'].mean(), 1))
@@ -469,25 +473,25 @@ class Grainsize():
             sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
             horizontalalignment='center')
         
-        # optional stats plots and annotations
-        if st_plt == True:
-            mean = st.loc['mean'].mean()
-            mean_ln = ax.axvline(mean, color='blue', lw=1.5)
-            mean_lab = wentclass(mean)
+        # # optional stats plots and annotations
+        # if st_plt == True:
+        #     mean = st.loc['mean'].mean()
+        #     mean_ln = ax.axvline(mean, color='blue', lw=1.5)
+        #     mean_lab = wentclass(mean)
             
-            median = st.loc['median'].mean()
+        #     median = st.loc['median'].mean()
 
             
             
-            median = 
+        #     median = 
             
-            med_ln = ax.axvline(st[sample].loc['median'], color='blue', ls=(0, (1, 1)), lw=1.5) 
-            modes = st[sample].iloc[19::2]
+        #     med_ln = ax.axvline(st[sample].loc['median'], color='blue', ls=(0, (1, 1)), lw=1.5) 
+        #     modes = st[sample].iloc[19::2]
             
             
-            ax.legend(handles=[mean_ln, med_ln], labels=[mean_lab, med_lab], 
-                      bbox_to_anchor=(0.5, -0.133), ncol=2, fancybox=False, 
-                      frameon=False, loc='center')
+        #     ax.legend(handles=[mean_ln, med_ln], labels=[mean_lab, med_lab], 
+        #               bbox_to_anchor=(0.5, -0.133), ncol=2, fancybox=False, 
+        #               frameon=False, loc='center')
             
     
         
