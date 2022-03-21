@@ -33,7 +33,7 @@ conda install python=3 grainpy
 ### Examples
 The basic functionality of GrainPy is explained below, however, please refer to the [documentation](https://example.com) for more detailed information and tutorials.
 
-***Data compilation***
+***Data compilation***\
 Grain size distribution data comes from a variety of methods, including sieve, hydrometer, and laser diffraction particle size analyses. GrainPy collects and organizes this data (table of bins used and percentages) for single or multiple samples, calculates cumulative percentages, and a variety of sample statistics.
 > 
 > <p align="center">
@@ -42,7 +42,7 @@ Grain size distribution data comes from a variety of methods, including sieve, h
 > 
 > _Multiple raw data tables collected from a Beckman Coulter laser particle analyzer (left) are collected and compiled by GrainPy into usable compilation tables of the data, cumulative frequencies, and statistics (right)._
 
-***Grain size distribution curves***
+***Grain size distribution curves***\
 Data can then be visualized and interpreted with publication-quality grain size distribution plots.
 >
 > <p align="center">
