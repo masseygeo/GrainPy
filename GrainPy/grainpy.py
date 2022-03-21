@@ -403,7 +403,7 @@ class Grainsize():
 
 
 
-    def gsd_multi(self, bins_plt=False, st_plt=False):
+    def gsd_multi(self, bplt=False, cplt=True):
         
         path = self.path[0]
         bins = self.bins()['phi']
@@ -411,9 +411,9 @@ class Grainsize():
         cp = self.data_cp()
         st = self.data_st()
              
-        # create figure and axes
-        fig, ax, ax2, ax3 = gsd_format()
-        ax.set_ylim(0, max(data.mean(axis=1)) + 0.25)  
+        # # create figure and axes
+        # fig, ax, ax2, ax3 = gsd_format()
+        # ax.set_ylim(0, max(data.mean(axis=1)) + 0.25)  
         
         # set savefile name and plot title
         if type(self.area) != str and type(self.lith) != str:
@@ -430,37 +430,153 @@ class Grainsize():
             title = 'Mean Grain Size Distribution' + ' - ' + both
             file = 'MeanGSD_' + self.lith + '_' + self.area
         
-        ax.set_title(title, size=18, weight='bold', style='italic')
+        #ax.set_title(title, size=18, weight='bold', style='italic')
         
-        # optional plot of mean volume percentages within each bin
-        if bins_plt == True:
-            # plot bin volumes bars of average
+        
+        
+        # plot both mean bars and mean cumulative
+        if bplt == True and cplt==True:
+            #set axes and title
+            fig, ax, ax2, ax3 = gsd_format()
+            ax.set_ylim(0, max(data.mean(axis=1)) + 0.25)  
+            ax.set_title(title, size=18, weight='bold', style='italic')
+            
+            #plot bars of mean data
             ax.bar(bins, data.mean(axis=1), width=0.1, color='0.7', align='edge', 
                    edgecolor='k', lw=0.2, zorder=1)
+            
+            #plot cumulative mean curve
+            ax2.plot(bins, cp.mean(axis=1).replace(0,np.nan), color='#AB2328', 
+                   linewidth=2.5, zorder=2.2)
+            
+            #plot 95% CI cumulative curves
+            n = len(cp.columns)
+            sem = cp.sem(axis=1)
+            
+            #use z (>=30) or t (<30) distribution for CI
+            if n >= 30:
+                ci = scipy.stats.norm.interval(alpha=0.95, loc=cp.mean(axis=1), scale=sem)
+            else:
+                ci = scipy.stats.t.interval(alpha=0.95, df=n-1, loc=cp.mean(axis=1), scale=sem) 
+            
+            ax2.fill_between(bins, ci[1], ci[0], color='#AB2328', alpha=0.3, zorder=2.1)
+            
+            #plot all stats
+
+
         
-        # plot cumulative line of all samples
-        for column, contents in cp.replace(0, np.nan).iteritems():
-            ax2.plot(bins, contents, color='k', linewidth=0.5, zorder=2)
+    
+        # plot bars only
+        elif bplt==True and cplt==False:
+            #set axes and title...no cumulative axis on right
+            fig, ax, ax2, ax3 = gsd_format()
+            ax2.set_visible(False)
+            ax.set_ylim(0, max(data.mean(axis=1)) + 0.25)  
+            ax.set_title(title, size=18, weight='bold', style='italic')
+
+            #plot all sample curves
+            for column, contents in data.replace(0, np.nan).iteritems():
+                ax.plot(bins, contents, color='k', linewidth=0.5, zorder=1.1)
+            
+            #plot mean bars & curve
+            ax.bar(bins, data.mean(axis=1), width=0.1, color='#AB2328', align='edge', 
+                   edgecolor='k', lw=0.2, zorder=1)
+            
+            ax.plot(bins, data.mean(axis=1).replace(0, np.nan), color='white', linewidth=2, zorder=1.3)
+            
+            #plot 95% CI curve
+            n = len(data.columns)
+            sem = data.sem(axis=1)
+            
+            if n >= 30:
+                ci = scipy.stats.norm.interval(alpha=0.95, loc=data.mean(axis=1), scale=sem)
+            else:
+                ci = scipy.stats.t.interval(alpha=0.95, df=n-1, loc=data.mean(axis=1), scale=sem) 
+            
+            ax.fill_between(bins, ci[1], ci[0], color = '#AB2328', alpha=0.3, zorder=1.2)
+            
+            #all stats in figure
         
-        # plot mean cumulative line
-        ax2.plot(bins, cp.mean(axis=1).replace(0,np.nan), color='#AB2328', linewidth=2.5, 
-                 zorder=2.2)
         
-        # plot 95% confidence intervals
-        n = len(cp.columns)
-        sem = cp.sem(axis=1)
         
-        # use z (>=30) or t (<30) distribution
-        if n >= 30:
-            ci = scipy.stats.norm.interval(alpha=0.95, loc=cp.mean(axis=1), scale=sem)
+        
+        
+        # plot cumulative curves only
         else:
-            ci = scipy.stats.t.interval(alpha=0.95, df=n-1, loc=cp.mean(axis=1), scale=sem) 
+            # set axes
+            fig, ax, ax2, ax3 = gsd_format()
+            ax2.set_visible(False)
+            ax.set_title(title, size=18, weight='bold', style='italic')
+
+            
+    
+            ax.set_ylim(0,100)
+            ax.tick_params(axis='y', color='#AB2328', width=0.5, labelsize=10, labelcolor='#AB2328')
+            ax.set_ylabel('Cumulative frequency (%)', size=12, style='italic', color='#AB2328')
+            ax_xtick_loc = [i for i in range(-1,13,1)]
+            ax_ytick_loc = [i for i in range(0,101,10)]
+            ax.set(xticks=ax_xtick_loc)
+            ax.set(yticks=ax_ytick_loc)
+            
+            
+            # cumulative axis on left
+            
+            # plot all cumulative sample curves
+            for column, contents in cp.replace(0, np.nan).iteritems():
+                ax2.plot(bins, contents, color='k', linewidth=0.5, zorder=2)
+            
+            # plot mean cumulative curve
+            ax2.plot(bins, cp.mean(axis=1).replace(0,np.nan), color='#AB2328', linewidth=2.5, 
+                     zorder=2.2)
+            
+            # plot 95% CI cumulative curve
+            n = len(cp.columns)
+            sem = cp.sem(axis=1)
+            
+            # use z (>=30) or t (<30) distribution
+            if n >= 30:
+                ci = scipy.stats.norm.interval(alpha=0.95, loc=cp.mean(axis=1), scale=sem)
+            else:
+                ci = scipy.stats.t.interval(alpha=0.95, df=n-1, loc=cp.mean(axis=1), scale=sem) 
+            
+            ax2.fill_between(bins, ci[1], ci[0], color='#AB2328', alpha=0.3, zorder=2.1)
+            
+            # only basic stats in figure
         
-        ax2.fill_between(bins, ci[1], ci[0], color='#AB2328', alpha=0.3, zorder=2.1)
+        
+        
+        
+        
+        # optional plot of mean volume percentages within each bin
+        # if binplt == True:
+        #     # plot bin volumes bars of average
+        #     ax.bar(bins, data.mean(axis=1), width=0.1, color='0.7', align='edge', 
+        #            edgecolor='k', lw=0.2, zorder=1)
+
+        
+        # # plot cumulative line of all samples
+        # for column, contents in cp.replace(0, np.nan).iteritems():
+        #     ax2.plot(bins, contents, color='k', linewidth=0.5, zorder=2)
+        
+        # # plot mean cumulative line
+        # ax2.plot(bins, cp.mean(axis=1).replace(0,np.nan), color='#AB2328', linewidth=2.5, 
+        #          zorder=2.2)
+        
+        # # plot 95% confidence intervals
+        # n = len(cp.columns)
+        # sem = cp.sem(axis=1)
+        
+        # # use z (>=30) or t (<30) distribution
+        # if n >= 30:
+        #     ci = scipy.stats.norm.interval(alpha=0.95, loc=cp.mean(axis=1), scale=sem)
+        # else:
+        #     ci = scipy.stats.t.interval(alpha=0.95, df=n-1, loc=cp.mean(axis=1), scale=sem) 
+        
+        # ax2.fill_between(bins, ci[1], ci[0], color='#AB2328', alpha=0.3, zorder=2.1)
     
         
         
-        # key and annotation text
+        # basic stats included in all plot options
         # means of selected statistics
         sand = str(round(st.loc['sand'].mean(), 1))
         silt = str(round(st.loc['silt'].mean(), 1))
@@ -468,10 +584,11 @@ class Grainsize():
         sed = folkclass(st.loc['sand'].mean(), st.loc['silt'].mean(), st.loc['clay'].mean())
         sort = sortclass(st.loc['sorting'].mean())
         
-        # key and annotation        
         ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(
             sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
             horizontalalignment='center')
+        
+        
         
         # # optional stats plots and annotations
         # if st_plt == True:
