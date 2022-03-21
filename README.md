@@ -4,10 +4,9 @@
       
 <p align="center">
   <a href="#about">About</a> •
-  <a href="#features">Features</a> •
   <a href="#getting-started">Getting Started</a> •
   <a href="#installation">Installation</a> •
-  <a href="#example">Example</a> •
+  <a href="#examples">Examples</a> •
   <a href="#roadmap">Roadmap</a> •
   <a href="#contributions&feedback">Contributions & Feedback</a> •
   <a href="#license">License</a>
