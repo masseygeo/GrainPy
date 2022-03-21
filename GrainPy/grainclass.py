@@ -78,7 +78,7 @@ def wentclass(phi):
 def folkclass(sand, silt, clay):
     """
     Convert relative sand-silt-clay volumes to qualitative Folk (1954, 1972) 
-    classiciation name.
+    sediment classiciation name.
 
     Parameters
     ----------

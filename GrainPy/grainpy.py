@@ -289,8 +289,7 @@ class Grainsize():
 
     
 
-    def gsd_single(self, i=0, j=0):
-        
+    def gsd_single(self, samplenames=None, i=0, j=0):
         """
         Method to plot grain size distribution data as a histogram of binned sizes, 
         cumulative percentage line, and statistics. Formatted to show Wentworth scale 
@@ -298,18 +297,23 @@ class Grainsize():
         statistics. User has the option of plotting all files in the Grainsize object 
         (default) or slicing specific file(s) using optional indexing. Plots are saved 
         in jpeg and PDF formats in the same location as the data files.
-    
+
         Parameters
         ----------
+        samplenames : list, optional
+            List of strings of specific samplenames to be plotted. The default 
+            is None.
         i : integer, optional
-            First index location for slicing specific files. The default is 0.
+            First index location for slicing specific files to be plotted. The 
+            default is 0.
         j : integer, optional
-            Second index location for slicing specific files. The default is 0.
-    
+            Second index location for slicing specific files to be plotted. The 
+            default is 0.
+
         Returns
         -------
         None.
-    
+
         """
         path = self.path
         bins = self.bins()
@@ -321,10 +325,12 @@ class Grainsize():
         c = 0
         
         # Collect sample names to be plotted
+        if len(samplenames) > 0:
+            samples = samplenames
         if i!=0 or j!=0:
-                samples = self.samplenames()[i:j]
+            samples = self.samplenames()[i:j]
         else:
-                samples = self.samplenames()
+            samples = self.samplenames()
     
         # plot all samples
         for sample in samples:
@@ -339,7 +345,7 @@ class Grainsize():
             ax.bar(bins['phi'], data[sample], width=0.1, color='0.7', align='edge', edgecolor='k', lw=0.2)
         
             # plot cumulative percentage line
-            ax2.plot(bins['phi'], cp[sample].replace(0, np.nan), color='#00008B', linewidth=2.5)
+            ax2.plot(bins['phi'], cp[sample].replace(0, np.nan), color='#AB2328', linewidth=2.5)
             
             # plot statistic lines
             med_ln = ax.axvline(st[sample].loc['median'], color='blue', ls=(0, (1, 1)), lw=1.5) 
@@ -396,14 +402,13 @@ class Grainsize():
 
 
 
-    def gsd_multi(self, bins_plt=False):
+    def gsd_multi(self, bins_plt=False, st_plt=False):
         path = self.path[0]
         bins = self.bins()['phi']
         data = self.data()
         cp = self.data_cp()
-        #st = self.data_st()
+        st = self.data_st()
              
-        
         # create figure and axes
         fig, ax, ax2, ax3 = gsd_format()
         ax.set_ylim(0, max(data.mean(axis=1)) + 0.25)  
@@ -425,23 +430,19 @@ class Grainsize():
         
         ax.set_title(title, size=18, weight='bold', style='italic')
         
-        
         # optional plot of mean volume percentages within each bin
         if bins_plt == True:
             # plot bin volumes bars of average
             ax.bar(bins, data.mean(axis=1), width=0.1, color='0.7', align='edge', 
                    edgecolor='k', lw=0.2, zorder=1)
         
-        
         # plot cumulative line of all samples
         for column, contents in cp.replace(0, np.nan).iteritems():
             ax2.plot(bins, contents, color='k', linewidth=0.5, zorder=2)
-                
         
         # plot mean cumulative line
-        ax2.plot(bins, cp.mean(axis=1).replace(0,np.nan), color='white', linewidth=2.5, 
+        ax2.plot(bins, cp.mean(axis=1).replace(0,np.nan), color='#AB2328', linewidth=2.5, 
                  zorder=2.2)
-        
         
         # plot 95% confidence intervals
         n = len(cp.columns)
@@ -453,19 +454,43 @@ class Grainsize():
         else:
             ci = scipy.stats.t.interval(alpha=0.95, df=n-1, loc=cp.mean(axis=1), scale=sem) 
         
-        ax2.fill_between(bins, ci[1], ci[0], color='r', alpha=0.3, zorder=2.1)
+        ax2.fill_between(bins, ci[1], ci[0], color='#AB2328', alpha=0.3, zorder=2.1)
+    
+        # key and annotation text
+        # means of selected statistics
+        sand = str(round(st.loc['sand'].mean(), 1))
+        silt = str(round(st.loc['silt'].mean(), 1))
+        clay = str(round(st.loc['clay'].mean(), 1))
+        sed = folkclass(st.loc['sand'].mean(), st.loc['silt'].mean(), st.loc['clay'].mean())
+        sort = sortclass(st.loc['sorting'].mean())
+        
+        # key and annotation        
+        ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(
+            sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
+            horizontalalignment='center')
+        
+        # optional stats plots and annotations
+        if st_plt == True:
+            mean = st.loc['mean'].mean()
+            mean_ln = ax.axvline(mean, color='blue', lw=1.5)
+            mean_lab = wentclass(mean)
+            
+            median = st.loc['median'].mean()
+
+            
+            
+            median = 
+            
+            med_ln = ax.axvline(st[sample].loc['median'], color='blue', ls=(0, (1, 1)), lw=1.5) 
+            modes = st[sample].iloc[19::2]
+            
+            
+            ax.legend(handles=[mean_ln, med_ln], labels=[mean_lab, med_lab], 
+                      bbox_to_anchor=(0.5, -0.133), ncol=2, fancybox=False, 
+                      frameon=False, loc='center')
+            
     
         
-        # # key and annotation text
-        # sed = st.loc['sediment_class']
-        # sort = st.loc['sorting_class']
-        # sand = str(round(st.loc['sand'], 1))
-        # silt = str(round(st.loc['silt'], 1))
-        # clay = str(round(st.loc['clay'], 1))
-        # ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(
-        #     sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
-        #     horizontalalignment='center')
-    
         
         # save figure in directory with sample files
         filesave = path.replace(os.path.basename(path), file)

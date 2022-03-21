@@ -216,7 +216,25 @@ def gems_ex(gso):
 
 
 
-def gsd_format(ww=True):
+def gsd_format():
+    """
+    Function to format grain size distribution plots using Wentworth classification
+    grain size boundaries.
+
+    Returns
+    -------
+    fig : Matplotlib Figure instance
+        New Matplotlib figure for plotting grain size distributions.
+    ax : Matplotlib axes object
+        Base axes for XY scales, Wentworth classification background, and data
+        relative frequency plot for grain size distribution plots.
+    ax2 : Matplotlib axes object
+        Second axes object for cumulative frequency curve for grain size distribution
+        plot.
+    ax3 : Matplotlib axes object
+        Third axes object for upper X axis.
+
+    """
     
     # create figure and axes
     fig, ax = plt.subplots(1, 1, figsize=(8,8), dpi=300)
@@ -228,13 +246,13 @@ def gsd_format(ww=True):
     ax.tick_params(axis='y', color='0.5', width=0.5, labelsize=10, labelcolor='0.5')
     ax.set_xlim(-1, 12)    
     ax.set_xlabel('Grain diameter (\u03C6)', size=12, style='italic')
-    ax.set_ylabel('Bin %', size=12, style='italic', color='0.5')
+    ax.set_ylabel('Relative frequency (%)', size=12, style='italic', color='0.5')
         
     ax2.set_ylim(0,100)
-    ax2.tick_params(axis='y', color='#00008B', width=0.5, labelsize=10, labelcolor='#00008B')
-    ax2.set_ylabel('Cumulative %', size=12, style='italic', color='#00008B')
+    ax2.tick_params(axis='y', color='#AB2328', width=0.5, labelsize=10, labelcolor='#AB2328')
+    ax2.set_ylabel('Percent finer (%)', size=12, style='italic', color='#AB2328')
     ax2.spines['left'].set_visible(False)
-    ax2.spines['right'].set(color='#00008B')
+    ax2.spines['right'].set(color='#AB2328')
     ax2_xtick_loc = [i for i in range(-1,13,1)]
     ax2_ytick_loc = [i for i in range(0,101,10)]
     ax2.set(xticks=ax2_xtick_loc)
@@ -255,43 +273,27 @@ def gsd_format(ww=True):
     ax3.annotate('-clay-', xy=(0.85, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
 
     # optional background lines and patches for Wentworth grain size divisions
-    if ww == True:
-        # lines along Wentworth divisions
-        for i in range(0,9,1):
-            ax.plot([i,i], [0,100], color='0.8', linewidth=0.25, zorder=0)
+    # lines along Wentworth divisions
+    for i in range(0,9,1):
+        ax.plot([i,i], [0,100], color='0.8', linewidth=0.25, zorder=0)
+
+    # Patches for Wentworth sand divisions   
+    ax.add_patch(Rectangle((-1,0), 1, 100, color='#FFBA01', alpha=0.5, zorder=0))
+    ax.add_patch(Rectangle((0,0), 1, 100, color='#FFC918', alpha=0.5, zorder=0))
+    ax.add_patch(Rectangle((1,0), 1, 100, color='#FFD82F', alpha=0.5, zorder=0))
+    ax.add_patch(Rectangle((2,0), 1, 100, color='#FEE745', alpha=0.6, zorder=0))
+    ax.add_patch(Rectangle((3,0), 1, 100, color='#FEF65C', alpha=0.3, zorder=0))
     
-        # Patches for Wentworth sand divisions   
-        ax.add_patch(Rectangle((-1,0), 1, 100, color='#FFBA01', alpha=0.5, zorder=0))
-        ax.add_patch(Rectangle((0,0), 1, 100, color='#FFC918', alpha=0.5, zorder=0))
-        ax.add_patch(Rectangle((1,0), 1, 100, color='#FFD82F', alpha=0.5, zorder=0))
-        ax.add_patch(Rectangle((2,0), 1, 100, color='#FEE745', alpha=0.6, zorder=0))
-        ax.add_patch(Rectangle((3,0), 1, 100, color='#FEF65C', alpha=0.3, zorder=0))
-        
-        # Patches for Wentworth silt divisions   
-        ax.add_patch(Rectangle((4,0), 1, 100, color='#0080FF', alpha=0.3, zorder=0))
-        ax.add_patch(Rectangle((5,0), 1, 100, color='#3399FF', alpha=0.3, zorder=0))
-        ax.add_patch(Rectangle((6,0), 1, 100, color='#66B2FF', alpha=0.3, zorder=0))
-        ax.add_patch(Rectangle((7,0), 1, 100, color='#99CCFF', alpha=0.3, zorder=0))
-        
-        # Patches for Wentworth clay division  
-        ax.add_patch(Rectangle((8,0), 4, 100, color='#6B8E23', alpha=0.1, zorder=0))
+    # Patches for Wentworth silt divisions   
+    ax.add_patch(Rectangle((4,0), 1, 100, color='#0080FF', alpha=0.3, zorder=0))
+    ax.add_patch(Rectangle((5,0), 1, 100, color='#3399FF', alpha=0.3, zorder=0))
+    ax.add_patch(Rectangle((6,0), 1, 100, color='#66B2FF', alpha=0.3, zorder=0))
+    ax.add_patch(Rectangle((7,0), 1, 100, color='#99CCFF', alpha=0.3, zorder=0))
+    
+    # Patches for Wentworth clay division  
+    ax.add_patch(Rectangle((8,0), 4, 100, color='#6B8E23', alpha=0.1, zorder=0))
         
     return fig, ax, ax2, ax3
 
 
 
-
-
-# Peak prominence utility
-#def modeprom(gsclass):
-    #data = gsclass.data().iloc[:,:-2]
-    
-    # find peaks
-    
-    # find prominences
-    
-    # plot histogram or bar chart of prominences for user to then apply to class object
-    
-    # no return
-    
-    #pass
