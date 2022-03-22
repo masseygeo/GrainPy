@@ -272,7 +272,6 @@ def gsd_format():
     ax3.annotate('-silt-', xy=(0.54, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
     ax3.annotate('-clay-', xy=(0.85, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
 
-    # optional background lines and patches for Wentworth grain size divisions
     # lines along Wentworth divisions
     for i in range(0,9,1):
         ax.plot([i,i], [0,100], color='0.8', linewidth=0.25, zorder=0)
