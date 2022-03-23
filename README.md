@@ -52,10 +52,11 @@ Data can then be visualized and interpreted with publication-quality grain size 
 
 ## Roadmap
 - [ ] Initial build
-- [ ] Package 0.1.0 release
-- [ ] Compatibility with multiple types/sources of grain size distribution data
-- [ ] Additional statistics
-- [ ] Comparison of multiple objects (More plots? MLR? PCA?)
+- [ ] Package release, version 0.1.0
+- [ ] Additional functionality
+      - [ ] Compatibility with multiple data sources
+      - [ ] Additional statistics
+      - [ ] Comparison of multiple objects
 - [ ] Sediment mixing models
 - [ ] Integrate with GIS
 
