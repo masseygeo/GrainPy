@@ -4,7 +4,6 @@
       
 <p align="center">
   <a href="#about">About</a> •
-  <a href="#getting-started">Getting Started</a> •
   <a href="#installation">Installation</a> •
   <a href="#examples">Examples</a> •
   <a href="#roadmap">Roadmap</a> •
@@ -20,19 +19,16 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
-## Getting Started
-
-### Installation
+## Installation
 We reccomend installation using Conda as below...
 ```
 conda install python=3 grainpy
 ```
 
-### Examples
+## Examples
 The basic functionality of GrainPy is explained below, however, please refer to the [documentation](https://example.com) for more detailed information and tutorials.
 
-***Data compilation***\
+###Data compilation
 Grain size distribution data comes from a variety of methods, including sieve, hydrometer, and laser diffraction particle size analyses. GrainPy collects and organizes this data (table of bins used and percentages) for single or multiple samples, calculates cumulative percentages, and a variety of sample statistics.
 > 
 > <p align="center">
