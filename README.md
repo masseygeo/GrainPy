@@ -52,11 +52,11 @@ Data can then be visualized and interpreted with publication-quality grain size 
 
 ## Roadmap
 - [ ] Initial build
-     - [ ] Package release, version 0.1.0
+- [ ] Package release, version 0.1.0
 - [ ] Additional functionality
-- [ ] Compatibility with multiple data sources
-- [ ] Additional statistics
-- [ ] Comparison of multiple objects
+     - [ ] Compatibility with multiple data sources
+     - [ ] Additional statistics
+     - [ ] Compare multiple objects
 - [ ] Sediment mixing models
 - [ ] Integrate with GIS
 
