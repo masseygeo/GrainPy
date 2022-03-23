@@ -7,7 +7,7 @@
   <a href="#installation">Installation</a> •
   <a href="#examples">Examples</a> •
   <a href="#roadmap">Roadmap</a> •
-  <a href="#contributions&feedback">Contributions & Feedback</a> •
+  <a href="#contributionsfeedback">Contributions & Feedback</a> •
   <a href="#license">License</a>
 </p>
 
