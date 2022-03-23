@@ -37,7 +37,7 @@ Grain size distribution data comes from a variety of methods, including sieve, h
 > 
 > _Multiple raw data tables collected from a Beckman Coulter laser particle analyzer (left) are collected and compiled by GrainPy into usable compilation tables of the data, cumulative frequencies, and statistics (right)._
 
-***Grain size distribution curves***\
+### Grain size distribution plots
 Data can then be visualized and interpreted with publication-quality grain size distribution plots.
 >
 > <p align="center">
