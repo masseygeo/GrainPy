@@ -246,11 +246,11 @@ def gsd_format():
     ax.tick_params(axis='y', color='0.5', width=0.5, labelsize=10, labelcolor='0.5')
     ax.set_xlim(-1, 12)    
     ax.set_xlabel('Grain diameter (\u03C6)', size=12, style='italic')
-    ax.set_ylabel('Relative frequency (%)', size=12, style='italic', color='0.5')
+    ax.set_ylabel('Relative proportion (%)', size=12, style='italic', color='0.5')
         
     ax2.set_ylim(0,100)
     ax2.tick_params(axis='y', color='#AB2328', width=0.5, labelsize=10, labelcolor='#AB2328')
-    ax2.set_ylabel('Cumulative frequency (%)', size=12, style='italic', color='#AB2328')
+    ax2.set_ylabel('Cumulative proportion (%)', size=12, style='italic', color='#AB2328')
     ax2.spines['left'].set_visible(False)
     ax2.spines['right'].set(color='#AB2328')
     ax2_xtick_loc = [i for i in range(-1,13,1)]
