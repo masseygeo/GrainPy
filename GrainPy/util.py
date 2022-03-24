@@ -182,8 +182,7 @@ def df_ex(df):
 
 def gems_ex(gso):
     """
-    Function to save an object of the Grainsize class in a specific table format
-    for GIS geodatabases. Saved as .csv or .xlsx file using file dialog window.
+    Function to save an object of the Grainsize class as .csv or .xlsx file using file dialog window. Table consists of compiled data, sand/silt/clay relative proportions, and samplenames, all transposed horizontally. Works well with GIS databases.
 
     Parameters
     ----------
@@ -196,7 +195,7 @@ def gems_ex(gso):
 
     """
     bins = gso.bins().drop(index=0)
-    data = gso.data().drop(index=0)
+    data = gso.data().iloc[:,:-1].drop(index=0)
     st = gso.data_st()
     
     # format bin titles

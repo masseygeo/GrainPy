@@ -38,6 +38,8 @@ class Grainsize():
         self.lith = lith
     
 
+
+
     def samplenames(self):
         '''
         Collects basenames of class path(s).
@@ -136,6 +138,9 @@ class Grainsize():
             data[names[x]] = file.iloc[i[0]:i[0]+data_rows, data_col].astype(float)
             x += 1
             
+        # add new column of mean values
+        data['mean'] = data.mean(axis=1)
+        
         # reorganize for standard grain size distribution plots
         data = data.iloc[::-1].reset_index(drop=True).replace(np.nan, 0)
                 
@@ -155,12 +160,8 @@ class Grainsize():
             Dataframe of cumulative percentages of grain size data.
 
         '''
-        names = self.samplenames()
-        data = self.data()
-        cp = pd.DataFrame()  
-
-        for sample in names:
-            cp[sample] = (data[sample].cumsum() / data[sample].sum()) * 100
+        
+        cp = self.data().cumsum()
     
         return cp
 
@@ -255,22 +256,22 @@ class Grainsize():
         st.loc['sand'] = s_list
         st.loc['silt'] = m_list
         st.loc['clay'] = c_list
-        st.loc['silt_clay'] = [str(round(x)) + '+' + str(round(y)) for x,y in zip(m_list, c_list)]
+        st.loc['silt+clay'] = [str(round(x)) + '+' + str(round(y)) for x,y in zip(m_list, c_list)]
         st.loc['sediment_class'] = [folkclass(x,y,z) for x,y,z in zip(s_list, m_list, c_list)]
         st.loc['max'] = max_list
-        st.loc['max_gs'] = [wentclass(i) for i in max_list]
+        st.loc['max_ww'] = [wentclass(i) for i in max_list]
         st.loc['min'] = min_list
-        st.loc['min_gs'] = [wentclass(i) for i in min_list]
+        st.loc['min_ww'] = [wentclass(i) for i in min_list]
         st.loc['median'] = median_list
-        st.loc['median_gs'] = [wentclass(i) for i in median_list]
-        st.loc['mean'] = mean_list
-        st.loc['mean_gs'] = [wentclass(i) for i in mean_list]
-        st.loc['sorting'] = sort_list
-        st.loc['sorting_class'] = [sortclass(i) for i in sort_list]
-        st.loc['skewness'] = skew_list
-        st.loc['skewness_class'] = [skewclass(i) for i in skew_list]
-        st.loc['kurtosis'] = kurt_list
-        st.loc['kurtosis_class'] = [kurtclass(i) for i in kurt_list]
+        st.loc['median_ww'] = [wentclass(i) for i in median_list]
+        st.loc['folkmean'] = mean_list
+        st.loc['folkmean_ww'] = [wentclass(i) for i in mean_list]
+        st.loc['folksort'] = sort_list
+        st.loc['folksort_class'] = [sortclass(i) for i in sort_list]
+        st.loc['folkskew'] = skew_list
+        st.loc['folkskew_class'] = [skewclass(i) for i in skew_list]
+        st.loc['folkkurt'] = kurt_list
+        st.loc['folkkurt_class'] = [kurtclass(i) for i in kurt_list]
         
         # make all mode lists same length then add mode rows in st dataframe
         mode_num = len(max(mode_list, key=len))
@@ -282,7 +283,7 @@ class Grainsize():
         while x <= mode_num:
             mode_label = 'mode' + str(x)
             st.loc[mode_label] = [modes[x-1] for modes in mode_list]
-            st.loc[mode_label + '_gs'] = [wentclass(modes[x-1]) for modes in mode_list]
+            st.loc[mode_label + '_ww'] = [wentclass(modes[x-1]) for modes in mode_list]
             x += 1
         
         return st
@@ -319,9 +320,9 @@ class Grainsize():
         """
         path = self.path
         bins = self.bins()
-        data = self.data()
-        cp = self.data_cp()
-        st = self.data_st()
+        data = self.data().iloc[:,:-1]
+        cp = self.data_cp().iloc[:,:-1]
+        st = self.data_st().iloc[:,:-1]
         
         # counter for saving files
         c = 0
@@ -351,7 +352,7 @@ class Grainsize():
             
             # plot statistic lines
             med_ln = ax.axvline(st[sample].loc['median'], color='blue', ls=(0, (1, 1)), lw=1.5) 
-            mean_ln = ax.axvline(st[sample].loc['mean'], color='blue', lw=1.5)
+            mean_ln = ax.axvline(st[sample].loc['folkmean'], color='blue', lw=1.5)
             modes = st[sample].iloc[19::2]
             mode_label = []
             x = 1
@@ -364,7 +365,7 @@ class Grainsize():
                                 
             # key and annotation text
             sed = st[sample].loc['sediment_class']
-            sort = st[sample].loc['sorting_class']
+            sort = st[sample].loc['folksort_class']
             sand = str(round(st[sample].loc['sand'], 1))
             silt = str(round(st[sample].loc['silt'], 1))
             clay = str(round(st[sample].loc['clay'], 1))
@@ -372,10 +373,10 @@ class Grainsize():
                 sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
                 horizontalalignment='center')
             
-            mean_lab = 'mean: {0:.1f}\u03C6, {1}'.format(st[sample].loc['mean'], 
-                                                         st[sample].loc['mean_gs'])
+            mean_lab = 'mean: {0:.1f}\u03C6, {1}'.format(st[sample].loc['folkmean'], 
+                                                         st[sample].loc['folkmean_ww'])
             med_lab = 'median: {0:.1f}\u03C6, {1}'.format(st[sample].loc['median'], 
-                                                          st[sample].loc['median_gs'])
+                                                          st[sample].loc['median_ww'])
             ax.legend(handles=[mean_ln, med_ln], labels=[mean_lab, med_lab], 
                       bbox_to_anchor=(0.5, -0.133), ncol=2, fancybox=False, 
                       frameon=False, loc='center')
@@ -384,11 +385,11 @@ class Grainsize():
             ax2.legend(handles=[modes_ln], labels=[modelab], bbox_to_anchor=(0.5, -0.166), 
                        fancybox=False, frameon=False, loc='center')
             
-            skew = str(round(st[sample].loc['skewness'], 2)) + ', {}'.format(
-                st[sample].loc['skewness_class'])
-            kurt = str(round(st[sample].loc['kurtosis'], 2)) + ', {}'.format(
-                st[sample].loc['kurtosis_class'])
-            ax.annotate('skewness: {0}     kurtosis: {1}'.format(skew, kurt), xy=(0.5, -0.204), 
+            skew = str(round(st[sample].loc['folkskew'], 2)) + ', {}'.format(
+                st[sample].loc['folkskew_class'])
+            kurt = str(round(st[sample].loc['folkkurt'], 2)) + ', {}'.format(
+                st[sample].loc['folkkurt_class'])
+            ax.annotate('folkskew: {0}     folkkurt: {1}'.format(skew, kurt), xy=(0.5, -0.204), 
                         xycoords='axes fraction', horizontalalignment='center')
             
             # save figure in directory with sample files
@@ -434,8 +435,8 @@ class Grainsize():
         
         path = self.path[0]
         bins = self.bins()['phi']
-        data = self.data()
-        cp = self.data_cp()
+        data = self.data().iloc[:,:-1]
+        cp = self.data_cp().iloc[:,:-1]
         st = self.data_st()
         
         # set savefile name and plot title
@@ -453,6 +454,7 @@ class Grainsize():
             title = 'Mean Grain Size Distribution' + ' - ' + both
             file = 'MeanGSD_' + self.lith + '_' + self.area
         
+        
         # default plot...cumulative curves only
         if bplt == False and cplt == True:
             # set axes and title...move cumulative axis to right side
@@ -460,7 +462,7 @@ class Grainsize():
             ax2.set_visible(False)
             ax.set_title(title, size=18, weight='bold', style='italic')
             ax.set_ylim(0,100)
-            ax.tick_params(axis='y', color='#AB2328', width=0.5, labelsize=10, abelcolor='#AB2328')
+            ax.tick_params(axis='y', color='#AB2328', width=0.5, labelsize=10, labelcolor='#AB2328')
             ax.set_ylabel('Cumulative frequency (%)', size=12, style='italic', color='#AB2328')
             ax_xtick_loc = [i for i in range(-1,13,1)]
             ax_ytick_loc = [i for i in range(0,101,10)]
@@ -486,6 +488,7 @@ class Grainsize():
                 ci = scipy.stats.t.interval(alpha=0.95, df=n-1, loc=cp.mean(axis=1), scale=sem) 
             
             ax.fill_between(bins, ci[1], ci[0], color='#AB2328', alpha=0.3, zorder=2.1)
+                    
         
         # optional plot...both mean bars and mean cumulative
         elif bplt == True and cplt == True:
@@ -517,18 +520,17 @@ class Grainsize():
             # plot and display selected mean, median, modes, skew, kurt
 
         
-
-# optional plot...bars only
+        # optional plot...bars only
         else:
             #set axes and title...no cumulative axis on right
             fig, ax, ax2, ax3 = gsd_format()
             ax2.set_visible(False)
-            ax.set_ylim(0, data.max().max())  
+            ax.set_ylim(0, data.max().max() + 0.25)  
             ax.set_title(title, size=18, weight='bold', style='italic')
 
             #plot all sample curves
             for column, contents in data.replace(0, np.nan).iteritems():
-                ax.plot(bins, contents, color='k', linewidth=0.75, zorder=1.1)
+                ax.plot(bins, contents, color='k', linewidth=0.5, zorder=1.1)
             
             #plot mean bars
             ax.bar(bins, data.mean(axis=1), width=0.1, color='0.7', align='edge', 
@@ -551,16 +553,19 @@ class Grainsize():
         
         # basic stats included in all plot options
         # means of selected statistics
-        sand = str(round(st.loc['sand'].mean(), 1))
-        silt = str(round(st.loc['silt'].mean(), 1))
-        clay = str(round(st.loc['clay'].mean(), 1))
-        sed = folkclass(st.loc['sand'].mean(), st.loc['silt'].mean(), st.loc['clay'].mean())
-        sort = sortclass(st.loc['sorting'].mean())
+        sand = round(st['mean'].loc['sand'], 1)
+        silt = round(st['mean'].loc['silt'], 1)
+        clay = round(st['mean'].loc['clay'], 1)
         
-        ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(
-            sed, sort, sand, silt, clay), xy=(0.5, -0.105), xycoords='axes fraction', 
-            horizontalalignment='center')
-            
+        sed = folkclass(sand, silt, clay)
+        
+        sort = st['mean'].loc['folksort_class']
+                
+        ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(sed, sort, str(sand),
+                    str(silt), str(clay)), xy=(0.5, -0.105), xycoords='axes fraction', horizontalalignment='center')
+
+        
+        
         # save figure in sample file directory
         filesave = path.replace(os.path.basename(path), file)
         
