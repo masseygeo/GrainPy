@@ -7,7 +7,7 @@
   <a href="#installation">Installation</a> •
   <a href="#examples">Examples</a> •
   <a href="#roadmap">Roadmap</a> •
-  <a href="#contributions">Contributions & Feedback</a> •
+  <a href="#contributionsandfeeback">Contributions and Feedback</a> •
   <a href="#license">License</a>
 </p>
 
@@ -67,7 +67,7 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a list of
 
 
 
-## Contributions & Feedback
+## Contributions and Feedback
 🔥 If you have a suggestion that you think would make this better, you can either:
 >- [Create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the appropriate label 🏷️\
 >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***...OR...***
