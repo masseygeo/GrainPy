@@ -1,14 +1,13 @@
 <p align="center">
-<img alt="plots" src="https://i.imgur.com/4DYY47L.png" height="500" /></p>
+<img alt="plots" src="https://i.imgur.com/6T1gtg7.png" height="500" /></p>
 </p>
       
 <p align="center">
   <a href="#about">About</a> •
-  <a href="#getting-started">Getting Started</a> •
   <a href="#installation">Installation</a> •
   <a href="#examples">Examples</a> •
   <a href="#roadmap">Roadmap</a> •
-  <a href="#contributions&feedback">Contributions & Feedback</a> •
+  <a href="#contributions">Contributions & Feedback</a> •
   <a href="#license">License</a>
 </p>
 
@@ -20,19 +19,16 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-
-## Getting Started
-
-### Installation
+## Installation
 We reccomend installation using Conda as below...
 ```
 conda install python=3 grainpy
 ```
 
-### Examples
+## Examples
 The basic functionality of GrainPy is explained below, however, please refer to the [documentation](https://example.com) for more detailed information and tutorials.
 
-***Data compilation***\
+### Data compilation
 Grain size distribution data comes from a variety of methods, including sieve, hydrometer, and laser diffraction particle size analyses. GrainPy collects and organizes this data (table of bins used and percentages) for single or multiple samples, calculates cumulative percentages, and a variety of sample statistics.
 > 
 > <p align="center">
@@ -41,7 +37,7 @@ Grain size distribution data comes from a variety of methods, including sieve, h
 > 
 > _Multiple raw data tables collected from a Beckman Coulter laser particle analyzer (left) are collected and compiled by GrainPy into usable compilation tables of the data, cumulative frequencies, and statistics (right)._
 
-***Grain size distribution curves***\
+### Grain size distribution plots
 Data can then be visualized and interpreted with publication-quality grain size distribution plots.
 >
 > <p align="center">
@@ -56,10 +52,11 @@ Data can then be visualized and interpreted with publication-quality grain size 
 
 ## Roadmap
 - [ ] Initial build
-- [ ] Package 0.1.0 release
-- [ ] Compatibility with multiple types/sources of grain size distribution data
-- [ ] Additional statistics
-- [ ] Comparison of multiple objects (More plots? MLR? PCA?)
+- [ ] Package release, version 0.1.0
+- [ ] Additional functionality
+     - [ ] Compatibility with multiple data sources
+     - [ ] Additional statistics
+     - [ ] Compare multiple objects
 - [ ] Sediment mixing models
 - [ ] Integrate with GIS
 
