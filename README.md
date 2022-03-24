@@ -67,7 +67,7 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a list of
 
 
 
-## Contributions
+## Contributions Feedback
 🔥 If you have a suggestion that you think would make this better, you can either:
 >- [Create a new issue](https://github.com/masseygeo/GrainPy/issues/new) with the _enhancement_ label 🏷️\
 >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;***...OR...***
