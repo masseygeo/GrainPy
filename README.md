@@ -51,7 +51,7 @@ Data can then be visualized and interpreted with publication-quality grain size 
 
 
 ## Roadmap
-- [ ] Initial build
+- [x] Initial build
 - [ ] Package release, version 0.1.0
 - [ ] Additional functionality
      - [ ] Compatibility with multiple data sources
