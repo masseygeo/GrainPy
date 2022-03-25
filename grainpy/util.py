@@ -28,7 +28,7 @@ __all__ = [
 
 
 import tkinter as tk
-#from tkinter import filedialog
+from tkinter import filedialog
 import pandas as pd
 import numpy as np
 from openpyxl import load_workbook
@@ -49,7 +49,7 @@ def selectdata():
 
     root = tk.Tk()
     root.withdraw()
-    path = tk.filedialog.askopenfilenames(title='Select files...', filetypes=(
+    path = filedialog.askopenfilenames(title='Select files...', filetypes=(
         [('Excel files', '*.xlsx *.xls')]))
     root.destroy()
 
