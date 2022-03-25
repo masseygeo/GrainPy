@@ -24,6 +24,7 @@ import numpy as np
 from scipy.signal import find_peaks
 import scipy.stats
 from matplotlib import pyplot as plt
+
 from util import *
 from grainclass import *
 
@@ -32,10 +33,11 @@ from grainclass import *
 
 
 class Grainsize():
-    def __init__(self, path, area=None, lith=None):
+    
+    def __init__(self, path, lith=None, area=None):
         self.path = path
-        self.area = area
         self.lith = lith
+        self.area = area
     
 
 
@@ -408,7 +410,7 @@ class Grainsize():
 
 
 
-    def gsd_multi(self, bplt=False, cplt=True):
+    def gsd_multi(self, bplt=False, cplt=True, stplt=True):
         """
         Method to plot grain size distribution data for multiple samples. Formatted 
         to show Wentworth scale grain size divisions, x scales in phi units and 
@@ -426,6 +428,8 @@ class Grainsize():
             Option to plot data relative frequency histogram. The default is False.
         cplt : Bool, optional
             Option to plot cumulative frequency curve. The default is True.
+        stplt : Bool, optional
+            Option to plot data selected statistics and include in legend. The default is True.
 
         Returns
         -------
@@ -488,7 +492,7 @@ class Grainsize():
                 ci = scipy.stats.t.interval(alpha=0.95, df=n-1, loc=cp.mean(axis=1), scale=sem) 
             
             ax.fill_between(bins, ci[1], ci[0], color='#AB2328', alpha=0.3, zorder=2.1)
-                    
+        
         
         # optional plot...both mean bars and mean cumulative
         elif bplt == True and cplt == True:
@@ -516,9 +520,7 @@ class Grainsize():
                 ci = scipy.stats.t.interval(alpha=0.95, df=n-1, loc=cp.mean(axis=1), scale=sem) 
             
             ax2.fill_between(bins, ci[1], ci[0], color='#AB2328', alpha=0.3, zorder=2.1)
-            
-            # plot and display selected mean, median, modes, skew, kurt
-
+        
         
         # optional plot...bars only
         else:
@@ -547,24 +549,56 @@ class Grainsize():
             
             ax.fill_between(bins, ci[1], ci[0], color = '#AB2328', alpha=0.3, zorder=1.2)
             
-            # plot and display selected mean, median, modes, skew, kurt
         
+        # option to include selected stats with plot
+        if stplt == True:
         
-        
-        # basic stats included in all plot options
-        # means of selected statistics
-        sand = round(st['mean'].loc['sand'], 1)
-        silt = round(st['mean'].loc['silt'], 1)
-        clay = round(st['mean'].loc['clay'], 1)
-        
-        sed = folkclass(sand, silt, clay)
-        
-        sort = st['mean'].loc['folksort_class']
-                
-        ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(sed, sort, str(sand),
-                    str(silt), str(clay)), xy=(0.5, -0.105), xycoords='axes fraction', horizontalalignment='center')
+            # plot statistic lines
+            med_ln = ax.axvline(st['mean'].loc['median'], color='blue', ls=(0, (1, 1)), lw=1.5) 
+            mean_ln = ax.axvline(st['mean']['folkmean'], color='blue', lw=1.5)
+            
+            modes = st['mean'].iloc[19::2]
+            mode_label = []
+            x = 1
+            for mode in modes:
+                modes_ln = ax.axvline(mode, color='black', ls=(0, (5, 1)), lw=1.5, zorder=4)
+                if mode != np.nan:
+                    label = 'mode%d: '%x + str(round(modes[x-1],1)) + '\u03C6' + ', {}'.format(wentclass(modes[x-1]))
+                    mode_label.append(label)
+                x+=1
+            
+            # means of selected statistics
+            sand = round(st['mean'].loc['sand'], 1)
+            silt = round(st['mean'].loc['silt'], 1)
+            clay = round(st['mean'].loc['clay'], 1)
+            
+            sed = folkclass(sand, silt, clay)
+            
+            sort = st['mean'].loc['folksort_class']
+                    
+            ax.annotate('{0}, {1}  -  sand: {2}%,  silt: {3}%,  clay: {4}%'.format(sed, sort, str(sand),
+                        str(silt), str(clay)), xy=(0.5, -0.105), xycoords='axes fraction', horizontalalignment='center')
+            
+            # key and annotation text
+            mean_lab = 'mean: {0:.1f}\u03C6, {1}'.format(st['mean'].loc['folkmean'], 
+                                                         st['mean'].loc['folkmean_ww'])
+            med_lab = 'median: {0:.1f}\u03C6, {1}'.format(st['mean'].loc['median'], 
+                                                          st['mean'].loc['median_ww'])
+            ax.legend(handles=[mean_ln, med_ln], labels=[mean_lab, med_lab], 
+                      bbox_to_anchor=(0.5, -0.133), ncol=2, fancybox=False, 
+                      frameon=False, loc='center')
+            
+            modelab = '  /  '.join(mode_label)
+            ax3.legend(handles=[modes_ln], labels=[modelab], bbox_to_anchor=(0.5, -0.166), 
+                       fancybox=False, frameon=False, loc='center')
+            
+            skew = str(round(st['mean'].loc['folkskew'], 2)) + ', {}'.format(
+                st['mean'].loc['folkskew_class'])
+            kurt = str(round(st['mean'].loc['folkkurt'], 2)) + ', {}'.format(
+                st['mean'].loc['folkkurt_class'])
+            ax.annotate('folkskew: {0}     folkkurt: {1}'.format(skew, kurt), xy=(0.5, -0.204), 
+                        xycoords='axes fraction', horizontalalignment='center')
 
-        
         
         # save figure in sample file directory
         filesave = path.replace(os.path.basename(path), file)
