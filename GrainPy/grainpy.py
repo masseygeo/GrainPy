@@ -24,10 +24,8 @@ import numpy as np
 from scipy.signal import find_peaks
 import scipy.stats
 from matplotlib import pyplot as plt
-
-from util import *
+from matplotlib.patches import Rectangle
 from grainclass import *
-
 
 
 
@@ -293,6 +291,87 @@ class Grainsize():
 
     
 
+    def _gsd_format(self):
+        """
+        Function to format grain size distribution plots using Wentworth classification
+        grain size boundaries.
+
+        Returns
+        -------
+        fig : Matplotlib Figure instance
+            New Matplotlib figure for plotting grain size distributions.
+        ax : Matplotlib axes object
+            Base axes for XY scales, Wentworth classification background, and data
+            relative frequency plot for grain size distribution plots.
+        ax2 : Matplotlib axes object
+            Second axes object for cumulative frequency curve for grain size distribution
+            plot.
+        ax3 : Matplotlib axes object
+            Third axes object for upper X axis.
+
+        """
+        
+        # create figure and axes
+        fig, ax = plt.subplots(1, 1, figsize=(8,8), dpi=300)
+        ax2 = ax.twinx()
+        ax3 = ax.twiny()
+
+        # format axes
+        ax.tick_params(axis='x', width=0.5, labelsize=10)
+        ax.tick_params(axis='y', color='0.5', width=0.5, labelsize=10, labelcolor='0.5')
+        ax.set_xlim(-1, 12)    
+        ax.set_xlabel('Grain diameter (\u03C6)', size=12, style='italic')
+        ax.set_ylabel('Relative proportion (%)', size=12, style='italic', color='0.5')
+            
+        ax2.set_ylim(0,100)
+        ax2.tick_params(axis='y', color='#AB2328', width=0.5, labelsize=10, labelcolor='#AB2328')
+        ax2.set_ylabel('Cumulative proportion (%)', size=12, style='italic', color='#AB2328')
+        ax2.spines['left'].set_visible(False)
+        ax2.spines['right'].set(color='#AB2328')
+        ax2_xtick_loc = [i for i in range(-1,13,1)]
+        ax2_ytick_loc = [i for i in range(0,101,10)]
+        ax2.set(xticks=ax2_xtick_loc)
+        ax2.set(yticks=ax2_ytick_loc)
+        
+        ax3.set_xlim(2, 0.00024)
+        ax3.tick_params(axis='x', color='k', width=0.5, labelsize=10, labelcolor='k', pad=-1)
+        ax3.set_xlabel('Grain diameter (mm)', size=12, style='italic', color='k')
+        ax3.set_xscale('log', base=2)
+        ax3.spines['right'].set_visible(False)
+        ax3.spines['left'].set_visible(False)
+        ax3_xtick_loc = [2, 0.0625, 0.0039]
+        ax3_xtick_lab = ['2', '0.0625', '0.0039']
+        ax3.set(xticks=ax3_xtick_loc)
+        ax3.set(xticklabels=ax3_xtick_lab)
+        ax3.annotate('-sand-', xy=(0.18, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
+        ax3.annotate('-silt-', xy=(0.54, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
+        ax3.annotate('-clay-', xy=(0.85, 1.01), xycoords='axes fraction', horizontalalignment='center', style='italic')
+
+        # lines along Wentworth divisions
+        for i in range(0,9,1):
+            ax.plot([i,i], [0,100], color='0.8', linewidth=0.25, zorder=0)
+
+        # Patches for Wentworth sand divisions   
+        ax.add_patch(Rectangle((-1,0), 1, 100, color='#FFBA01', alpha=0.5, zorder=0))
+        ax.add_patch(Rectangle((0,0), 1, 100, color='#FFC918', alpha=0.5, zorder=0))
+        ax.add_patch(Rectangle((1,0), 1, 100, color='#FFD82F', alpha=0.5, zorder=0))
+        ax.add_patch(Rectangle((2,0), 1, 100, color='#FEE745', alpha=0.6, zorder=0))
+        ax.add_patch(Rectangle((3,0), 1, 100, color='#FEF65C', alpha=0.3, zorder=0))
+        
+        # Patches for Wentworth silt divisions   
+        ax.add_patch(Rectangle((4,0), 1, 100, color='#0080FF', alpha=0.3, zorder=0))
+        ax.add_patch(Rectangle((5,0), 1, 100, color='#3399FF', alpha=0.3, zorder=0))
+        ax.add_patch(Rectangle((6,0), 1, 100, color='#66B2FF', alpha=0.3, zorder=0))
+        ax.add_patch(Rectangle((7,0), 1, 100, color='#99CCFF', alpha=0.3, zorder=0))
+        
+        # Patches for Wentworth clay division  
+        ax.add_patch(Rectangle((8,0), 4, 100, color='#6B8E23', alpha=0.1, zorder=0))
+            
+        return fig, ax, ax2, ax3
+    
+    
+    
+    
     def gsd_single(self, files=None, i=0, j=0):
         """
         Method to plot grain size distribution data as a histogram of binned sizes, 
@@ -341,7 +420,7 @@ class Grainsize():
         for sample in samples:
             
             # create figure and axes
-            fig, ax, ax2, ax3 = gsd_format()
+            fig, ax, ax2, ax3 = self._gsd_format()
             
             ax.set_ylim(0, max(data[sample]) + 0.25)
             ax.set_title(sample, size=18, weight='bold', style='italic')
@@ -462,7 +541,7 @@ class Grainsize():
         # default plot...cumulative curves only
         if bplt == False and cplt == True:
             # set axes and title...move cumulative axis to right side
-            fig, ax, ax2, ax3 = gsd_format()
+            fig, ax, ax2, ax3 = self._gsd_format()
             ax2.set_visible(False)
             ax.set_title(title, size=18, weight='bold', style='italic')
             ax.set_ylim(0,100)
@@ -497,7 +576,7 @@ class Grainsize():
         # optional plot...both mean bars and mean cumulative
         elif bplt == True and cplt == True:
             #set axes and title
-            fig, ax, ax2, ax3 = gsd_format()
+            fig, ax, ax2, ax3 = self._gsd_format()
             ax.set_ylim(0, max(data.mean(axis=1)) + 0.25)  
             ax.set_title(title, size=18, weight='bold', style='italic')
             
@@ -525,7 +604,7 @@ class Grainsize():
         # optional plot...bars only
         else:
             #set axes and title...no cumulative axis on right
-            fig, ax, ax2, ax3 = gsd_format()
+            fig, ax, ax2, ax3 = self._gsd_format()
             ax2.set_visible(False)
             ax.set_ylim(0, data.max().max() + 0.25)  
             ax.set_title(title, size=18, weight='bold', style='italic')
@@ -612,5 +691,7 @@ class Grainsize():
 
 
 # TESTING
+from util import *
+
 path = selectdata()
 test = Grainsize(path)
