@@ -29,13 +29,12 @@ The basic functionality of GrainPy is explained below, however, please refer to 
 Grain size distribution data comes from a variety of methods, including sieve, hydrometer, and laser diffraction particle size analyses. GrainPy collects and organizes this data (table of bins used and percentages) for single or multiple samples, calculates cumulative percentages, and a variety of sample statistics.
 >
 > ```
-> # optional file dialog window to collect paths to grain size file(s)
-> files = selectdata()
-> # create Grainsize object; requires list/tuple of path(s) to file(s)
+> files = ['path(s) to grain size data files']
+> # create Grainsize object using path(s)
 > var = Grainsize(files)
-> var.data()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# compiled data from input files
-> var.data_cp()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# cumulative percentages
-> var.data_st()&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# statistics
+> var.data()
+> var.data_cp()
+> var.data_st()
 > ```
 > <p align="center">
 >  <img alt="plots" src="https://i.imgur.com/XtCbxh2.png" height="400" /></p>
