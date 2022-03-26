@@ -29,7 +29,7 @@ The basic functionality of GrainPy is explained below, however, please refer to 
 Grain size distribution data comes from a variety of methods, including sieve, hydrometer, and laser diffraction particle size analyses. GrainPy collects and organizes this data (table of bins used and percentages) for single or multiple samples, calculates cumulative percentages, and a variety of sample statistics.
 > 
 > <p align="center">
->  <img alt="plots" src="https://i.imgur.com/WuEMx6R.png" height="500" /></p>
+>  <img alt="plots" src="https://i.imgur.com/XtCbxh2.png" height="400" /></p>
 > </p>
 > 
 > _Multiple raw data tables collected from a Beckman Coulter laser particle analyzer (left) are collected and compiled by GrainPy into usable compilation tables of the data, cumulative frequencies, and statistics (right)._
@@ -38,7 +38,7 @@ Grain size distribution data comes from a variety of methods, including sieve, h
 Data can then be visualized and interpreted with publication-quality grain size distribution plots.
 >
 > <p align="center">
->  <img alt="plots" src="https://i.imgur.com/2zp0KCt.png" height="500" /></p>
+>  <img alt="plots" src="https://i.imgur.com/zf36tZb.png" height="400" /></p>
 > </p>
 > 
 > _Single samples can be plotted (left) to show histogram of binned data, cumulative percentage curve, vertical lines for mean, median, and modes. Multiple sample plots (right) show cumulative frequencies (percent finer) of all samples, the mean, and a 95% confidence interval._
