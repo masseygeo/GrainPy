@@ -85,8 +85,8 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a list of
 
 
 ## License
-<sub>Copyright 2021-2022, Matthew A. Massey\
-_GrainPy is free software: you can redistribute it and/or modify it under the terms 
+Copyright 2021-2022, Matthew A. Massey\
+<sub>_GrainPy is free software: you can redistribute it and/or modify it under the terms 
 of the GNU General Public License as published by the Free Software Foundation, 
 either version 3 of the License, or (at your option) any later version. GrainPy is 
 distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
