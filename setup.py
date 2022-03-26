@@ -15,7 +15,6 @@ requirements = ['Click>=7.0',
                 'pandas', 
                 'scipy',
                 'matplotlib',
-                'tkinter',
                 'openpyxl',
                 'os'
                ]
