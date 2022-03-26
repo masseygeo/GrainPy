@@ -689,10 +689,3 @@ class Grainsize():
         plt.savefig(fname=save_jpg, dpi=300, bbox_inches='tight')
 
 
-
-# TESTING
-from util import *
-
-
-path = selectdata()
-test = Grainsize(path)
