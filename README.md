@@ -45,6 +45,11 @@ Grain size distribution data comes from a variety of methods, including sieve, h
 ### Grain size distribution plots
 Data can then be visualized and interpreted with publication-quality grain size distribution plots.
 >
+> ```
+> # grain size distribution plots of single samples and all samples
+> var.gsd_single()
+> var.gsd_multi()
+> ```
 > <p align="center">
 >  <img alt="plots" src="https://i.imgur.com/ZFmjpiz.png" height="400" /></p>
 > </p>
