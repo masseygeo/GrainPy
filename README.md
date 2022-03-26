@@ -27,21 +27,34 @@ The basic functionality of GrainPy is explained below, however, please refer to 
 
 ### Data compilation
 Grain size distribution data comes from a variety of methods, including sieve, hydrometer, and laser diffraction particle size analyses. GrainPy collects and organizes this data (table of bins used and percentages) for single or multiple samples, calculates cumulative percentages, and a variety of sample statistics.
-> 
+>
+> ```
+> files = ['path(s) to grain size data files']
+> # create Grainsize object using path(s)
+> var = Grainsize(files)
+> var.data()
+> var.data_cp()
+> var.data_st()
+> ```
 > <p align="center">
->  <img alt="plots" src="https://i.imgur.com/WuEMx6R.png" height="500" /></p>
+>  <img alt="plots" src="https://i.imgur.com/XtCbxh2.png" height="400" /></p>
 > </p>
 > 
-> _Multiple raw data tables collected from a Beckman Coulter laser particle analyzer (left) are collected and compiled by GrainPy into usable compilation tables of the data, cumulative frequencies, and statistics (right)._
+> _Multiple raw data tables collected from grain size measurements (left) are collected and compiled by GrainPy into usable compilation tables of the data, cumulative frequencies, and statistics (right)._
 
 ### Grain size distribution plots
 Data can then be visualized and interpreted with publication-quality grain size distribution plots.
 >
+> ```
+> # grain size distribution plots of single samples and all samples
+> var.gsd_single()
+> var.gsd_multi()
+> ```
 > <p align="center">
->  <img alt="plots" src="https://i.imgur.com/2zp0KCt.png" height="500" /></p>
+>  <img alt="plots" src="https://i.imgur.com/ZFmjpiz.png" height="400" /></p>
 > </p>
 > 
-> _Single samples can be plotted (left) to show histogram of binned data, cumulative percentage curve, vertical lines for mean, median, and modes. Multiple sample plots (right) show cumulative frequencies (percent finer) of all samples, the mean, and a 95% confidence interval._
+> _Single samples can be plotted (left) to show histogram of binned data, cumulative percentage curve, vertical lines for mean, median, and modes. Multiple sample plots (right) show cumulative frequencies of all samples, the mean, and a 95% confidence interval._
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -85,8 +98,8 @@ See the [open issues](https://github.com/masseygeo/GrainPy/issues) for a list of
 
 
 ## License
-<sub>Copyright 2021-2022, Matthew A. Massey\
-_GrainPy is free software: you can redistribute it and/or modify it under the terms 
+Copyright 2021-2022, Matthew A. Massey\
+<sub>_GrainPy is free software: you can redistribute it and/or modify it under the terms 
 of the GNU General Public License as published by the Free Software Foundation, 
 either version 3 of the License, or (at your option) any later version. GrainPy is 
 distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
