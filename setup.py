@@ -43,7 +43,7 @@ setup(
     packages=find_packages(include=['grainpy', 'grainpy.*']),
     test_suite='tests',
     tests_require=test_requirements,
-    url='https://github.com/masseygeo/grainpy',
+    url='https://github.com/masseygeo/GrainPy',
     version='0.1.0',
     zip_safe=False,
 )
