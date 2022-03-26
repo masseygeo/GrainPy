@@ -38,7 +38,7 @@ Grain size distribution data comes from a variety of methods, including sieve, h
 Data can then be visualized and interpreted with publication-quality grain size distribution plots.
 >
 > <p align="center">
->  <img alt="plots" src="https://i.imgur.com/zf36tZb.png" height="400" /></p>
+>  <img alt="plots" src="https://i.imgur.com/ZFmjpiz.png" height="400" /></p>
 > </p>
 > 
 > _Single samples can be plotted (left) to show histogram of binned data, cumulative percentage curve, vertical lines for mean, median, and modes. Multiple sample plots (right) show cumulative frequencies of all samples, the mean, and a 95% confidence interval._
