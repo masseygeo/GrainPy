@@ -546,7 +546,7 @@ class Grainsize():
             ax.set_title(title, size=18, weight='bold', style='italic')
             ax.set_ylim(0,100)
             ax.tick_params(axis='y', color='#AB2328', width=0.5, labelsize=10, labelcolor='#AB2328')
-            ax.set_ylabel('Cumulative frequency (%)', size=12, style='italic', color='#AB2328')
+            ax.set_ylabel('Cumulative proportion (%)', size=12, style='italic', color='#AB2328')
             ax_xtick_loc = [i for i in range(-1,13,1)]
             ax_ytick_loc = [i for i in range(0,101,10)]
             ax.set(xticks=ax_xtick_loc)
@@ -688,3 +688,11 @@ class Grainsize():
         save_jpg = filesave + '.jpg'
         plt.savefig(fname=save_jpg, dpi=300, bbox_inches='tight')
 
+
+
+# TESTING
+from util import *
+
+
+path = selectdata()
+test = Grainsize(path)
