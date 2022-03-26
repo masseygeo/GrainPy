@@ -16,7 +16,6 @@ requirements = ['Click>=7.0',
                 'scipy',
                 'matplotlib',
                 'openpyxl',
-                'os'
                ]
 
 test_requirements = ['pytest>=3', ]
