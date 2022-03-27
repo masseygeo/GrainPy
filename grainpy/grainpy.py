@@ -30,7 +30,7 @@ from grainclass import *
 
 
 
-class Grainsize():
+class GrainSize():
     
     def __init__(self, path, lith=None, area=None):
         self.path = path
@@ -152,7 +152,7 @@ class Grainsize():
     def data_cp(self):
         '''
         Calculates cumulative percentage of grain size data collected from 
-        Grainsize.data class method
+        GrainSize.data class method
 
         Returns
         -------
@@ -377,7 +377,7 @@ class Grainsize():
         Method to plot grain size distribution data as a histogram of binned sizes, 
         cumulative percentage line, and statistics. Formatted to show Wentworth scale 
         grain size divisions, x scales in phi units and millimeters, and legend with 
-        statistics. User has the option of plotting all files in the Grainsize object 
+        statistics. User has the option of plotting all files in the GrainSize object 
         (default) or slicing specific file(s) using list of specific sample name(s) or 
         indexing (i, j). Plots are saved in jpeg and PDF formats in the same location 
         as the data files.
