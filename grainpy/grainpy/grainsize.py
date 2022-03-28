@@ -21,7 +21,7 @@ from scipy.signal import find_peaks
 import scipy.stats
 from matplotlib import pyplot as plt
 from matplotlib.patches import Rectangle
-from classify import *
+from .classify import *
 
 
 class GrainSizeDist():
