@@ -20,14 +20,6 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
 
 
 ## Installation
-<p align="center">
-  _Pandas •
-  Numpy •
-  Matplotlib •
-  SciPy •
-  Openpyxl_
-</p>
-
 It is ***strongly*** recommended to set up a virtual environment before installation, as it represents good practice and helps avoid potential dependency conflicts. In your new virtual environment, you can then install the current version of GrainPy using pip...
 ```
 # from terminal (note: python3 is usually py for Windows)...
