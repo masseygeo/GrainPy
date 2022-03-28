@@ -35,10 +35,10 @@ Grain size distribution data comes from a variety of methods, including sieve, h
 > ```
 > files = ['path(s) to grain size data files']
 > # create Grainsize object using path(s)
-> var = Grainsize(files)
+> var = grainsize.GrainSizeDist(files)
 > var.data()
-> var.data_cp()
-> var.data_st()
+> var.datacp()
+> var.datast()
 > ```
 > <p align="center">
 >  <img alt="plots" src="https://i.imgur.com/XtCbxh2.png" height="400" /></p>
@@ -52,7 +52,7 @@ Data can then be visualized and interpreted with publication-quality grain size 
 > ```
 > # grain size distribution plots of single samples and all samples
 > var.gsd_single()
-> var.gsd_multi()
+> var.gsd_multi(stplt=False)
 > ```
 > <p align="center">
 >  <img alt="plots" src="https://i.imgur.com/ZFmjpiz.png" height="400" /></p>
