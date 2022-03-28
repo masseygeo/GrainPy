@@ -4,36 +4,27 @@ Copyright 2021-2022 Matthew A. Massey
 
 This file is part of GrainPy.
 
-GrainPy is free software: you can redistribute it and/or modify it under the terms 
-of the GNU General Public License as published by the Free Software Foundation, 
-either version 3 of the License, or (at your option) any later version. GrainPy is 
-distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without 
-even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
-See the GNU General Public License for more details.
+GrainPy is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. GrainPy is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License along with GrainPy. 
-If not, see <https://www.gnu.org/licenses/>. 
+You should have received a copy of the GNU General Public License along with GrainPy. If not, see <https://www.gnu.org/licenses/>. 
 """
 
 
-
 __all__ = [
-    "wentclass",
-    "folkclass",
-    "sortclass",
-    "skewclass",
-    "kurtclass",
+    "wentworth_gs",
+    "folk_sed",
+    "folk_sort",
+    "folk_skew",
+    "folk_kurt",
 ]
-
 
 
 import numpy as np
 
 
-
-def wentclass(phi):
+def wentworth_gs(phi):
     """
-    Convert grain size to qualitative Wentworth classification name.
+    Convert grain size in phi units to qualitative Wentworth classification name.
 
     Parameters
     ----------
@@ -46,7 +37,6 @@ def wentclass(phi):
         text description of grain size
 
     """
-
 
     if -1 <= phi < 0:
         gs = 'very coarse sand'
@@ -74,11 +64,9 @@ def wentclass(phi):
     return gs
 
 
-
-def folkclass(sand, silt, clay):
+def folk_sed(sand, silt, clay):
     """
-    Convert relative sand-silt-clay volumes to qualitative Folk (1954, 1972) 
-    sediment classiciation name.
+    Convert relative sand-silt-clay percentages to qualitative Folk (1954, 1972) sediment classiciation name.
 
     Parameters
     ----------
@@ -100,7 +88,7 @@ def folkclass(sand, silt, clay):
     elif 50 <= sand < 90:
         if silt/clay >= 2:
             sed = 'silty sand'
-        elif clay/silt >=2:
+        elif clay/silt >= 2:
             sed = 'clayey sand'
         else:
             sed = 'muddy sand'
@@ -124,11 +112,9 @@ def folkclass(sand, silt, clay):
     return sed
 
 
-
-def sortclass(sorting):
+def folk_sort(sorting):
     """
-    Convert inclusive graphic standard deviation of grain size distribution to 
-    qualitative Folk and Ward (1957) classiciation name.
+    Convert inclusive graphic standard deviation of grain size distribution to qualitative Folk and Ward (1957) classiciation name for sorting.
 
     Parameters
     ----------
@@ -148,7 +134,7 @@ def sortclass(sorting):
     elif 0.5 < sorting <= 0.71:
         sort = 'moderately well sorted'
     elif 0.71 < sorting <= 1.0:
-        sort  = 'moderately sorted'
+        sort = 'moderately sorted'
     elif 1.0 < sorting <= 2.0:
         sort = 'poorly sorted'
     elif 2.0 < sorting <= 4.0:
@@ -161,11 +147,9 @@ def sortclass(sorting):
     return sort
 
 
-
-def skewclass(skewness):
+def folk_skew(skewness):
     """
-    Convert inclusive graphic skewness of grain size distribution curve to 
-    qualitative Folk and Ward (1957) classification name.
+    Convert inclusive graphic skewness of grain size distribution curve to qualitative Folk and Ward (1957) classification name for skewness.
 
     Parameters
     ----------
@@ -178,7 +162,7 @@ def skewclass(skewness):
         text description of skewness
 
     """
-    if 0.3 < skewness <=1:
+    if 0.3 < skewness <= 1:
         skew = 'strongly coarse skewed'
     elif 0.1 < skewness <= 0.3:
         skew = 'coarse skewed'
@@ -194,11 +178,9 @@ def skewclass(skewness):
     return skew
 
 
-
-def kurtclass(kurtosis):
+def folk_kurt(kurtosis):
     """
-    Convert inclusive graphic kurtosis of grain size distribution curve to 
-    qualitative Folk and Ward (1957) classification name.
+    Convert inclusive graphic kurtosis of grain size distribution curve to qualitative Folk and Ward (1957) classification name for kurtosis.
 
     Parameters
     ----------
@@ -227,6 +209,3 @@ def kurtclass(kurtosis):
         kurt = np.nan
 
     return kurt
-
-
-
