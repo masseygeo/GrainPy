@@ -20,7 +20,11 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
 
 
 ## Installation
-TBD...
+It is ***strongly*** recommended to set up a virtual environment before installation, as it represents good practice and helps avoid potential dependency conflicts. In your new virtual environment, you can then install the current version of GrainPy using pip...
+```
+# from terminal (note: python3 is usually py for Windows)...
+python3 -m pip install grainpy
+```
 
 ## Examples
 The basic functionality of GrainPy is explained below, however, please refer to the [documentation](https://example.com) for more detailed information and tutorials.
