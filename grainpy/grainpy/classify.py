@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 """
+This module contains functions used to classify grain sizes and distributions in terms of commonly accepted descriptive classifications, including those from Folk and Ward (1957), Folk (1954, 1966, 1972), and Wentworth (1922).
+
+
+--------------------------------------
 Copyright 2021-2022 Matthew A. Massey
 
 This file is part of GrainPy.

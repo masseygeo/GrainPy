@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 """
+This module contains the class for grain size analysis data with GrainPy.
+
+
+--------------------------------------
 Copyright 2021-2022 Matthew A. Massey
 
 This file is part of GrainPy.

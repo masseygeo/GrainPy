@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 """
+This module provides utilities beneficial to GrainPy, including functions for selecting data with a user dialog window, exporting grain size data in a variety of formats, and to check data for common incompatibilities with GrainPy.
+
+
+--------------------------------------
 Copyright 2021-2022 Matthew A. Massey
 
 This file is part of GrainPy.
