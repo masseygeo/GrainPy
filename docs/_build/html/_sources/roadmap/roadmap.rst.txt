@@ -1,0 +1,26 @@
+.. GrainPy documentation master file, created by
+   sphinx-quickstart on Tue Mar 29 20:33:40 2022.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Roadmap
+=======
+
+GrainPy will continue to add modern, user-friendly tools for the interpretation and presentation of sediment analyses.
+
+
+Additional functionalities
+--------------------------
+
+hello
+
+Sediment mixing models
+----------------------
+
+sediment
+
+Integration with GIS
+--------------------
+
+gis
+
