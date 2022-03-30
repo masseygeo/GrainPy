@@ -28,7 +28,7 @@ python3 -m pip install grainpy
 This should install GrainPy along with its dependency packages pandas, numpy, matplotlib, scipy, and openpyxl.
 
 ## Examples
-The basic functionality of GrainPy is explained below, however, please refer to the [documentation](http://grainpy.readthedocs.io/) for more detailed information and tutorials.
+The basic functionality of GrainPy is explained below, however, please refer to the documentation for more detailed information and tutorials.
 
 ### Data compilation
 Grain size distribution data comes from a variety of methods, including sieve, hydrometer, and laser diffraction particle size analyses. GrainPy collects and organizes this data (table of bins used and percentages) for single or multiple samples, calculates cumulative percentages, and a variety of sample statistics.
