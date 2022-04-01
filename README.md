@@ -71,7 +71,7 @@ Data can then be visualized and interpreted with publication-quality grain size 
 - [ ] Additional functionality
      - [ ] Compatibility with multiple data sources
      - [ ] Additional statistics
-     - [ ] Compare multiple objects
+     - [ ] Compare multiple instances
 - [ ] Sediment mixing models
 - [ ] Integrate with GIS
 
