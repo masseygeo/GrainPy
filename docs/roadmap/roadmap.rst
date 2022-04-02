@@ -24,8 +24,6 @@ GrainPy will continue to add modern, user-friendly tools for the interpretation 
 
 |uncheck_| Compatibility with multiple data sources
 
-|uncheck_| Compatibility with multiple data sources
-
 |uncheck_| Additional statistics, including engineering and USCS
 
 |uncheck_| Plotting/comparison of multiple instances
@@ -33,24 +31,5 @@ GrainPy will continue to add modern, user-friendly tools for the interpretation 
 |uncheck_| Sediment mixing models for multi-modal samples
 
 |uncheck_| Integration with GIS
-
-
-
-Additional functionalities
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-...under construction...
-
-
-Sediment mixing models
-^^^^^^^^^^^^^^^^^^^^^^^
-
-...under construction...
-
-
-Integration with GIS
-^^^^^^^^^^^^^^^^^^^^^
-
-...under construction...
 
 
