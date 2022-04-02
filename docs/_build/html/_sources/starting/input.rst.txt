@@ -1,0 +1,18 @@
+.. GrainPy documentation master file, created by
+   sphinx-quickstart on Tue Mar 29 20:33:40 2022.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Data Input
+==========
+
+Grain size distribution data can be obtained from a variety of equipment, including sieves, hydrometers, and laser diffraction particle size analyzers. GrainPy collects and organizes this data for single or multiple samples, calculates cumulative percentages, and a variety of sample statistics, however, there are a few basic requirements for the input data structure.
+
+1. Currently, GrainPy only accepts Excel files (.xlsx or .xls). This will be updated to include Comma Separated Value files (.csv) soon, and other file formats if there is interest.
+
+2. Each file contains data for one sample only.
+
+3. 
+
+
+

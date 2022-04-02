@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GrainPy Fundamentals &mdash; GrainPy v0.1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The GrainSizeDist Object" href="../tutorials/object.html" />
+    <link rel="prev" title="Installation" href="install.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> GrainPy
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">GrainPy Fundamentals</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-input">Data Input</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compiling-the-data">Compiling the Data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#visualizing-the-data">Visualizing the Data</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/object.html">The GrainSizeDist Object</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/stats.html">Statistics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/plots.html">Plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/util.html">The 'util' Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials/classify.html">The 'classify' Module</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">The Road Ahead for GrainPy</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap/roadmap.html">Roadmap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../roadmap/contributions.html">Suggestions &amp; Contributions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">GrainPy</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>GrainPy Fundamentals</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/starting/fundamentals.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="grainpy-fundamentals">
+<h1>GrainPy Fundamentals<a class="headerlink" href="#grainpy-fundamentals" title="Permalink to this headline"></a></h1>
+<section id="data-input">
+<h2>Data Input<a class="headerlink" href="#data-input" title="Permalink to this headline"></a></h2>
+<p>Grain size distribution data can be obtained from a variety of equipment, including sieves, hydrometers, and laser diffraction particle size analyzers. GrainPy collects and organizes this data, then calculates cumulative percentages and a variety of statistics, however, there are a few basic requirements for the input data structure:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Currently, GrainPy only accepts Excel files (.xlsx or .xls).</p></li>
+<li><p>Each file contains data for one sample only.</p></li>
+<li><p>Bins used in the analytical method are located in a column immediately preceding the collected data.</p></li>
+<li><p>Bin sizes are in microns.</p></li>
+<li><p>Bins are arranged from smallest to largest.</p></li>
+<li><p>Bin sizes represent the lower limit of each interval interval, with a final bin size representing the maximum upper limit included in the study.</p></li>
+<li><p>Currently, GrainPy can only accept multiple files that use the same bins.</p></li>
+<li><p>Optional: files are named according to the sample name. This is completely up to the user, but filenames are used in the titles of plots.</p></li>
+</ol>
+</div></blockquote>
+</section>
+<section id="compiling-the-data">
+<h2>Compiling the Data<a class="headerlink" href="#compiling-the-data" title="Permalink to this headline"></a></h2>
+<p>Given the correct input format, GrainPy can easily collect and organize single or multiple files, and calculate cumulative percentages and a variety of sample statistics.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># list or tuple of complete paths to files</span>
+<span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;path to file 1&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">,</span> <span class="s1">&#39;path to file n&#39;</span><span class="p">]</span>
+
+<span class="c1"># compile data from file(s), cumulative proportions, and statistics</span>
+<span class="n">var</span> <span class="o">=</span> <span class="n">GrainSizeDist</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+<span class="n">var</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+<span class="n">var</span><span class="o">.</span><span class="n">datacp</span><span class="p">()</span>
+<span class="n">var</span><span class="o">.</span><span class="n">datast</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="https://i.imgur.com/XtCbxh2.png"><img alt="https://i.imgur.com/XtCbxh2.png" src="https://i.imgur.com/XtCbxh2.png" style="height: 400px;" /></a>
+</figure>
+</section>
+<section id="visualizing-the-data">
+<h2>Visualizing the Data<a class="headerlink" href="#visualizing-the-data" title="Permalink to this headline"></a></h2>
+<p>Data can then be visualized and interpreted with publication-quality grain size distribution plots.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># plots of individual files</span>
+<span class="n">var</span><span class="o">.</span><span class="n">gsd_single</span><span class="p">()</span>
+
+<span class="c1"># plot of all files</span>
+<span class="n">var</span><span class="o">.</span><span class="n">gsd_multi</span><span class="p">()</span>
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="reference internal image-reference" href="https://i.imgur.com/ZFmjpiz.png"><img alt="https://i.imgur.com/ZFmjpiz.png" src="https://i.imgur.com/ZFmjpiz.png" style="height: 400px;" /></a>
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="install.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../tutorials/object.html" class="btn btn-neutral float-right" title="The GrainSizeDist Object" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Matt Massey.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
