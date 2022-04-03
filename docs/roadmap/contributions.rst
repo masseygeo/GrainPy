@@ -7,12 +7,13 @@
 Contributions
 =============
 
-It is very much hoped that users of GrainPy will suggest new functionalities by either...
+It is very much hoped that users of GrainPy will suggest improvements and/or new functionalities by one of two methods:
 
-1. `creating a new issue on Github <https://github.com/masseygeo/GrainPy/issues/new>`_
+1. Simply `create a new issue <https://github.com/masseygeo/GrainPy/issues/new>`_ with the appropriate 'label' on Github.
 
+      **...OR...**
 
-2. Personally contributing to the coding...
+2. Personally contributing to the coding using a fork...
 
 ::
 
