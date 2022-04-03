@@ -16,9 +16,8 @@ For example...
 
 ::
 
-   # call the function with no parameters, select the file(s) using your mouse and the user dialog window that opens, and click 'ok'
+   # call function with no parameters, select file(s) using mouse and user dialog window, click 'ok'
    files = selectdata()
-   # the variable 'files' is a list of paths that can then be input as a parameter in a GrainSizeDist object
    files
    
 
@@ -28,25 +27,24 @@ The most common problem with input data is bin sizes are not consistent in all f
 
 ::
 
-   # call the function using the "files" variable created above. 
-   # min_bin and bin_rows have default values of 0.375198 and 93 by default, but may be changed accordingly by the user
+   # call function using "files" variable created above
+   # min_bin and bin_rows have default values, but may be changed accordingly by user
    datacheck(files)
    
 
 df_ex and gems_ex functions
 ----------------------------
-The df_ex and gems_ex functions afford the user the option to export GrainSizeDist object information as tables (.csv or .xlsx). The df_ex function exports the data as it is displayed in GrainPy. The gems_ex function exports the data in a transposed data format, along with a few basic statistics and blank fields.
+The *df_ex* and *gems_ex* functions afford the user the option to export GrainSizeDist object information as tables (.csv or .xlsx). The *df_ex* function exports the data as it is displayed in GrainPy. The *gems_ex* function exports the data in a transposed data format, along with a few basic statistics and blank fields.
 
 ::
 
-   # exporting cumulative proportions and statistics from GrainSizeDist object named gsd
-   # exporting cumulative proportion data followed by statistics
+   # export cumulative proportion data followed by statistics
    df_ex(gsd.datacp())
    df_ex(gsd.datast())
    
    # using the gems_ex function...
    gems_ex(gsd)
    
-   # df_ex requires a dataframe parameter, but gems_ex requires a GrainSizeDist object!
+   # df_ex requires dataframe parameter, gems_ex requires GrainSizeDist object!
 
 
