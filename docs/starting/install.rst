@@ -58,8 +58,8 @@ Once your virtual environment is created and activated, installing GrainPy is si
 Congratulations! the most current stable release of GrainPy is now installed and ready to use!
 
 
-
-**Developmental Version**
+Developmental Version
+^^^^^^^^^^^^^^^^^^^^^^
 
 In some cases, the user may want to install the current working version of GrainPy, which can be done directly from Github.
 
