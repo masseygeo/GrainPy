@@ -13,6 +13,7 @@ wentworth_gs function
 The *wentworth_gs* function converts grain sizes, in phi units, into the qualitative grain size classification scheme of Wentworth (1922).
 
 ::
+
    wentworth_gs(-1)
    wentworth_gs(3.6)
    wentworth_gs(11.21)
