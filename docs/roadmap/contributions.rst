@@ -11,7 +11,7 @@ It is very much hoped that users of GrainPy will suggest improvements and/or new
 
 1. Simply `create a new issue <https://github.com/masseygeo/GrainPy/issues/new>`_ with the appropriate 'label' on Github.
 
-      **...OR...**
+**...OR...**
 
 2. Personally contributing to the coding using a fork...
 
