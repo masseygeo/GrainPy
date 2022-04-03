@@ -38,4 +38,10 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
    Suggestions & Contributions <roadmap/contributions>
 
 
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
 
