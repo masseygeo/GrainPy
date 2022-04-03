@@ -9,28 +9,37 @@ Installation
 Create a Virtual Environment
 ----------------------------
 
-It is common practice to set up and work within virtual environments, as it helps avoid potential dependency conflicts, and represents good practice. It is also strongly recommended	to do that here with GrainPy. GrainPy was built and continues to be developed using `Conda <https://conda.io/projects/conda/en/latest/>`_ and `Anaconda <https://www.anaconda.com/>`_ environment, although it is not required and we present several command line procedures below for creating (first line) and activating (second line) your new virtual environment.
+It is common practice to set up and work within virtual environments, as it helps avoid potential dependency conflicts, and represents good practice. It is also strongly recommended	to do that here with GrainPy. GrainPy was built and continues to be developed using `Conda <https://conda.io/projects/conda/en/latest/>`_ and `Anaconda <https://www.anaconda.com/>`_ environment, although it is not required and we present several command line procedures below for creating and then activating your new virtual environment.
 
-*Conda...*
+**Conda...**
 
 ::
 
+   # create
    conda create -n CoolNewGrainPyVirtualEnvironment
+   
+   # activate
    conda activate CoolNewGrainPyVirtualEnvironment
 
-*Mac OSX Terminal...*
+**Mac OSX Terminal...**
 
 ::
 
+   # create
    python3 -m venv CoolNewGrainPyVirtualEnvironment
+   
+   # activate
    source CoolNewGrainPyVirtualEnvironment/bin/activate
 
-*Windows Command Prompt...*
+**Windows Command Prompt...**
 
 ::
 
-   pip install virtualenv
-   virtualenv -p /usr/bin/python3 CoolNewGrainPyVirtualEnvironment   
+   # create 
+   py -m venv CoolNewGrainPyVirtualEnvironment 
+   
+   # activate
+   .\CoolNewGrainPyVirtualEnvironment\Scripts\activate
 
 
 
