@@ -62,6 +62,7 @@ Congratulations! the most current stable release of GrainPy is now installed and
 
 
 **Developmental Version**
+
 In some cases, the user may want to install the current working version of GrainPy, which can be done directly from Github.
 
 ::
