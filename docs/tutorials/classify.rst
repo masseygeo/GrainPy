@@ -40,6 +40,6 @@ The *folk_sort*, *folk_skew*, and *folk_kurt* functions classify sediment sortin
    folk_skew(0.12)
    folk_kurt(0.96)
    
-Folk, R.L., and Ward, W.C., 1957, Brazos River bar: a study in the significance of grain size parameters: Journal of Sedimentary Petrology, Volume 27, Number 1, DOI: https://doi.org/10.1306/74D70646-2B21-11D7-8648000102C1865D.
+*  Folk, R.L., and Ward, W.C., 1957, Brazos River bar: a study in the significance of grain size parameters: Journal of Sedimentary Petrology, Volume 27, Number 1, DOI: https://doi.org/10.1306/74D70646-2B21-11D7-8648000102C1865D.
 
 
