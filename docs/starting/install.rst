@@ -44,8 +44,8 @@ It is common practice to set up and work within virtual environments, as it help
 
 
 
-Installation
--------------
+Install the GrainPy Package
+----------------------------
 
 Once your virtual environment is created and activated, installing GrainPy is similar across each of the three platforms discussed above. Each released version of GrainPy is also indexed on `PyPi <https://pypi.org/project/grainpy/>`_, and it is recommended to install this package using `pip <https://pypi.org/project/pip/>`_. 
 
