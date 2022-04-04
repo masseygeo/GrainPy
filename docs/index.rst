@@ -8,6 +8,9 @@
     :height: 400px
     :figclass: align-center
 
+GrainPy
+========
+
 GrainPy is a Python package for compiling, analyzing, visualizing, and interpreting grain size distribution data. The idea for GrainPy started with an abundance of grain size distribution data that wasn't being fully utilized. Initially, GrainPy was developed to quickly compile analyses of multiple samples, analyze results with geologic statistics and figures, and produce publication-quality grain size distribution plots. GrainPy will continue to add functionality, develop new methodologies of grain size distribution analysis and interpretation, and provide a user-friendly experience for sediment analyses.
 
 
