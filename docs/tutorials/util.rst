@@ -32,7 +32,7 @@ The most common problem with input data is bin sizes are not consistent in all f
    datacheck(files)
    
 
-df_ex and gems_ex functions
+df_ex & gems_ex functions
 ----------------------------
 The *df_ex* and *gems_ex* functions afford the user the option to export GrainSizeDist object information as tables (.csv or .xlsx). The *df_ex* function exports the data as it is displayed in GrainPy. The *gems_ex* function exports the data in a transposed data format, along with a few basic statistics and blank fields.
 
