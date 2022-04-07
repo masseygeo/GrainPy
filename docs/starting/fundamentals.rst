@@ -9,24 +9,19 @@ GrainPy Fundamentals
 Data Input
 -----------
 
-Grain size distribution data can be obtained from a variety of equipment, including sieves, hydrometers, and laser diffraction particle size analyzers. GrainPy collects and organizes this data, then calculates cumulative percentages and a variety of statistics, however, there are a few basic requirements for the input data structure:
+Grain size distribution data can be obtained from a variety of equipment, including sieves, hydrometers, and laser diffraction particle size analyzers, however, there are a few basic requirements for the input data structure in order to utilize GrainPy:
 
-   1. Currently, GrainPy only accepts Excel files (.xlsx or .xls).
+   1. Grain size distribution data must be an Excel file (.xlsx or .xls).
 
    2. Each file contains data for one sample only.
 
-   3. Bins used in the analytical method are located in a column immediately preceding the collected data. 
+   3. Bins used in the user's methodology are located in a column immediately preceding the data collected. 
 
    4. Bin sizes are in microns.
 
    5. Bins are arranged from smallest to largest.
 
-   6. Bin sizes represent the lower limit of each interval interval, with a final bin size representing the maximum upper limit included in the study.
-
-   7. Currently, GrainPy can only accept multiple files that use the same bins. 
-
-   8. Optional: files are named according to the sample name. This is completely up to the user, but filenames are used in the titles of plots.
-
+   6. Bins represent the lower limit of each grain size interval, and the last row contains the maximum *UPPER* limit (therefore there is one more row of bins than data.
 
 
 Compiling the Data
@@ -38,7 +33,7 @@ Given the correct input format, GrainPy can easily collect and organize single o
    # list or tuple of complete paths to files
    files = ['path to file 1', ..., 'path to file n']
    
-   # compile data from file(s), cumulative proportions, and statistics
+   # compile data, cumulative proportions, and statistics from file(s)
    var = GrainSizeDist(files)
    var.data()
    var.datacp()
@@ -49,6 +44,8 @@ Given the correct input format, GrainPy can easily collect and organize single o
     :align: center
     :height: 400px
     :figclass: align-center
+
+*The figures above show an example of three Excel files on the left, with bins in one column and data in the following column. After these files have been input into GrainPy, the user can see the compiled data, cumulative percentages, and data statistics as shown on the right.*
 
 
 
@@ -72,3 +69,4 @@ Data can then be visualized and interpreted with publication-quality grain size 
     :height: 400px
     :figclass: align-center
 
+*The two figures above show a GrainPy plot for a single sample (left) and multiple samples (right). The single sample plot shows a histogram of relative proportions within each bin, a cumulative proportion curve, mean, median, and mode(s) of the sample (vertical lines), and selected statistics below the plot. The multiple sample plot shows cumulative proportion curves for all samples (black), the mean cumulative proportion curve (dark red), and a 95% confidence interval of the mean (translucent dark red). GrainPy has multiple options for plots, which are discussed in detail in the 'Plotting'_ section.*
