@@ -42,7 +42,7 @@ Given the correct input format, GrainPy can easily collect and organize single o
 
 .. figure:: https://i.imgur.com/XtCbxh2.png
     :align: center
-    :height: 500px
+    :height: 400px
     :figclass: align-center
 
 The figures above show an example of three Excel files on the left, with bins in one column and data in the following column. After these files have been input into GrainPy, the user can see the compiled data, cumulative percentages, and data statistics as shown on the right.
@@ -66,7 +66,7 @@ Data can then be visualized and interpreted with publication-quality grain size 
 
 .. figure:: https://i.imgur.com/ZFmjpiz.png
     :align: center
-    :height: 500px
+    :height: 400px
     :figclass: align-center
 
-The two figures above show a GrainPy plot for a single sample (left) and multiple samples (right). The single sample plot shows a histogram of relative proportions within each bin, a cumulative proportion curve, mean, median, and mode(s) of the sample (vertical lines), and selected statistics below the plot. The multiple sample plot shows cumulative proportion curves for all samples (black lines), the mean cumulative proportion curve (dark red lines), and a 95% confidence interval of the mean (translucent red polygon). GrainPy has multiple options for plots, which are discussed in detail in the `Plotting <https://grainpy.readthedocs.io/en/latest/tutorials/plots.html>'_ section.
+The two figures above show a GrainPy plot for a single sample (left) and multiple samples (right). The single sample plot shows a histogram of relative proportions within each bin, a cumulative proportion curve, mean, median, and mode(s) of the sample (vertical lines), and selected statistics below the plot. The multiple sample plot shows cumulative proportion curves for all samples (black lines), the mean cumulative proportion curve (dark red lines), and a 95% confidence interval of the mean (translucent red polygon). GrainPy has multiple options for plots, which are discussed in detail in the `Plotting <https://grainpy.readthedocs.io/en/latest/tutorials/plots.html>`_ section.
