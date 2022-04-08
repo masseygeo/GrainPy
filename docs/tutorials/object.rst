@@ -3,17 +3,15 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-The GrainSizeDist Object
-=========================
+The **grainsize** Module
+===========================
 
-The *GrainSizeDist* object is the fundamental grain size distribution data structure of GrainPy, which contain a variety of attributes and methods to aid the user with data compilation and visualization. 
-
-Attibutes of the class include, (1) a list or tuple of the path(s) to the file(s) to be included in the instance of the *GrainSizeDist* class; (2) the lithology of the file(s) included in the *GrainSizeDist* class; (3) the area (generalized location) of the file(s) included in the *GrainSizeDist* class. Attribute 1 is required to create a new instance of the *GrainSizeDist* class, while attributes 2 and 3 are optional and, currently, only used for grain size distribution plot titles. Planned functionalities for GrainPy will make more use of attributes 2 and 3.
+The **grainsize** module contains the *GrainSizeDist* class, which is the fundamental object of GrainPy. The *GrainSizeDist* object contains a variety of attributes and methods to aid the user with data compilation and visualization. 
 
 
-Attribute: path
-^^^^^^^^^^^^^^^^
-The *path* attribute is the only required parameter for creating an instance of the *GrainSizeDist* class, and consists of either a list or tuple of path(s) to the file(s) containing the grain size distribution data. This parameter can be input manually, or interactively using the *selectdata* function from the `'util' module <https://grainpy.readthedocs.io/en/latest/tutorials/util.html>`_.
+The 'path' Attribute
+^^^^^^^^^^^^^^^^^^^^^
+The *path* attribute is the only required parameter for creating a *GrainSizeDist* object, and consists of either a list or tuple of path(s) for the file(s) containing the grain size distribution data. This parameter can be input manually, or interactively using the *selectdata* function from the `**util** module <https://grainpy.readthedocs.io/en/latest/tutorials/util.html>`_.
 
 ::
 
@@ -24,9 +22,9 @@ The *path* attribute is the only required parameter for creating an instance of 
    var = GrainSizeDist(files)
 
 
-Attributes: lith & area
-^^^^^^^^^^^^^^^^^^^^^^^^
-The *lith* and *area* attributes are optional to the user. The intent is to provide a way to differentiate GrainSizeDist objects by lithology and/or location. Currently, this is only used for titles on grain size distribution plots.
+The *lith* & 'area' Attributes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The *lith* and *area* attributes are optional. Their intent is to provide a means to differentiate GrainSizeDist objects by lithology and/or location. Currently, this is only used for grain size distribution plot titles.
 
 ::
 
@@ -44,8 +42,8 @@ The *lith* and *area* attributes are optional to the user. The intent is to prov
    var = GrainSizeDist(files, lith='alluvium', area='Lebanon Junction')
 
 
-Method: samplenames
-^^^^^^^^^^^^^^^^^^^^
+The 'samplenames' Method
+^^^^^^^^^^^^^^^^^^^^^^^^^
 The *samplenames* method assumes that the base file names represent the sample names and are unique. Both of these assumptions are not strictly required, but are used in other methods of the GrainSizeDist class, as well as in plot titles.
 
 ::
