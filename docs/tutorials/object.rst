@@ -3,51 +3,45 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-The GrainSizeDist Class
-========================
+The GrainSizeDist Object
+=========================
 
-The *GrainSizeDist* class is the fundamental data structure to hold grain size distribution data. Attibutes of the class include, (1) a list or tuple of the path(s) to the file(s) to be included in the instance of the *GrainSizeDist* class; (2) the lithology of the file(s) included in the *GrainSizeDist* class; (3) the area (generalized location) of the file(s) included in the *GrainSizeDist* class. Attribute 1 is required to create a new instance of the *GrainSizeDist* class, while attributes 2 and 3 are optional and, currently, only used for grain size distribution plot titles. Planned functionalities for GrainPy will make more use of attributes 2 and 3.
+The *GrainSizeDist* object is the fundamental grain size distribution data structure of GrainPy, which contain a variety of attributes and methods to aid the user with data compilation and visualization. 
+
+Attibutes of the class include, (1) a list or tuple of the path(s) to the file(s) to be included in the instance of the *GrainSizeDist* class; (2) the lithology of the file(s) included in the *GrainSizeDist* class; (3) the area (generalized location) of the file(s) included in the *GrainSizeDist* class. Attribute 1 is required to create a new instance of the *GrainSizeDist* class, while attributes 2 and 3 are optional and, currently, only used for grain size distribution plot titles. Planned functionalities for GrainPy will make more use of attributes 2 and 3.
 
 
 Attribute: path
 ^^^^^^^^^^^^^^^^
-The *path* attribute is a required parameter to create an instance of the GrainSizeDist class, and consists of either a list or tuple of path(s) to the file(s) of interest. This can be input manually, or interactively using the *selectdata* function from the 'util' module.
+The *path* attribute is the only required parameter for creating an instance of the *GrainSizeDist* class, and consists of either a list or tuple of path(s) to the file(s) containing the grain size distribution data. This parameter can be input manually, or interactively using the *selectdata* function from the `'util' module <https://grainpy.readthedocs.io/en/latest/tutorials/util.html>`_.
 
 ::
 
-   # selecting files using the file diaglog windown from the util module
+   # selectdata function opens a user dialog window to select files interactively
    files = selectdata()
    
-   # creating a new instance of the GrainSizeDist class
+   # create a new instance of the GrainSizeDist class with the selected files
    var = GrainSizeDist(files)
 
 
-Attribute: lith
-^^^^^^^^^^^^^^^^
-The *lith* attribute is optional, but is meant to represent the lithology of the file(s) selected for the GrainSizeDist object. For example, below we are inputting a list of files of samples collected from alluvium:
+Attributes: lith & area
+^^^^^^^^^^^^^^^^^^^^^^^^
+The *lith* and *area* attributes are optional to the user. The intent is to provide a way to differentiate GrainSizeDist objects by lithology and/or location. Currently, this is only used for titles on grain size distribution plots.
 
 ::
 
-   # creating a new instance of the GrainSizeDist class; all files of alluvium lithology
+   # using the path attribute to indicate all samples are of alluvium lithology
    var = GrainSizeDist(files, ltih='alluvium')
    
-   # alternatively, can assign lith attribute post creation
+   # alternatively, can assign attribute anytime after instantiation
    var = GrainSizeDist(files)
    var.lith = 'alluvium'
 
-
-Attribute: area
-^^^^^^^^^^^^^^^^
-The *area* attribute is also optional, but was originally designed to represent the area (or quadrangle) of a particular set of files selected for a particular GrainSizeDist object. For example, below we are inputting a list of files of samples of collected from the Lebanon Junction 7.5-minute quadrangle:
-
-::
-
-   # creating a new instance of the GrainSizeDist class; all files from the Lebanon Junction quadrangle
+   # using the area attribute to indicate all samples are located in Lebanon Junction
    var = GrainSizeDist(files, area='Lebanon Junction')
    
-   # alternatively, can assign lith attribute post creation
-   var = GrainSizeDist(files)
-   var.area = 'Lebanon Junction'
+   # using both *lith* and *path*
+   var = GrainSizeDist(files, lith='alluvium', area='Lebanon Junction')
 
 
 Method: samplenames
