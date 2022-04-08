@@ -26,7 +26,7 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
    :maxdepth: 1
    :caption: Tutorials
 
-   The GrainSizeDist Object <tutorials/object>
+   The 'grainsize' Module <tutorials/object>
    Statistics <tutorials/stats>
    Plotting <tutorials/plots>
    The 'util' Module <tutorials/util>
