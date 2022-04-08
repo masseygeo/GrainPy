@@ -3,13 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-The **grainsize** Module
+The 'grainsize' Module
 ===========================
 
-The **grainsize** module contains the *GrainSizeDist* class, which is the fundamental object of GrainPy. The *GrainSizeDist* object contains a variety of attributes and methods to aid the user with data compilation and visualization. 
+The **grainsize** module contains the *GrainSizeDist* class, which is the fundamental GrainPy object. The *GrainSizeDist* object contains a variety of attributes and methods to aid the user with data compilation and visualization. 
 
 
-The 'path' Attribute
+'path' Attribute
 ^^^^^^^^^^^^^^^^^^^^^
 The *path* attribute is the only required parameter for creating a *GrainSizeDist* object, and consists of either a list or tuple of path(s) for the file(s) containing the grain size distribution data. This parameter can be input manually, or interactively using the *selectdata* function from the `**util** module <https://grainpy.readthedocs.io/en/latest/tutorials/util.html>`_.
 
@@ -22,7 +22,7 @@ The *path* attribute is the only required parameter for creating a *GrainSizeDis
    var = GrainSizeDist(files)
 
 
-The *lith* & 'area' Attributes
+'lith' & 'area' Attributes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 The *lith* and *area* attributes are optional. Their intent is to provide a means to differentiate GrainSizeDist objects by lithology and/or location. Currently, this is only used for grain size distribution plot titles.
 
@@ -42,7 +42,7 @@ The *lith* and *area* attributes are optional. Their intent is to provide a mean
    var = GrainSizeDist(files, lith='alluvium', area='Lebanon Junction')
 
 
-The 'samplenames' Method
+'samplenames' Method
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 The *samplenames* method assumes that the base file names represent the sample names and are unique. Both of these assumptions are not strictly required, but are used in other methods of the GrainSizeDist class, as well as in plot titles.
 
@@ -52,8 +52,8 @@ The *samplenames* method assumes that the base file names represent the sample n
    var.samplenames()
 
 
-Method: bins
-^^^^^^^^^^^^^^^^
+'bins' Method
+^^^^^^^^^^^^^^^^^^
 The *bins* method assumes that the orignal files have bins input in microns, and the bin intervals are the same in all file(s) selected and input for the GrainSizeDist instance. The method returns a Pandas dataframe of the bin intervals in phi units, microns, and millimaters.
 
 ::
@@ -62,7 +62,7 @@ The *bins* method assumes that the orignal files have bins input in microns, and
    var.bins()
 
 
-Method: data
+'data' Method
 ^^^^^^^^^^^^^^^^
 The *data* method returns a Pandas dataframe of the raw data for all file(s) selected and input for the GrainSizeDist instance. 
 
@@ -74,7 +74,7 @@ The *data* method returns a Pandas dataframe of the raw data for all file(s) sel
 *Note: if the minimum bin value is not consistent in all input file paths, then this method will raise an error.*
 
 
-Method: datacp
+'datacp' Method
 ^^^^^^^^^^^^^^^^
 The *datacp* method returns a Pandas dataframe of the cumulative proportions for all file(s) selected and input for the GrainSizeDist instance. 
 
@@ -84,7 +84,7 @@ The *datacp* method returns a Pandas dataframe of the cumulative proportions for
    var.datacp()
 
 
-Method: datast
+'datast' Method
 ^^^^^^^^^^^^^^^^
 The *datast* method returns a Pandas dataframe of the statistics calculated from the data and cumulative proportions for all file(s) selected and input for the GrainSizeDist instance. 
 
@@ -94,8 +94,8 @@ The *datast* method returns a Pandas dataframe of the statistics calculated from
    var.datast()
 
 
-Method: gsd_single
-^^^^^^^^^^^^^^^^^^^
+'gsd_single' Method
+^^^^^^^^^^^^^^^^^^^^
 The *gsd_single* method creates two image files (.pdf and .jpg) grain size distributions of either:
 1. each file(s) selected and input for the GrainSizeDist instance (default)
 2. a list of user-selected sample names (basenames of files) using the parameter *files*
@@ -113,8 +113,8 @@ The *gsd_single* method creates two image files (.pdf and .jpg) grain size distr
    var.gsd_single(i=0, j=3)
 
 
-Method: gsd_multi
-^^^^^^^^^^^^^^^^^^
+'gsd_multi' Method
+^^^^^^^^^^^^^^^^^^^
 The *gsd_multi* method creates two image files (.pdf and .jpg) of:
 1. Cumulative proportion curves of all files, with mean and 95% confidence interval (default)
 2. Mean cumulative proportion curve with 95% confidence interval, and mean grain size distributions per bin
