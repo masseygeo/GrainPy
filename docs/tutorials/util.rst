@@ -23,7 +23,7 @@ df_ex & gems_ex functions
 ----------------------------
 The *df_ex* and *gems_ex* functions afford the user the option to export *GrainSizeDist* object data as tables (.csv or .xlsx). 
 
-The *df_ex* function requires a **dataframe** parameter, then saves that dataframe according to the chosen location/name from the interactive user-dialog window. Dataframes include returns of the *bins*\, *data*\ , *datacp* \, or *datast* methods, or any other type of non-GrainPy dataframe.
+The *df_ex* function requires a **dataframe** parameter, then saves that dataframe according to the chosen location/name from the interactive user-dialog window. Dataframes include returns of the *bins*\, *data*\ , *datacp*\, or *datast* methods, or any other type of non-GrainPy dataframe.
 
 The *gems_ex* function requires a **GrainSizeDist** object parameter, then saves the data and selected statistics in a transposed format to a location/name from the interactive user-dialog window.
 
