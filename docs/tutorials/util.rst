@@ -8,7 +8,7 @@ The 'util' Module
 
 The 'util' module provides functionality that is called within the *GrainSizeDist* class, but may also be of outside use to the user.
 
-datacheck function
+The 'datacheck' Function
 --------------------
 The most common problem with input data is bin sizes are not consistent in all files. For example, one bin may be 0.375198, but some files may have been rounded inadvertently to 0.37520). The *datacheck* function checks the smallest expected bin value input as a function parameter by the user, displays the results of the datacheck, and offers the option to automatically fix the problematic files by changing them, or let's the user manually examing the file(s) themselves. We warn the user that the auto-fix solution is permanent and changes the original files!
 
@@ -19,7 +19,7 @@ The most common problem with input data is bin sizes are not consistent in all f
    datacheck(files)
    
 
-df_ex & gems_ex functions
+The 'df_ex' & 'gems_ex' Functions
 ----------------------------
 The *df_ex* and *gems_ex* functions afford the user the option to export *GrainSizeDist* object data as tables (.csv or .xlsx). 
 
@@ -40,7 +40,7 @@ The *gems_ex* function requires a **GrainSizeDist** object parameter, then saves
    gems_ex(gsd)
    
 
-selectdata function
+The 'selectdata' Function
 --------------------
 The *selectdata* function provides an interactive user dialog window to manually select file(s). This provides a user-friendly option to select single or multiple Excel files (.xlsx or .xls), save a list of paths to the selected files, then can be used as a parameter for creating a GrainSizeDist object.
 
