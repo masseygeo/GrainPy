@@ -6,20 +6,7 @@
 The 'util' Module
 =================
 
-The 'util' module provides functionality that is both called within the GrainSizeDist class, and may be of interest to the user. Functions, parameters, and examples are presented below...
-
-selectdata function
---------------------
-The *selectdata* function provides a user dialog window to select files to include in a GrainSizeDist object. This provides a user-friendly option to select single or multiple Excel files (.xlsx or .xls), save a list of paths to the selected files, then can be used as a parameter for creating a GrainSizeDist object.
-
-For example...
-
-::
-
-   # call function with no parameters, select file(s) using mouse and user dialog window, click 'ok'
-   files = selectdata()
-   files
-   
+The 'util' module provides functionality that is called within the *GrainSizeDist* class, but may also be of outside use to the user.
 
 datacheck function
 --------------------
@@ -34,17 +21,33 @@ The most common problem with input data is bin sizes are not consistent in all f
 
 df_ex & gems_ex functions
 ----------------------------
-The *df_ex* and *gems_ex* functions afford the user the option to export GrainSizeDist object information as tables (.csv or .xlsx). The *df_ex* function exports the data as it is displayed in GrainPy. The *gems_ex* function exports the data in a transposed data format, along with a few basic statistics and blank fields.
+The *df_ex* and *gems_ex* functions afford the user the option to export *GrainSizeDist* object data as tables (.csv or .xlsx). 
+
+The *df_ex* function requires a **dataframe** parameter, then saves that dataframe according to the chosen location/name from the interactive user-dialog window. Dataframes include returns of the *bins*\, *data*\ , *datacp* \, or *datast* methods, or any other type of non-GrainPy dataframe.
+
+The *gems_ex* function requires a **GrainSizeDist** object parameter, then saves the data and selected statistics in a transposed format to a location/name from the interactive user-dialog window.
 
 ::
 
-   # export cumulative proportion data followed by statistics
+   # df_ex function
+   # first export cumulative proportion dataframe
    df_ex(gsd.datacp())
+   
+   # then statistics dataframe from a GrainSizeDist object named 'gsd'
    df_ex(gsd.datast())
    
-   # using the gems_ex function...
+   # gems_ex function with a GrainSizeDist object named 'gsd'
    gems_ex(gsd)
    
-   # df_ex requires dataframe parameter, gems_ex requires GrainSizeDist object!
 
+selectdata function
+--------------------
+The *selectdata* function provides an interactive user dialog window to manually select file(s). This provides a user-friendly option to select single or multiple Excel files (.xlsx or .xls), save a list of paths to the selected files, then can be used as a parameter for creating a GrainSizeDist object.
+
+::
+
+   # selectdata function, call function then select file(s) using dialog window
+   files = selectdata()
+   files
+   
 
