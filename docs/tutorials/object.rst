@@ -11,7 +11,7 @@ The **grainsize** module contains the *GrainSizeDist* class, which is the fundam
 
 'path' Attribute
 ^^^^^^^^^^^^^^^^^^^^^
-The *path* attribute is the only required parameter for creating a *GrainSizeDist* object, and consists of either a list or tuple of path(s) for the file(s) containing the grain size distribution data. This parameter can be input manually, or interactively using the *selectdata* function from the `util module <https://grainpy.readthedocs.io/en/latest/tutorials/util.html>`_.
+The *path* attribute is the only reqquirement for creating a *GrainSizeDist* object, and consists of either a list or tuple of path(s) for the file(s) containing the grain size distribution data. This parameter can be input manually, or interactively using the *selectdata* function from the `util module <https://grainpy.readthedocs.io/en/latest/tutorials/util.html>`_.
 
 ::
 
