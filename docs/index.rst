@@ -27,9 +27,10 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
    :caption: Tutorials
 
    The 'grainsize' Module <tutorials/object>
-   Statistics <tutorials/stats>
-   The 'util' Module <tutorials/util>
    The 'classify' Module <tutorials/classify>
+   The 'util' Module <tutorials/util>
+   Statistics <tutorials/stats>
+
 
 
 .. toctree::
