@@ -109,7 +109,7 @@ The *gsd_single* method saves two image files of grain size distribution plots (
 ^^^^^^^^^^^^^^^^^^^
 The *gsd_multi* method saves two image files of grain size distribution plots (.pdf and .jpg) of multiple samples in the directory where the sample files are located. There are three plot options (1-3) and two additional options (4-5) to customize each plot according to user specifications:
 
-1. Cumulative proportion curves of all files, with mean and 95% confidence interval (default).
+1. Cumulative proportion curves of all files, with mean and 95% confidence interval. This is the default with parameters *bplt*=False, *cplt*=True, *stplt*=True, and *ci*=True.
 2. Mean cumulative proportion curve with 95% confidence interval, and histogram of mean grain size distributions using the *bplt* parameter.
 3. Histogram of mean grain size distribution per bin with 95% confidence interval, and grain size distributions per bin for each sample (as curves) using the *bplt* and *cplt* parameters.
 4. Plotting mean, median, and modes, and selected statistics of mean in plot legend using the *stplt* parameter.
@@ -117,7 +117,7 @@ The *gsd_multi* method saves two image files of grain size distribution plots (.
 
 ::
 
-   # option 1, default parameters are bplt=False, cplt=True, stplt=True, ci=True
+   # option 1, default
    var.gsd_multi()
    
    # options 2 and 4
