@@ -6,8 +6,8 @@
 GrainPy Fundamentals
 =====================
 
-Data Input
------------
+Input
+-------
 
 Grain size distribution data can be obtained from a variety of equipment, including sieves, hydrometers, and laser diffraction particle size analyzers, however, there are a few basic requirements for the input data structure in order to utilize GrainPy:
 
@@ -24,8 +24,8 @@ Grain size distribution data can be obtained from a variety of equipment, includ
    6. Bins represent the lower limit of each grain size interval, and the last row contains the maximum *UPPER* limit (therefore there is one more row of bins than data.
 
 
-Compiling the Data
--------------------
+Compilation
+------------
 Given the correct input format, GrainPy can easily collect and organize single or multiple files, and calculate cumulative percentages and a variety of sample statistics.
 
 ::
@@ -50,8 +50,8 @@ The figures above show an example of three Excel files on the left, with bins in
 
 
 
-Visualizing the Data
----------------------
+Visualization
+---------------
 
 Data can then be visualized and interpreted with publication-quality grain size distribution plots.
 
