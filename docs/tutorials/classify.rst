@@ -6,11 +6,11 @@
 The 'classify' Module
 =====================
 
-The 'classify' module contains functions to convert numerical statistics of grain size analyses into various qualitative classifcations. These functions are called within the GrainSizeDist class, but can also be used by the user for quick references.
+The **classify** module contains conversion functions, including conversion of numerical statistics into qualitative classifcation names. These functions are called within the *GrainSizeDist* class, but can also be used individually by the user.
 
 The 'wentworth_gs' Function
 ----------------------------
-The *wentworth_gs* function converts grain sizes, in phi units, into the qualitative grain size classification scheme of Wentworth (1922).
+The *wentworth_gs* function converts grain sizes, in phi units, into the appropriate grain size classification scheme of Wentworth (1922).
 
 ::
 
@@ -21,7 +21,7 @@ The *wentworth_gs* function converts grain sizes, in phi units, into the qualita
 
 The 'folk_sed' Function
 ------------------------
-The *folk_sed* function classifies sand, silt, and clay proportions into the qualitative sediment classification scheme of Folk (1954).
+The *folk_sed* function converts sand, silt, and clay proportions into the appropriate sediment classification scheme of Folk (1954).
 
 ::
 
@@ -32,7 +32,7 @@ The *folk_sed* function classifies sand, silt, and clay proportions into the qua
 
 The 'folk_sort', 'folk_skew', & 'folk_kurt' Functions
 -------------------------------------------------------
-The *folk_sort*, *folk_skew*, and *folk_kurt* functions classify sediment sorting, and skewness and kurtosis of grain size distributions according to the classification of Folk and Ward (1957).
+The *folk_sort*, *folk_skew*, and *folk_kurt* functions classify sediment sorting, distribution skewness and distribution kurtosis into the appropriate classification schemes of Folk and Ward (1957).
 
 ::
 
