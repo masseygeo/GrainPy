@@ -6,10 +6,10 @@
 The 'util' Module
 =================
 
-The 'util' module provides functionality that is called within the *GrainSizeDist* class, but may also be of outside use to the user.
+The **util** module provides functionalities called within the *GrainSizeDist* class, but may also be called individually to the user.
 
 The 'datacheck' Function
---------------------
+-------------------------
 The most common problem with input data is bin sizes are not consistent in all files. For example, one bin may be 0.375198, but some files may have been rounded inadvertently to 0.37520). The *datacheck* function checks the smallest expected bin value input as a function parameter by the user, displays the results of the datacheck, and offers the option to automatically fix the problematic files by changing them, or let's the user manually examing the file(s) themselves. We warn the user that the auto-fix solution is permanent and changes the original files!
 
 ::
@@ -20,7 +20,7 @@ The most common problem with input data is bin sizes are not consistent in all f
    
 
 The 'df_ex' & 'gems_ex' Functions
-----------------------------
+-----------------------------------
 The *df_ex* and *gems_ex* functions afford the user the option to export *GrainSizeDist* object data as tables (.csv or .xlsx). 
 
 The *df_ex* function requires a **dataframe** parameter, then saves that dataframe according to the chosen location/name from the interactive user-dialog window. Dataframes include returns of the *bins*\, *data*\ , *datacp*\, or *datast* methods, or any other type of non-GrainPy dataframe.
@@ -41,7 +41,7 @@ The *gems_ex* function requires a **GrainSizeDist** object parameter, then saves
    
 
 The 'selectdata' Function
---------------------
+--------------------------
 The *selectdata* function provides an interactive user dialog window to manually select file(s). This provides a user-friendly option to select single or multiple Excel files (.xlsx or .xls), save a list of paths to the selected files, then can be used as a parameter for creating a GrainSizeDist object.
 
 ::
