@@ -24,7 +24,7 @@ The *path* attribute is the only reqquirement for creating a *GrainSizeDist* obj
 
 'lith' & 'area' Attributes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-The *lith* and *area* attributes are optional. Their intent is to provide a means to differentiate GrainSizeDist objects by lithology and/or location. Currently, this is only used for grain size distribution plot titles.
+The *lith* and *area* attributes are optional. Their intent is to provide a means to differentiate GrainSizeDist objects by lithology and/or location. Currently, these are only used for grain size distribution plot titles.
 
 ::
 
@@ -35,15 +35,6 @@ The *lith* and *area* attributes are optional. Their intent is to provide a mean
    # alternatively, assign attributes at time of instantiation
    var = GrainSizeDist(files, lith='alluvium', area='Lebanon Junction')
 
-
-'samplenames' Method
-^^^^^^^^^^^^^^^^^^^^^^^^^
-The *samplenames* method assumes that the input file names represent the sample names and are unique. Both of these assumptions are not strictly required, but are used in other methods of the GrainSizeDist class, as well as in plot titles. Calling the *samplenames* method returns a list of the assumed sample names.
-
-::
-
-   # using the GrainSizeDist instance from above
-   var.samplenames()
 
 
 'bins' Method
@@ -125,3 +116,15 @@ The *gsd_multi* method saves two image files of grain size distribution plots (.
    
    # options 3 and 5
    var.gsd_multi(bplt=True, cplt=False, ci=False)
+
+
+
+'samplenames' Method
+^^^^^^^^^^^^^^^^^^^^^^^^^
+The *samplenames* method assumes that the input file names represent the sample names and are unique. Both of these assumptions are not strictly required, but are used in other methods of the GrainSizeDist class, as well as in plot titles. Calling the *samplenames* method returns a list of the assumed sample names.
+
+::
+
+   # using the GrainSizeDist instance from above
+   var.samplenames()
+
