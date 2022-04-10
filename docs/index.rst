@@ -19,7 +19,7 @@ GrainPy is a Python package for compiling, analyzing, visualizing, and interpret
    :caption: Getting Started
 
    Installation <starting/install>
-   GrainPy Fundamentals <starting/fundamentals>
+   Fundamentals <starting/fundamentals>
 
 
 .. toctree::
